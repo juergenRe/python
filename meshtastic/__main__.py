@@ -104,7 +104,7 @@ def onConnection(interface, topic=pub.AUTO_TOPIC) -> None:  # pylint: disable=W0
 def checkChannel(interface: MeshInterface, channelIndex: int) -> bool:
     """Given an interface and channel index, return True if that channel is non-disabled on the local node"""
     ch = interface.localNode.getChannelByChannelIndex(channelIndex)
-    logger.debug(f"ch:{ch}")
+    logger.debug(f"check channel: {ch}")
     return ch and ch.role != channel_pb2.Channel.Role.DISABLED
 
 
@@ -726,7 +726,7 @@ def onConnected(interface):
                     time.sleep(0.5)
 
                 if "canned_messages" in configuration:
-                    print("Setting canned message messages to", configuration["canned_messages"])
+                    print(f"Setting canned message messages to '{configuration["canned_messages"]}'")
                     interface.getNode(args.dest, **getNode_kwargs).set_canned_message(configuration["canned_messages"])
                     time.sleep(0.5)
 

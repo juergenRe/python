@@ -574,32 +574,21 @@ class Node:
         if not self.module_available(mesh_pb2.CANNEDMSG_CONFIG):
             logging.warning("Canned Message module not present (excluded by firmware)")
             return None
-
+        if not message:     # treats empty canned messages entry in yaml
+            logging.debug("canned_messages key word found, but contains None. Aborting command.")
+            our_exit("Warning: you need to enter a string for canned message in yaml.")
         if len(message) > 200:
             our_exit("Warning: The canned message must be less than 200 characters.")
         self.ensureSessionKey()
-        # split into chunks
-        chunks = []
-        chunks_size = 200
-        for i in range(0, len(message), chunks_size):
-            chunks.append(message[i : i + chunks_size])
-
-        # for each chunk, send a message to set the values
-        # for i in range(0, len(chunks)):
-        for i, chunk in enumerate(chunks):
-            p = admin_pb2.AdminMessage()
-
-            # TODO: should be a way to improve this
-            if i == 0:
-                p.set_canned_message_module_messages = chunk
-
-            logger.debug(f"Setting canned message '{chunk}' part {i+1}")
-            # If sending to a remote node, wait for ACK/NAK
-            if self == self.iface.localNode:
-                onResponse = None
-            else:
-                onResponse = self.onAckNak
-            return self._sendAdmin(p, onResponse=onResponse)
+        p = admin_pb2.AdminMessage()
+        p.set_canned_message_module_messages = message
+        logger.debug(f"Setting canned message to '{message}'")
+        # If sending to a remote node, wait for ACK/NAK
+        if self == self.iface.localNode:
+            onResponse = None
+        else:
+            onResponse = self.onAckNak
+        return self._sendAdmin(p, onResponse=onResponse)
 
     def exitSimulator(self):
         """Tell a simulator node to exit (this message
