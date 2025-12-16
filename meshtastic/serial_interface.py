@@ -54,14 +54,38 @@ class SerialInterface(StreamInterface):
 
         logger.debug(f"Connecting to {self.devPath}")
 
-        if sys.platform != "win32":
+        def serLinuxOpen(comPath: str) -> serial.Serial:
+            """Opens serial port on Linux"""
             with open(self.devPath, encoding="utf8") as f:
                 self._set_hupcl_with_termios(f)
             time.sleep(0.1)
+            stream = serial.Serial(comPath, 115200, exclusive=True, timeout=0.5, write_timeout=0)
+            return stream
 
-        self.stream = serial.Serial(
-            self.devPath, 115200, exclusive=True, timeout=0.5, write_timeout=0
-        )
+        def serWinOpenNorm(comPath: str) -> serial.Serial:
+            """Opens serial port on Windows"""
+            stream = serial.Serial(comPath, 115200, exclusive=True, timeout=0.5, write_timeout=0)
+            return stream
+
+        def serWinOpenSiLabs(comPath: str) -> serial.Serial:
+            """Opens serial port on Windows with a SiLab driver"""
+            stream = serial.Serial(None, 115200, exclusive=True, timeout=0.5, write_timeout=0)
+            stream.port = self.devPath
+            stream.dtr = 0
+            stream.rts = 0
+            stream.open()
+            return stream
+
+        isSiLab = meshtastic.util.isSiLabPort(self.devPath)
+        logger.debug(f'Opening serial port: Platform: {sys.platform} port: {self.devPath} Driver: {isSiLab}')
+
+        if sys.platform != "win32":
+            self.stream = serLinuxOpen(self.devPath)
+        elif isSiLab:
+            self.stream = serWinOpenSiLabs(self.devPath)
+        else:
+            self.stream = serWinOpenNorm(self.devPath)
+
         self.stream.flush()	# type: ignore[attr-defined]
         time.sleep(0.1)
 

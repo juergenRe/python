@@ -184,6 +184,14 @@ def findPorts(eliminate_duplicates: bool=False) -> List[str]:
         ports = eliminate_duplicate_port(ports)
     return ports
 
+def isSiLabPort(portName: str) -> bool:
+    """Check the VID for SiLab driver"""
+    all_ports = serial.tools.list_ports.comports()
+    for port in all_ports:
+        if port.name == portName and port.vid == 4292:
+            return True
+    return False
+
 
 class dotdict(dict):
     """dot.notation access to dictionary attributes"""
