@@ -11,7 +11,7 @@ from typing import Optional, cast
 import serial # type: ignore[import-untyped]
 
 from meshtastic.mesh_interface import MeshInterface
-from meshtastic.util import is_windows11, stripnl
+from meshtastic.util import stripnl
 
 START1 = 0x94
 START2 = 0xC3
@@ -25,11 +25,10 @@ class StreamInterface(MeshInterface):
 
     def __init__( # pylint: disable=R0917
         self,
+        timeout: int = 300,
+        noNodes: bool = False,
         debugOut: Optional[io.TextIOWrapper] = None,
         noProto: bool = False,
-        connectNow: bool = True,
-        noNodes: bool = False,
-        timeout: int = 300
     ) -> None:
         """Constructor, opens a connection to self.stream
 
@@ -43,27 +42,24 @@ class StreamInterface(MeshInterface):
             Exception: [description]
         """
 
-        if not hasattr(self, "stream") and not noProto:
-            raise Exception( # pylint: disable=W0719
-                "StreamInterface is now abstract (to update existing code create SerialInterface instead)"
-            )
-        self.stream: Optional[serial.Serial] # only serial uses this, TCPInterface overrides the relevant methods instead
+        # if not hasattr(self, "stream") and not noProto:
+        #     raise NotImplemented( # pylint: disable=W0719
+        #         "StreamInterface is now abstract (to update existing code create SerialInterface instead)"
+        #     )
+
+        super().__init__(timeout, noNodes, debugOut, noProto)
         self._rxBuf = bytes()  # empty
         self._wantExit = False
-
-        self.is_windows11 = is_windows11()
         self.cur_log_line = ""
 
         # FIXME, figure out why daemon=True causes reader thread to exit too early
-        self._rxThread = threading.Thread(target=self.__reader, args=(), daemon=True, name="stream reader")
+        self._rxThread = threading.Thread(target=self.__reader, args=(), daemon=True, name=f"{self.__class__.__name__}_stream_reader")
 
-        MeshInterface.__init__(self, debugOut=debugOut, noProto=noProto, noNodes=noNodes, timeout=timeout)
-
-        # Start the reader thread after superclass constructor completes init
-        if connectNow:
-            self.connect()
-            if not noProto:
-                self.waitForConfig()
+    def connectAndGetConfig(self):
+        """Start communication with radio and retrieve the actual configuration"""
+        self.connect()
+        if not self.noProto:
+            self.waitForConfig()
 
     def connect(self) -> None:
         """Connect to our radio
@@ -101,22 +97,11 @@ class StreamInterface(MeshInterface):
 
     def _writeBytes(self, b: bytes) -> None:
         """Write an array of bytes to our stream and flush"""
-        if self.stream:  # ignore writes when stream is closed
-            self.stream.write(b)
-            self.stream.flush()
-            # win11 might need a bit more time, too
-            if self.is_windows11:
-                time.sleep(1.0)
-            else:
-                # we sleep here to give the TBeam a chance to work
-                time.sleep(0.1)
+        raise NotImplemented("StreamInterface._writeBytes is abstract")
 
     def _readBytes(self, length) -> Optional[bytes]:
         """Read an array of bytes from our stream"""
-        if self.stream:
-            return self.stream.read(length)
-        else:
-            return None
+        raise NotImplemented("StreamInterface._readBytes is abstract")
 
     def _sendToRadioImpl(self, toRadio) -> None:
         """Send a ToRadio protobuf to the device"""

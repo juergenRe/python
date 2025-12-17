@@ -5,7 +5,8 @@ import atexit
 import logging
 import struct
 import time
-import io
+from io import TextIOWrapper
+
 from threading import Thread
 from typing import List, Optional
 
@@ -35,14 +36,14 @@ class BLEInterface(MeshInterface):
     def __init__( # pylint: disable=R0917
         self,
         address: Optional[str],
-        noProto: bool = False,
-        debugOut: Optional[io.TextIOWrapper]=None,
-        noNodes: bool = False,
+        connectNow: bool = True,    # not used here, connects always
         timeout: int = 300,
+        noNodes: bool = False,
+        debugOut: TextIOWrapper | None = None,
+        noProto: bool = False,
     ) -> None:
-        MeshInterface.__init__(
-            self, debugOut=debugOut, noProto=noProto, noNodes=noNodes, timeout=timeout
-        )
+
+        super().__init__(timeout, noNodes, debugOut, noProto)
 
         self.should_read = False
 

@@ -15,6 +15,7 @@ import traceback
 from datetime import datetime
 from decimal import Decimal
 from typing import Any, Callable, Dict, List, Optional, Union
+from io import TextIOWrapper
 
 import google.protobuf.json_format
 
@@ -71,6 +72,18 @@ def _timeago(delta_secs: int) -> str:
 
     return "now"
 
+class InterfaceOpenError(Exception):
+    """An exception class for errors occurring during opening of the interface"""
+    def __init__(self, message: str, ifType: str):
+        super().__init__(message)
+        self.ifType = ifType
+
+    def __str__(self):
+        msg = ''
+        if len(self.args) > 0:
+            msg = self.args[0]
+        return f"Interface opening error from {self.ifType} - {msg}"
+
 
 class MeshInterface:  # pylint: disable=R0902
     """Interface class for meshtastic devices
@@ -90,7 +103,11 @@ class MeshInterface:  # pylint: disable=R0902
             super().__init__(self.message)
 
     def __init__(
-        self, debugOut=None, noProto: bool = False, noNodes: bool = False, timeout: int = 300
+        self,
+        timeout: int = 300,
+        noNodes: bool = False,
+        debugOut: TextIOWrapper | None = None,
+        noProto: bool = False,
     ) -> None:
         """Constructor
 
@@ -101,10 +118,13 @@ class MeshInterface:  # pylint: disable=R0902
                        on startup, just other configuration information.
             timeout -- How long to wait for replies (default: 300 seconds)
         """
+        self._timeout: Timeout = Timeout(maxSecs=timeout)
+        self.noNodes: bool = noNodes
         self.debugOut = debugOut
+        self.noProto: bool = noProto
+
         self.nodes: Optional[Dict[str, Dict]] = None  # FIXME
         self.isConnected: threading.Event = threading.Event()
-        self.noProto: bool = noProto
         self.localNode: meshtastic.node.Node = meshtastic.node.Node(
             self, -1, timeout=timeout
         )  # We fixup nodenum later
@@ -120,13 +140,11 @@ class MeshInterface:  # pylint: disable=R0902
         self.failure = (
             None  # If we've encountered a fatal exception it will be kept here
         )
-        self._timeout: Timeout = Timeout(maxSecs=timeout)
         self._acknowledgment: Acknowledgment = Acknowledgment()
         self.heartbeatTimer: Optional[threading.Timer] = None
         random.seed()  # FIXME, we should not clobber the random seedval here, instead tell user they must call it
         self.currentPacketId: int = random.randint(0, 0xFFFFFFFF)
         self.nodesByNum: Optional[Dict[int, Dict]] = None
-        self.noNodes: bool = noNodes
         self.configId: Optional[int] = NODELESS_WANT_CONFIG_ID if noNodes else None
         self.gotResponse: bool = False  # used in gpio read
         self.mask: Optional[int] = None  # used in gpio read and gpio watch

@@ -6,6 +6,7 @@ import logging
 import socket
 import time
 from typing import Optional
+from io import TextIOWrapper
 
 from meshtastic.stream_interface import StreamInterface
 
@@ -17,13 +18,12 @@ class TCPInterface(StreamInterface):
 
     def __init__(
         self,
-        hostname: str,
-        debugOut=None,
-        noProto: bool=False,
-        connectNow: bool=True,
-        portNumber: int=DEFAULT_TCP_PORT,
-        noNodes:bool=False,
+        hostname: str,      # form: <url>:<portNo>
+        connectNow: bool = True,
         timeout: int = 300,
+        noNodes: bool = False,
+        debugOut: TextIOWrapper | None = None,
+        noProto: bool = False,
     ):
         """Constructor, opens a connection to a specified IP address/hostname
 
@@ -32,30 +32,24 @@ class TCPInterface(StreamInterface):
             timeout -- How long to wait for replies (default: 300 seconds)
         """
 
-        self.stream = None
+        super().__init__(timeout, noNodes, debugOut, noProto)
 
-        self.hostname: str = hostname
-        self.portNumber: int = portNumber
-
+        hn = hostname.split(':', maxsplit=1)
+        self.serverAddress = (hn[0], int(hn[1]))
         self.socket: Optional[socket.socket] = None
 
-        if connectNow:
-            self.myConnect()
-        else:
-            self.socket = None
-
-        super().__init__(debugOut=debugOut, noProto=noProto, connectNow=connectNow, noNodes=noNodes, timeout=timeout)
+        self.open()
+        if self.socket is not None and connectNow:
+            self.connectAndGetConfig()
 
     def __repr__(self):
-        rep = f"TCPInterface({self.hostname!r}"
+        rep = f"TCPInterface({self.serverAddress!r}"
         if self.debugOut is not None:
             rep += f", debugOut={self.debugOut!r}"
         if self.noProto:
             rep += ", noProto=True"
         if self.socket is None:
             rep += ", connectNow=False"
-        if self.portNumber != DEFAULT_TCP_PORT:
-            rep += f", portNumber={self.portNumber!r}"
         if self.noNodes:
             rep += ", noNodes=True"
         rep += ")"
@@ -68,11 +62,10 @@ class TCPInterface(StreamInterface):
         if self.socket is not None:
             self.socket.shutdown(socket.SHUT_RDWR)
 
-    def myConnect(self) -> None:
+    def open(self) -> None:
         """Connect to socket"""
-        logger.debug(f"Connecting to {self.hostname}") # type: ignore[str-bytes-safe]
-        server_address = (self.hostname, self.portNumber)
-        self.socket = socket.create_connection(server_address)
+        logger.debug(f"Connecting to {self.serverAddress}") # type: ignore[str-bytes-safe]
+        self.socket = socket.create_connection(self.serverAddress)
 
     def close(self) -> None:
         """Close a connection to the device"""
@@ -107,7 +100,7 @@ class TCPInterface(StreamInterface):
                 self.socket.close()
                 self.socket = None
                 time.sleep(1)
-                self.myConnect()
+                self.open()
                 self._startConfig()
                 return None
             return data
