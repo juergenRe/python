@@ -35,8 +35,10 @@ blacklistVids: Dict = dict.fromkeys([0x1366, 0x0483, 0x1915, 0x0925, 0x04b4])
 
 """Some devices are highly likely to be meshtastic.
 0x239a RAK4631
-0x303a Heltec tracker"""
-whitelistVids = dict.fromkeys([0x239a, 0x303a])
+0x303a Heltec tracker
+0x10c4 Heltec V3
+"""
+whitelistVids = dict.fromkeys([0x239a, 0x303a, 0x10c4])
 
 logger = logging.getLogger(__name__)
 

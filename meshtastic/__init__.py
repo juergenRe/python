@@ -106,26 +106,14 @@ from . import (
     util,
 )
 
-# Note: To follow PEP224, comments should be after the module variable.
-
-LOCAL_ADDR = "^local"
-"""A special ID that means the local node"""
-
-BROADCAST_NUM: int = 0xFFFFFFFF
-"""if using 8 bit nodenums this will be shortened on the target"""
-
-BROADCAST_ADDR = "^all"
-"""A special ID that means broadcast"""
-
-OUR_APP_VERSION: int = 20300
-"""The numeric buildnumber (shared with android apps) specifying the
-   level of device code we are guaranteed to understand
-
-   format is Mmmss (where M is 1+the numeric major number. i.e. 20120 means 1.1.20
-"""
-
-NODELESS_WANT_CONFIG_ID = 69420
-"""A special thing to pass for want_config_id that instructs nodes to skip sending nodeinfos other than its own."""
+LOCAL_ADDR :str = "^local"          # A special ID that means the local node
+BROADCAST_ADDR: str = "^all"        # A special ID that means broadcast
+BROADCAST_NUM: int = 0xFFFFFFFF     # if using 8 bit nodenums this will be shortened on the target
+OUR_APP_VERSION: int = 20300        # The numeric buildnumber (shared with android apps) specifying
+                                    # the level of device code we are guaranteed to understand
+                                    # format is Mmmss (where M is 1+the numeric major number. i.e. 20120 means 1.1.20
+NODELESS_WANT_CONFIG_ID: int = 69420# A special thing to pass for want_config_id that instructs nodes to skip
+                                    # sending nodeinfos other than its own.
 
 publishingThread = DeferredExecution("publishing")
 

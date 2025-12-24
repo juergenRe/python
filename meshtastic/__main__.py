@@ -1,5 +1,6 @@
 """ Main Meshtastic
 """
+import io
 # We just hit the 1600 line limit for main.py, but I currently have a huge set of powermon/structured logging changes
 # later we can have a separate changelist to refactor main.py into smaller files
 # pylint: disable=R0917,C0302
@@ -32,11 +33,13 @@ except ImportError as e:
 import meshtastic.util
 from meshtastic.setup_arguments import initParser
 from meshtastic.ble_interface import BLEInterface
-import meshtastic.tcp_interface
-from meshtastic.interface_factory import InterfaceFactory
+from meshtastic.mesh_interface import MeshInterface
+from meshtastic.command_factory import CommandFactory
+from meshtastic.command_executor import CommandExecutor
+from meshtastic.mesh_model import MeshModel
+from meshtastic.protocol_manager import ProtocolHandlerManager
 
 from meshtastic import BROADCAST_ADDR, mt_config, remote_hardware
-from meshtastic.mesh_interface import MeshInterface
 try:
     from meshtastic.powermon import PowerMeter, PowerStress, PPK2PowerSupply, RidenPowerSupply, SimPowerSupply
     from meshtastic.slog import LogSet
@@ -1273,190 +1276,116 @@ def common():
     if not (args.debug or args.listen) and args.debuglib:
         logging.getLogger('meshtastic').setLevel(logging.DEBUG)
 
+    # Execute all options where we will return fast and without connection
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
         meshtastic.util.our_exit("", 1)
-    else:
-        if args.support:
-            meshtastic.util.support_info()
-            meshtastic.util.our_exit("", 0)
+    if args.support:
+        meshtastic.util.support_info()
+        meshtastic.util.our_exit("", 0)
+    if args.deprecated is not None:
+        logger.error("This option has been deprecated, see help below for the correct replacement...")
+        parser.print_help(sys.stderr)
+        meshtastic.util.our_exit("", 1)
+    if args.ble_scan:
+        # Only scan for nodes, do not connect with this option
+        logger.debug("BLE scan starting")
+        for x in BLEInterface.scan():
+            print(f"Found: name='{x.name}' address='{x.address}'")
+        meshtastic.util.our_exit("BLE scan finished", 0)
 
-        # Early validation for owner names before attempting device connection
-        if hasattr(args, 'set_owner') and args.set_owner is not None:
-            stripped_long_name = args.set_owner.strip()
-            if not stripped_long_name:
-                meshtastic.util.our_exit("ERROR: Long Name cannot be empty or contain only whitespace characters")
+    mt_config.logfile = configureSerialLog(args.seriallog, args.noproto)
 
-        if hasattr(args, 'set_owner_short') and args.set_owner_short is not None:
-            stripped_short_name = args.set_owner_short.strip()
-            if not stripped_short_name:
-                meshtastic.util.our_exit("ERROR: Short Name cannot be empty or contain only whitespace characters")
+    if have_powermon:
+        create_power_meter()
 
-        if hasattr(args, 'set_ham') and args.set_ham is not None:
-            stripped_ham_name = args.set_ham.strip()
-            if not stripped_ham_name:
-                meshtastic.util.our_exit("ERROR: Ham radio callsign cannot be empty or contain only whitespace characters")
+    if args.test:
+        if not have_test:
+            meshtastic.util.our_exit("Test module could not be imported. Ensure you have the 'dotmap' module installed.")
 
-        if have_powermon:
-            create_power_meter()
-
-        if args.ch_index is not None:
-            channelIndex = int(args.ch_index)
-            mt_config.channel_index = channelIndex
-
-        if not args.dest:
-            args.dest = BROADCAST_ADDR
-
-        if not args.seriallog:
-            if args.noproto:
-                args.seriallog = "stdout"
-            else:
-                args.seriallog = "none"  # assume no debug output in this case
-
-        if args.deprecated is not None:
-            logger.error(
-                "This option has been deprecated, see help below for the correct replacement..."
-            )
-            parser.print_help(sys.stderr)
-            meshtastic.util.our_exit("", 1)
-        elif args.test:
-            if not have_test:
-                meshtastic.util.our_exit("Test module could not be important. Ensure you have the 'dotmap' module installed.")
-            else:
-                result = meshtastic.test.testAll()
-                if not result:
-                    meshtastic.util.our_exit("Warning: Test was not successful.")
-                else:
-                    meshtastic.util.our_exit("Test was a success.", 0)
+        result = meshtastic.test.testAll()
+        if not result:
+            meshtastic.util.our_exit("Warning: Test was not successful.")
         else:
-            if args.seriallog == "stdout":
-                logfile = sys.stdout
-            elif args.seriallog == "none":
-                args.seriallog = None
-                logger.debug("Not logging serial output")
-                logfile = None
-            else:
-                logger.info(f"Logging serial output to {args.seriallog}")
-                # Note: using "line buffering"
-                # pylint: disable=R1732
-                logfile: TextIOWrapper | None = open(args.seriallog, "w+", buffering=1, encoding="utf8")
-                mt_config.logfile = logfile
+            meshtastic.util.our_exit("Test was a success.", 0)
 
-            subscribe()
-            ifceType = {
-                "ble": args.ble,
-                "host": args.host,
-                "serial": args.port,
-            }
-            ifceArgs = {
-                "debugOut": logfile,
-                "noProto": args.noproto,
-                "noNodes": args.no_nodes,
-                "timeout": args.timeout
-            }
-            if args.ble_scan:
-                # Only scan for node, do not connect with this option
-                logger.debug("BLE scan starting")
-                for x in BLEInterface.scan():
-                    print(f"Found: name='{x.name}' address='{x.address}'")
-                meshtastic.util.our_exit("BLE scan finished", 0)
-            else:
-                client = InterfaceFactory().createInterface(**ifceType, **ifceArgs)
-            # elif args.ble:
-            #     client = BLEInterface(
-            #         args.ble if args.ble != "any" else None,
-            #         debugOut=logfile,
-            #         noProto=args.noproto,
-            #         noNodes=args.no_nodes,
-            #         timeout=args.timeout,
-            #     )
-            # elif args.host:
-            #     try:
-            #         if ":" in args.host:
-            #             tcp_hostname, tcp_port = args.host.split(':')
-            #         else:
-            #             tcp_hostname = args.host
-            #             tcp_port = meshtastic.tcp_interface.DEFAULT_TCP_PORT
-            #         client = meshtastic.tcp_interface.TCPInterface(
-            #             tcp_hostname,
-            #             portNumber=tcp_port,
-            #             debugOut=logfile,
-            #             noProto=args.noproto,
-            #             noNodes=args.no_nodes,
-            #             timeout=args.timeout,
-            #         )
-            #     except Exception as ex:
-            #         meshtastic.util.our_exit(f"Error connecting to {args.host}:{ex}", 1)
-            # else:
-            #     try:
-            #         client = meshtastic.serial_interface.SerialInterface(
-            #             args.port,
-            #             debugOut=logfile,
-            #             noProto=args.noproto,
-            #             noNodes=args.no_nodes,
-            #             timeout=args.timeout,
-            #         )
-            #     except FileNotFoundError:
-            #         # Handle the case where the serial device is not found
-            #         message = (
-            #             f"File Not Found Error:\n"
-            #         )
-            #         message += f"  The serial device at '{args.port}' was not found.\n"
-            #         message += "  Please check the following:\n"
-            #         message += "    1. Is the device connected properly?\n"
-            #         message += "    2. Is the correct serial port specified?\n"
-            #         message += "    3. Are the necessary drivers installed?\n"
-            #         message += "    4. Are you using a **power-only USB cable**? A power-only cable cannot transmit data.\n"
-            #         message += "       Ensure you are using a **data-capable USB cable**.\n"
-            #         meshtastic.util.our_exit(message, 1)
-            #     except PermissionError as ex:
-            #         username = os.getlogin()
-            #         message = "Permission Error:\n"
-            #         message += (
-            #             "  Need to add yourself to the 'dialout' group by running:\n"
-            #         )
-            #         message += f"     sudo usermod -a -G dialout {username}\n"
-            #         message += "  After running that command, log out and re-login for it to take effect.\n"
-            #         message += f"Error was:{ex}"
-            #         meshtastic.util.our_exit(message)
-            #     except OSError as ex:
-            #         message = f"OS Error:\n"
-            #         message += "  The serial device couldn't be opened, it might be in use by another process.\n"
-            #         message += "  Please close any applications or webpages that may be using the device and try again.\n"
-            #         message += f"\nOriginal error: {ex}"
-            #         meshtastic.util.our_exit(message)
-            #     if client.devPath is None:
-            #         try:
-            #             client = meshtastic.tcp_interface.TCPInterface(
-            #                 "localhost",
-            #                 debugOut=logfile,
-            #                 noProto=args.noproto,
-            #                 noNodes=args.no_nodes,
-            #                 timeout=args.timeout,
-            #             )
-            #         except Exception as ex:
-            #             meshtastic.util.our_exit(
-            #                 f"Error connecting to localhost:{ex}", 1
-            #             )
+    # # Early validation for owner names before attempting device connection
+    # if hasattr(args, 'set_owner') and args.set_owner is not None:
+    #     stripped_long_name = args.set_owner.strip()
+    #     if not stripped_long_name:
+    #         meshtastic.util.our_exit("ERROR: Long Name cannot be empty or contain only whitespace characters")
+    #
+    # if hasattr(args, 'set_owner_short') and args.set_owner_short is not None:
+    #     stripped_short_name = args.set_owner_short.strip()
+    #     if not stripped_short_name:
+    #         meshtastic.util.our_exit("ERROR: Short Name cannot be empty or contain only whitespace characters")
+    #
+    # if hasattr(args, 'set_ham') and args.set_ham is not None:
+    #     stripped_ham_name = args.set_ham.strip()
+    #     if not stripped_ham_name:
+    #         meshtastic.util.our_exit("ERROR: Ham radio callsign cannot be empty or contain only whitespace characters")
+    #
 
-            # We assume client is fully connected now
-            onConnected(client)
+    # subscribe()
+    ifceType = {
+        "ble": args.ble,
+        "host": args.host,
+        "serial": args.port,
+    }
+    ifceArgs = {
+        "debugOut": mt_config.logfile,
+        "noProto": args.noproto,
+        "noNodes": args.no_nodes,
+        "timeout": args.timeout
+    }
+    argDict = vars(args)
+    argsKeys = list(argDict.keys())
+    cmdList = CommandFactory(argsKeys).createCommandList(vars(args))
+    client = MeshInterface(ifceType, **ifceArgs)
+    pm = ProtocolHandlerManager(client)
+    pm.instantiateHandlers()
+    mesh = MeshModel()
+    CommandExecutor(client, mesh, args.timeout).execute(cmdList)
 
-            have_tunnel = platform.system() == "Linux"
-            if (
-                args.noproto
-                or args.reply
-                or (have_tunnel and args.tunnel)
-                or args.listen
-            ):  # loop until someone presses ctrlc
-                try:
-                    while True:
-                        time.sleep(1000)
-                except KeyboardInterrupt:
-                    logger.info("Exiting due to keyboard interrupt")
+    # We assume client is fully connected now
+    # onConnected(client)
 
-        # don't call exit, background threads might be running still
-        # sys.exit(0)
+    have_tunnel = platform.system() == "Linux"
+    if (
+        args.noproto
+        or args.reply
+        or (have_tunnel and args.tunnel)
+        or args.listen
+    ):  # loop until someone presses ctrlc
+        try:
+            while True:
+                time.sleep(1000)
+        except KeyboardInterrupt:
+            logger.info("Exiting due to keyboard interrupt")
+
+    # don't call exit, background threads might be running still
+    # sys.exit(0)
+
+
+def configureSerialLog(serLogCfg: str | None, cfgNoproto: bool) -> io.TextIOWrapper | None:
+    """setup file for serial log if configured so"""
+    logfile = None
+    if serLogCfg:
+        if serLogCfg  == "stdout":
+            logfile = sys.stdout
+        elif len(serLogCfg) > 0:
+            # Note: using "line buffering"
+            # pylint: disable=R1732
+            logfile = open(serLogCfg, "w+", buffering=1, encoding="utf8")
+    else:
+        if cfgNoproto:
+            logfile = sys.stdout
+
+    if logfile is None:
+        logger.debug("Not logging serial output")
+    else:
+        logger.info(f"Logging serial output to {logfile.name}")
+    return logfile
 
 
 def main():

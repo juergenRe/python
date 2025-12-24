@@ -5,18 +5,17 @@ import atexit
 import logging
 import struct
 import time
-from io import TextIOWrapper
 
 from threading import Thread
-from typing import List, Optional
+from typing import List, Optional, Any, Callable
 
 import google.protobuf
 from bleak import BleakClient, BleakScanner, BLEDevice
 from bleak.exc import BleakDBusError, BleakError
 
-from meshtastic.mesh_interface import MeshInterface
+from meshtastic.radio_interface import RadioInterfaceBase
 
-from .protobuf import mesh_pb2
+from meshtastic.protobuf import mesh_pb2
 
 SERVICE_UUID = "6ba1b218-15a8-461f-9fa8-5dcae273eafd"
 TORADIO_UUID = "f75c76d2-129e-4dad-a1dd-7866124401e7"
@@ -24,10 +23,11 @@ FROMRADIO_UUID = "2c55e69e-4993-11ed-b878-0242ac120002"
 FROMNUM_UUID = "ed9da18c-a800-4f66-a670-aa7547e34453"
 LEGACY_LOGRADIO_UUID = "6c6fd238-78fa-436b-aacf-15c5be1ef2e2"
 LOGRADIO_UUID = "5a3d6e49-06e6-4423-9944-e9de8cdf9547"
+
 logger = logging.getLogger(__name__)
 
 
-class BLEInterface(MeshInterface):
+class BLEInterface(RadioInterfaceBase):
     """MeshInterface using BLE to connect to devices."""
 
     class BLEError(Exception):
@@ -35,67 +35,59 @@ class BLEInterface(MeshInterface):
 
     def __init__( # pylint: disable=R0917
         self,
-        address: Optional[str],
-        connectNow: bool = True,    # not used here, connects always
-        timeout: int = 300,
-        noNodes: bool = False,
-        debugOut: TextIOWrapper | None = None,
-        noProto: bool = False,
+        address: str,
+        rcvCallback: Callable[[bytes], None],
+        logCallback: Callable[[str], None],
     ) -> None:
 
-        super().__init__(timeout, noNodes, debugOut, noProto)
+        super().__init__(address, rcvCallback, logCallback)
+        self._should_read: bool = False
+        self._want_receive: bool = True
+        self.client: BLEClient | None = None
+        self._receiveThread: Thread | None = None
+        self._exit_handler = None
 
-        self.should_read = False
+        self.createRcvThread()
+        self.connect(address)
 
+    def createRcvThread(self) -> None:
+        """Create and start the receiving thread"""
         logger.debug("Threads starting")
-        self._want_receive = True
-        self._receiveThread: Optional[Thread] = Thread(
+        self._receiveThread = Thread(
             target=self._receiveFromRadioImpl, name="BLEReceive", daemon=True
         )
         self._receiveThread.start()
         logger.debug("Threads running")
 
-        self.client: Optional[BLEClient] = None
-        try:
-            logger.debug(f"BLE connecting to: {address if address else 'any'}")
-            self.client = self.connect(address)
-            logger.debug("BLE connected")
-        except BLEInterface.BLEError as e:
-            self.close()
-            raise e
+    def connect(self, address):
+        """Create the BLE client using address and set its properties"""
+        if self.client is None:
+            try:
+                logger.debug(f"BLE connecting to: {address if address else 'any'}")
+                self.client = self._connect(address)
+                logger.debug("BLE connected")
+            except BLEInterface.BLEError as e:
+                self.close()
+                raise e
 
-        if self.client.has_characteristic(LEGACY_LOGRADIO_UUID):
-            self.client.start_notify(
-                LEGACY_LOGRADIO_UUID, self.legacy_log_radio_handler
-            )
+            if self.client.has_characteristic(LEGACY_LOGRADIO_UUID):
+                self.client.start_notify(
+                    LEGACY_LOGRADIO_UUID, self.legacy_log_radio_handler
+                )
 
-        if self.client.has_characteristic(LOGRADIO_UUID):
-            self.client.start_notify(LOGRADIO_UUID, self.log_radio_handler)
+            if self.client.has_characteristic(LOGRADIO_UUID):
+                self.client.start_notify(LOGRADIO_UUID, self.log_radio_handler)
 
-        logger.debug("Mesh configure starting")
-        self._startConfig()
-        if not self.noProto:
-            self._waitConnected(timeout=60.0)
-            self.waitForConfig()
+            logger.debug("Register FROMNUM notify callback")
+            self.client.start_notify(FROMNUM_UUID, self.from_num_handler)
 
-        logger.debug("Register FROMNUM notify callback")
-        self.client.start_notify(FROMNUM_UUID, self.from_num_handler)
-
-        # We MUST run atexit (if we can) because otherwise (at least on linux) the BLE device is not disconnected
-        # and future connection attempts will fail.  (BlueZ kinda sucks)
-        # Note: the on disconnected callback will call our self.close which will make us nicely wait for threads to exit
-        self._exit_handler = atexit.register(self.client.disconnect)
+            # We MUST run atexit (if we can) because otherwise (at least on linux) the BLE device is not disconnected
+            # and future connection attempts will fail.  (BlueZ kinda sucks)
+            # Note: the on disconnected callback will call our self.close which will make us nicely wait for threads to exit
+            self._exit_handler = atexit.register(self.client.disconnect)
 
     def __repr__(self):
-        rep = f"BLEInterface(address={self.client.address if self.client else None!r}"
-        if self.debugOut is not None:
-            rep += f", debugOut={self.debugOut!r}"
-        if self.noProto:
-            rep += ", noProto=True"
-        if self.noNodes:
-            rep += ", noNodes=True"
-        rep += ")"
-        return rep
+        return f"BLEInterface(address={self.client.address if self.client else None!r})"
 
     def from_num_handler(self, _, b: bytes) -> None:  # pylint: disable=C0116
         """Handle callbacks for fromnum notify.
@@ -103,25 +95,7 @@ class BLEInterface(MeshInterface):
         """
         from_num = struct.unpack("<I", bytes(b))[0]
         logger.debug(f"FROMNUM notify: {from_num}")
-        self.should_read = True
-
-    async def log_radio_handler(self, _, b):  # pylint: disable=C0116
-        log_record = mesh_pb2.LogRecord()
-        try:
-            log_record.ParseFromString(bytes(b))
-
-            message = (
-                f"[{log_record.source}] {log_record.message}"
-                if log_record.source
-                else log_record.message
-            )
-            self._handleLogLine(message)
-        except google.protobuf.message.DecodeError:
-            logger.warning("Malformed LogRecord received. Skipping.")
-
-    async def legacy_log_radio_handler(self, _, b):  # pylint: disable=C0116
-        log_radio = b.decode("utf-8").replace("\n", "")
-        self._handleLogLine(log_radio)
+        self._should_read = True
 
     @staticmethod
     def scan() -> List[BLEDevice]:
@@ -166,14 +140,34 @@ class BLEInterface(MeshInterface):
         return addressed_devices[0]
 
     def _sanitize_address(self, address: Optional[str]) -> Optional[str]:  # pylint: disable=E0213
-        "Standardize BLE address by removing extraneous characters and lowercasing."
+        """Standardize BLE address by removing extraneous characters and lowercasing."""
         if address is None:
             return None
         else:
             return address.replace("-", "").replace("_", "").replace(":", "").lower()
 
-    def connect(self, address: Optional[str] = None) -> "BLEClient":
-        "Connect to a device by address."
+    async def log_radio_handler(self, _, b):  # pylint: disable=C0116
+        """receives a log entry from BLE"""
+        log_record = mesh_pb2.LogRecord()
+        try:
+            log_record.ParseFromString(bytes(b))
+
+            message = (
+                f"[{log_record.source}] {log_record.message}"
+                if log_record.source
+                else log_record.message
+            )
+            self._logCallback(message)
+        except google.protobuf.message.DecodeError:
+            logger.warning("Malformed LogRecord received. Skipping.")
+
+    async def legacy_log_radio_handler(self, _, b):  # pylint: disable=C0116
+        """receives a log entry from BLE (legacy format)"""
+        log_radio = b.decode("utf-8").replace("\n", "")
+        self._logCallback(log_radio)
+
+    def _connect(self, address: str) -> Any:
+        """Connect to a device by address."""
 
         # Bleak docs recommend always doing a scan before connecting (even if we know addr)
         device = self.find_device(address)
@@ -183,9 +177,10 @@ class BLEInterface(MeshInterface):
         return client
 
     def _receiveFromRadioImpl(self) -> None:
+        self._want_receive = True
         while self._want_receive:
-            if self.should_read:
-                self.should_read = False
+            if self._should_read:
+                self._should_read = False
                 retries: int = 0
                 while self._want_receive:
                     if self.client is None:
@@ -205,18 +200,18 @@ class BLEInterface(MeshInterface):
                             self._want_receive = False
                         else:
                             raise BLEInterface.BLEError("Error reading BLE") from e
-                    if not b:
+                    if not b:  # Fixme: analyze repeat. Function is unclear. b seems not initialized always.
                         if retries < 5:
                             time.sleep(0.1)
                             retries += 1
                             continue
                         break
                     logger.debug(f"FROMRADIO read: {b.hex()}")
-                    self._handleFromRadio(b)
+                    self._rcvCallback(b)
             else:
                 time.sleep(0.01)
 
-    def _sendToRadioImpl(self, toRadio) -> None:
+    def sendToRadioImpl(self, toRadio: mesh_pb2.ToRadio) -> None:
         b: bytes = toRadio.SerializeToString()
         if b and self.client:  # we silently ignore writes while we are shutting down
             logger.debug(f"TORADIO write: {b.hex()}")
@@ -231,14 +226,14 @@ class BLEInterface(MeshInterface):
                 ) from e
             # Allow to propagate and then make sure we read
             time.sleep(0.01)
-            self.should_read = True
+            self._should_read = True
 
     def close(self) -> None:
-        try:
-            MeshInterface.close(self)
-        except Exception as e:
-            logger.error(f"Error closing mesh interface: {e}")
-
+        # try:
+        #     MeshInterface.close(self)
+        # except Exception as e:
+        #     logger.error(f"Error closing mesh interface: {e}")
+        #
         if self._want_receive:
             self._want_receive = False  # Tell the thread we want it to stop
             if self._receiveThread:
@@ -252,7 +247,7 @@ class BLEInterface(MeshInterface):
             self.client.disconnect()
             self.client.close()
             self.client = None
-        self._disconnected() # send the disconnected indicator up to clients
+        # self._disconnected() # send the disconnected indicator up to clients
 
 
 class BLEClient:
@@ -268,7 +263,7 @@ class BLEClient:
         if not address:
             logger.debug("No address provided - only discover method will work.")
             return
-
+        self.address = address
         self.bleak_client = BleakClient(address, **kwargs)
 
     def discover(self, **kwargs):  # pylint: disable=C0116

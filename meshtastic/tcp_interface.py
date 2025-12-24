@@ -5,7 +5,7 @@ import contextlib
 import logging
 import socket
 import time
-from typing import Optional
+from typing import Optional, Callable
 from io import TextIOWrapper
 
 from meshtastic.stream_interface import StreamInterface
@@ -18,12 +18,9 @@ class TCPInterface(StreamInterface):
 
     def __init__(
         self,
-        hostname: str,      # form: <url>:<portNo>
-        connectNow: bool = True,
-        timeout: int = 300,
-        noNodes: bool = False,
-        debugOut: TextIOWrapper | None = None,
-        noProto: bool = False,
+        address: str,
+        rcvCallback: Callable[[bytes], None],
+        logCallback: Callable[[str], None],
     ):
         """Constructor, opens a connection to a specified IP address/hostname
 
@@ -32,28 +29,16 @@ class TCPInterface(StreamInterface):
             timeout -- How long to wait for replies (default: 300 seconds)
         """
 
-        super().__init__(timeout, noNodes, debugOut, noProto)
+        super().__init__(address, rcvCallback, logCallback)
 
-        hn = hostname.split(':', maxsplit=1)
+        hn = address.split(':', maxsplit=1)
         self.serverAddress = (hn[0], int(hn[1]))
-        self.socket: Optional[socket.socket] = None
+        self.socket: socket.socket | None = None
 
         self.open()
-        if self.socket is not None and connectNow:
-            self.connectAndGetConfig()
 
     def __repr__(self):
-        rep = f"TCPInterface({self.serverAddress!r}"
-        if self.debugOut is not None:
-            rep += f", debugOut={self.debugOut!r}"
-        if self.noProto:
-            rep += ", noProto=True"
-        if self.socket is None:
-            rep += ", connectNow=False"
-        if self.noNodes:
-            rep += ", noNodes=True"
-        rep += ")"
-        return rep
+        return f"TCPInterface(address:{self.serverAddress!r}"
 
     def _socket_shutdown(self) -> None:
         """Shutdown the socket.
@@ -73,7 +58,6 @@ class TCPInterface(StreamInterface):
         super().close()
         # Sometimes the socket read might be blocked in the reader thread.
         # Therefore we force the shutdown by closing the socket here
-        self._wantExit = True
         if self.socket is not None:
             with contextlib.suppress(Exception):  # Ignore errors in shutdown, because we might have a race with the server
                 self._socket_shutdown()

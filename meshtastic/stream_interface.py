@@ -1,16 +1,15 @@
 """Stream Interface base class
 """
-import io
 import logging
 import threading
 import time
 import traceback
 
-from typing import Optional, cast
+from typing import Optional, Callable
 
 import serial # type: ignore[import-untyped]
 
-from meshtastic.mesh_interface import MeshInterface
+from meshtastic.radio_interface import RadioInterfaceBase
 from meshtastic.util import stripnl
 
 START1 = 0x94
@@ -20,15 +19,14 @@ MAX_TO_FROM_RADIO_SIZE = 512
 logger = logging.getLogger(__name__)
 
 
-class StreamInterface(MeshInterface):
+class StreamInterface(RadioInterfaceBase):
     """Interface class for meshtastic devices over a stream link (serial, TCP, etc)"""
 
     def __init__( # pylint: disable=R0917
         self,
-        timeout: int = 300,
-        noNodes: bool = False,
-        debugOut: Optional[io.TextIOWrapper] = None,
-        noProto: bool = False,
+        address: str,
+        rcvCallback: Callable[[bytes], None],
+        logCallback: Callable[[str], None],
     ) -> None:
         """Constructor, opens a connection to self.stream
 
@@ -47,21 +45,20 @@ class StreamInterface(MeshInterface):
         #         "StreamInterface is now abstract (to update existing code create SerialInterface instead)"
         #     )
 
-        super().__init__(timeout, noNodes, debugOut, noProto)
+        super().__init__(address, rcvCallback, logCallback)
         self._rxBuf = bytes()  # empty
         self._wantExit = False
         self.cur_log_line = ""
 
         # FIXME, figure out why daemon=True causes reader thread to exit too early
-        self._rxThread = threading.Thread(target=self.__reader, args=(), daemon=True, name=f"{self.__class__.__name__}_stream_reader")
+        self._rxThread = threading.Thread(target=self._receiveFromRadioImpl, args=(), daemon=True, name=f"{self.__class__.__name__}_stream_reader")
 
-    def connectAndGetConfig(self):
-        """Start communication with radio and retrieve the actual configuration"""
-        self.connect()
-        if not self.noProto:
-            self.waitForConfig()
-
-    def connect(self) -> None:
+    # def connectAndGetConfig(self, cmdTxt: str, cb, timeout: int = 300):
+    #     """Start communication with radio and retrieve the actual configuration"""
+    #     self.connect()
+    #     super().connectAndGetConfig(cmdTxt, cb)
+    #
+    def connect(self, address: str) -> None:
         """Connect to our radio
 
         Normally this is called automatically by the constructor, but if you
@@ -78,23 +75,18 @@ class StreamInterface(MeshInterface):
 
         self._rxThread.start()
 
-        self._startConfig()
-
-        if not self.noProto:  # Wait for the db download if using the protocol
-            self._waitConnected()
-
-    def _disconnected(self) -> None:
-        """We override the superclass implementation to close our port"""
-        MeshInterface._disconnected(self)
-
-        logger.debug("Closing our port")
-        # pylint: disable=E0203
-        if not self.stream is None:
-            # pylint: disable=E0203
-            self.stream.close()
-            # pylint: disable=W0201
-            self.stream = None
-
+    # def _disconnected(self) -> None:
+    #     """We override the superclass implementation to close our port"""
+    #     MeshInterface._disconnected(self)
+    #
+    #     logger.debug("Closing our port")
+    #     # pylint: disable=E0203
+    #     if not self.stream is None:
+    #         # pylint: disable=E0203
+    #         self.stream.close()
+    #         # pylint: disable=W0201
+    #         self.stream = None
+    #
     def _writeBytes(self, b: bytes) -> None:
         """Write an array of bytes to our stream and flush"""
         raise NotImplemented("StreamInterface._writeBytes is abstract")
@@ -103,7 +95,7 @@ class StreamInterface(MeshInterface):
         """Read an array of bytes from our stream"""
         raise NotImplemented("StreamInterface._readBytes is abstract")
 
-    def _sendToRadioImpl(self, toRadio) -> None:
+    def sendToRadioImpl(self, toRadio) -> None:
         """Send a ToRadio protobuf to the device"""
         logger.debug(f"Sending: {stripnl(toRadio)}")
         b: bytes = toRadio.SerializeToString()
@@ -115,8 +107,8 @@ class StreamInterface(MeshInterface):
 
     def close(self) -> None:
         """Close a connection to the device"""
-        logger.debug("Closing stream")
-        MeshInterface.close(self)
+        logger.debug("Exiting receiving thread")
+        # MeshInterface.close(self)
         # pyserial cancel_read doesn't seem to work, therefore we ask the
         # reader thread to close things for us
         self._wantExit = True
@@ -129,18 +121,18 @@ class StreamInterface(MeshInterface):
         utf = "?"  # assume we might fail
         try:
             utf = b.decode("utf-8")
-        except:
+        except Exception as ex:
             pass
 
         if utf == "\r":
             pass    # ignore
         elif utf == "\n":
-            self._handleLogLine(self.cur_log_line)
+            self._logCallback(self.cur_log_line)
             self.cur_log_line = ""
         else:
             self.cur_log_line += utf
 
-    def __reader(self) -> None:
+    def _receiveFromRadioImpl(self) -> None:
         """The reader thread that reads bytes from our stream"""
         logger.debug("in __reader()")
         empty = bytes()
@@ -151,7 +143,7 @@ class StreamInterface(MeshInterface):
                 b: Optional[bytes] = self._readBytes(1)
                 # logger.debug("In reader loop")
                 # logger.debug(f"read returned {b}")
-                if b is not None and len(cast(bytes, b)) > 0:
+                if b is not None and len(b) > 0:
                     c: int = b[0]
                     # logger.debug(f'c:{c}')
                     ptr: int = len(self._rxBuf)
@@ -184,7 +176,7 @@ class StreamInterface(MeshInterface):
 
                         if len(self._rxBuf) != 0 and ptr + 1 >= packetlen + HEADER_LEN:
                             try:
-                                self._handleFromRadio(self._rxBuf[HEADER_LEN:])
+                                self._rcvCallback(self._rxBuf[HEADER_LEN:])
                             except Exception as ex:
                                 logger.error(
                                     f"Error while handling message from radio {ex}"
@@ -214,4 +206,4 @@ class StreamInterface(MeshInterface):
             )
         finally:
             logger.debug("reader is exiting")
-            self._disconnected()
+            # self._disconnected()

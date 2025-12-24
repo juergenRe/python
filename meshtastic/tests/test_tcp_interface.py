@@ -15,7 +15,7 @@ def test_TCPInterface(capsys):
     with patch("socket.socket") as mock_socket:
         iface = TCPInterface(hostname="localhost", noProto=True)
         iface.localNode.localConfig.lora.CopyFrom(config_pb2.Config.LoRaConfig())
-        iface.myConnect()
+        iface.open()
         iface.showInfo()
         iface.localNode.showInfo()
         out, err = capsys.readouterr()
@@ -42,7 +42,7 @@ def test_TCPInterface_exception():
         mock_shutdown.side_effect = throw_an_exception
         with patch("socket.socket") as mock_socket:
             iface = TCPInterface(hostname="localhost", noProto=True)
-            iface.myConnect()
+            iface.open()
             iface.close()
             assert mock_socket.called
             assert mock_shutdown.called
