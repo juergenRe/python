@@ -6,6 +6,7 @@ from typing import Any, Callable
 from pathlib import Path
 
 from meshtastic.mesh_interface import MeshInterface
+from meshtastic.protobuf import mesh_pb2
 
 # Name definitions for protocol handler types
 UNKNOWN_HANDLER = 'Unknown'
@@ -31,12 +32,12 @@ class IProtocolHandler(metaclass=abc.ABCMeta):
                 NotImplemented)
 
     @abc.abstractmethod
-    def receivePacket(self, address: str) -> Any:
+    def receivePacket(self, packet) -> None:
         """Abstract method to receive a packet and decode it to a message"""
         raise NotImplementedError("Subclass must implement this method")
 
     @abc.abstractmethod
-    def sendPacket(self, address: str) -> Any:
+    def sendPacket(self, data: dict) -> Any:
         """Abstract method to send a message and encode it to a packet"""
         raise NotImplementedError("Subclass must implement this method")
 

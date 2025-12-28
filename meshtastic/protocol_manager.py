@@ -21,10 +21,10 @@ class NotImplementedHandler(ProtocolHandlerBase):
         super().__init__(ifMesh)
         self.hdlrType: str | None = UNKNOWN_HANDLER
 
-    def receivePacket(self, address: str) -> Any:
+    def receivePacket(self, packet) -> None:
         pass
 
-    def sendPacket(self, address: str) -> Any:
+    def sendPacket(self, data: dict) -> Any:
         pass
 
     def addHandler(self, address: str) -> Any:

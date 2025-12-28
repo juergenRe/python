@@ -296,7 +296,7 @@ BaseProtocolHandler "1" o-> "1" IMeshInterface: "       "
 
 PacketHandlerManager --> IProtocolHandler: create
 
-note right of UnknownHandler
+note bottom of UnknownHandler
     used for every otherwise unknown 
     or not implemented protocol
 end note

@@ -20,6 +20,7 @@ from io import TextIOWrapper
 import google.protobuf.json_format
 
 from meshtastic.interface_factory import InterfaceFactory
+from meshtastic.protocol_base import IProtocolHandler
 from meshtastic.radio_interface import RadioInterfaceBase, IRadioInterface
 
 try:
@@ -221,11 +222,11 @@ class MeshInterface:  # pylint: disable=R0902
         if self.interface:
             self.interface.close()
 
-    def registerHandler(self, fieldName: str, callback: Callable) -> bool:
-        """register a protocol handler treating protobuf message with 'field'
+    def registerHandler(self, fieldName: str, hdlr: IProtocolHandler) -> bool:
+        """register a protocol handler object treating protobuf message with 'field'
         Do not register in case the field is used inside this class"""
         if fieldName not in self.internalFields:
-            self.registeredHandlers[fieldName] = callback
+            self.registeredHandlers[fieldName] = hdlr
             return True
         return False
 
