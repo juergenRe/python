@@ -1,11 +1,14 @@
 """Definitions for the commands which can be executed from meshtastic"""
 import logging
+from abc import abstractmethod
 from collections import deque
 from threading import Event
 from typing import Any
 
+from pubsub import pub  # type: ignore[import-untyped]
+import topic_map
+
 from meshtastic import BROADCAST_ADDR, LOCAL_ADDR, BROADCAST_NUM
-from meshtastic.mesh_interface import MeshInterface
 
 logger = logging.getLogger(__name__)
 
@@ -19,32 +22,30 @@ class Command:
         self.transactionId: None | int = None
         self.cmdName: str = self.__class__.__name__
         self.parameter: list = parameter
-        self.answerQueue: deque = deque()
         self.answerEvent: Event = Event()
 
-    def execute(self, ifce: MeshInterface, timeout: int) -> dict:
+    @abstractmethod
+    def execute(self, timeout: int) -> dict:
         """Executes the command"""
         raise NotImplementedError(f"Unknown Command")
 
-    def completionCallback(self, cmd: str, data: Any) -> None:
-        """Callback function that is called when the command is completed.
-        This callback is executed in the receiving thread context"""
-        self.answerQueue.append((cmd, data))
-        self.answerEvent.set()
 
 class UnknownCommand(Command):
     """Placeholder for any unknown command"""
     def __init__(self, destNode: str | None, chIndex: int | None, parameter: list):
         super().__init__(None, None, [])
 
-    def execute(self, ifce: MeshInterface, timeout: int):
+    def execute(self, timeout: int):
         raise NotImplementedError(f"Unknown Command")
 
 
 class GetConfigCommand(Command):
     """Triggers the reception of all the infos from local node"""
-    def execute(self, ifce: MeshInterface, timeout: int) -> dict:
-        ifce.connectAndGetConfig('getConfig', self.completionCallback)
+    def execute(self, timeout: int) -> dict:
+        """execute the command"""
+        pub.subscribe(self.onGetConfigFinished, topic_map.SUBS_STARTCOMM_FINISH)
+        pub.subscribe(self.onReceiveData, topic_map.SUBS_STARTCOMM_RECEIVE)
+        pub.sendMessage(topic_map.SUBS_STARTCOMM_START, timeout=timeout)
         if not self.answerEvent.wait(timeout):
             logger.debug("Connection to radio timed out. Stopping.")
             self.answerEvent.clear()
@@ -52,13 +53,22 @@ class GetConfigCommand(Command):
         self.answerEvent.clear()
         return {'Error': None, 'Data': self.answerQueue.popleft()}
 
+    def onGetConfigFinished(self):
+        """callback when command is finished"""
+        logger.debug("GetConfigFinished")
+        self.answerEvent.set()
+
+    def onReceiveData(self, field: str, data: dict):
+        """callback for receiving data"""
+        logger.debug(f"Received field {field} data: {data}")
+
 
 class InfoCommand(Command):
     """Defines the info command"""
     def __init__(self, destNode: str | None, chIndex: int | None, parameter: list = ()):
         super().__init__(destNode, chIndex, parameter)
 
-    def execute(self, ifce: MeshInterface, timeout: int):
+    def execute(self, timeout: int):
         logger.debug(f"Execute {self.cmdName} {self.destinationNode}")
 
 
@@ -67,5 +77,5 @@ class SetCommand(Command):
     def __init__(self, destNode: str | None, chIndex: int | None, parameter: list = ()):
         super().__init__(destNode, chIndex, parameter)
 
-    def execute(self, ifce: MeshInterface, timeout: int):
+    def execute(self, timeout: int):
         logger.debug(f"Execute {self.cmdName} {self.destinationNode}")

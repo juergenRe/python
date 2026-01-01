@@ -13,26 +13,6 @@ from meshtastic.protocol_base import UNKNOWN_HANDLER, START_CONFIG_HANDLER
 
 logger = logging.getLogger(__name__)
 
-class NotImplementedHandler(ProtocolHandlerBase):
-    """covers any unimplemented or unknown protocol as default.
-    Typically, will ignore any messages, except during debug"""
-
-    def __init__(self, ifMesh: MeshInterface) -> None:
-        super().__init__(ifMesh)
-        self.hdlrType: str | None = UNKNOWN_HANDLER
-
-    def receivePacket(self, packet) -> None:
-        pass
-
-    def sendPacket(self, data: dict) -> Any:
-        pass
-
-    def addHandler(self, address: str) -> Any:
-        pass
-
-    def removeHandler(self, address: str) -> Any:
-        pass
-
 # some fields will use the same handler to process data. This dict lists them.
 # if no entry for a specific field, then use the field name as handler type (1:1 relation)
 FIELD2HANDLERTYPE = {
@@ -45,7 +25,7 @@ FIELD2HANDLERTYPE = {
 }
 
 KNOWN_HANDLERS = [
-    'meshtastic.protocol_manager.NotImplementedHandler',
+    'meshtastic.protocol_base.NotImplementedHandler',
     'meshtastic.protocol_start_config.StartConfigHandler'
 ]
 
@@ -58,7 +38,8 @@ class ProtocolHandlerManager:
         self.ifMesh: MeshInterface = ifMesh
 
     def instantiateHandlers(self):
-        """Create all needed handlers and keep them in a list"""
+        """Create all needed handler objects and keep them in a list
+        Register all handlers according their type with the mesh interface"""
         self.handlers = self._createActualHandlers()
         handlerTypes = { hdlr.handlerType: hdlr for hdlr in self.handlers}
 
@@ -67,11 +48,11 @@ class ProtocolHandlerManager:
         for pbFieldName in pbFields:
             actHandlerType = FIELD2HANDLERTYPE.get(pbFieldName, pbFieldName)
             if actHandlerType in handlerTypes.keys():
-                result = self.ifMesh.registerHandler(pbFieldName, handlerTypes[actHandlerType])
-                if result is False:   # MeshInterface refuses to register this handler
+                result = self.ifMesh.registerHandler(pbFieldName, handlerTypes[actHandlerType].receivePacket)
+                if not result:   # MeshInterface refuses to register this handler
                     refusedHandlers.append(pbFieldName)
             else:
-                result = self.ifMesh.registerHandler(pbFieldName, handlerTypes[UNKNOWN_HANDLER])
+                result = self.ifMesh.registerHandler(pbFieldName, handlerTypes[UNKNOWN_HANDLER].receivePacket)
         self._removeRefusedHandlers(refusedHandlers)
 
     def _removeRefusedHandlers(self, refusedHandlers: list[str]) -> None:
@@ -87,7 +68,7 @@ class ProtocolHandlerManager:
         fields_raw = mesh_pb2.FromRadio().DESCRIPTOR.fields_by_name
         return [name for name in fields_raw.keys()]
 
-    def _createActualHandlers(self) -> list:
+    def _createActualHandlers(self) -> list[IProtocolHandler]:
         """find all implemented protocol handler classes and return their names"""
         # base: type[IProtocolHandler] = IProtocolHandler.__subclasses__()[0]
         # handlerClasses = base.__subclasses__()
@@ -105,4 +86,5 @@ class ProtocolHandlerManager:
                 handlers.append(cls)
             except Exception as ex:
                 logger.debug(f"Error instantiating protocol handler {clsName}: {ex}")
+                raise RuntimeError(f"Error instantiating protocol handler {clsName}: {ex}")
         return handlers

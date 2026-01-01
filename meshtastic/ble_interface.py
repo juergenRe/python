@@ -46,25 +46,26 @@ class BLEInterface(RadioInterfaceBase):
         self.client: BLEClient | None = None
         self._receiveThread: Thread | None = None
         self._exit_handler = None
+        self.address: str = address if address else 'any'
 
-        self.createRcvThread()
-        self.connect(address)
+        self._createRcvThread()
+        # self.connect(address)
 
-    def createRcvThread(self) -> None:
+    def _createRcvThread(self) -> None:
         """Create and start the receiving thread"""
-        logger.debug("Threads starting")
+        logger.debug("BLE Thread starting")
         self._receiveThread = Thread(
-            target=self._receiveFromRadioImpl, name="BLEReceive", daemon=True
+            target=self._receiveFromRadioImpl, name=f"{self.__class__.__name__}", daemon=True
         )
         self._receiveThread.start()
-        logger.debug("Threads running")
+        logger.debug("BLE Thread running")
 
-    def connect(self, address):
+    def connect(self) -> None:
         """Create the BLE client using address and set its properties"""
         if self.client is None:
             try:
-                logger.debug(f"BLE connecting to: {address if address else 'any'}")
-                self.client = self._connect(address)
+                logger.debug(f"BLE connecting to: {self.address}")
+                self.client = self._connect(self.address)
                 logger.debug("BLE connected")
             except BLEInterface.BLEError as e:
                 self.close()
@@ -209,7 +210,7 @@ class BLEInterface(RadioInterfaceBase):
                     logger.debug(f"FROMRADIO read: {b.hex()}")
                     self._rcvCallback(b)
             else:
-                time.sleep(0.01)
+                time.sleep(0.1)
 
     def sendToRadioImpl(self, toRadio: mesh_pb2.ToRadio) -> None:
         b: bytes = toRadio.SerializeToString()

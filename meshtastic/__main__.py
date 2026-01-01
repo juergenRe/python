@@ -1269,7 +1269,7 @@ def common():
     parser = mt_config.parser
     logging.basicConfig(
         level=logging.DEBUG if (args.debug or args.listen) else logging.INFO,
-        format="%(levelname)s file:%(filename)s %(funcName)s line:%(lineno)s %(message)s",
+        format="%(levelname)s file:%(filename)s %(funcName)s line:%(lineno)s [%(threadName)s] %(message)s",
     )
 
     # set all meshtastic loggers to DEBUG
@@ -1294,7 +1294,7 @@ def common():
             print(f"Found: name='{x.name}' address='{x.address}'")
         meshtastic.util.our_exit("BLE scan finished", 0)
 
-    mt_config.logfile = configureSerialLog(args.seriallog, args.noproto)
+    mt_config.serialLogfile = configureSerialLog(args.seriallog, args.noproto)
 
     if have_powermon:
         create_power_meter()
@@ -1333,7 +1333,7 @@ def common():
         "serial": args.port,
     }
     ifceArgs = {
-        "debugOut": mt_config.logfile,
+        "debugOut": mt_config.serialLogfile,
         "noProto": args.noproto,
         "noNodes": args.no_nodes,
         "timeout": args.timeout
@@ -1345,7 +1345,7 @@ def common():
     pm = ProtocolHandlerManager(client)
     pm.instantiateHandlers()
     mesh = MeshModel()
-    CommandExecutor(client, mesh, args.timeout).execute(cmdList)
+    CommandExecutor(pm, mesh, args.timeout).execute(cmdList)
 
     # We assume client is fully connected now
     # onConnected(client)
@@ -1398,7 +1398,7 @@ def main():
     mt_config.parser = parser
     initParser()
     common()
-    logfile = mt_config.logfile
+    logfile = mt_config.serialLogfile
     if logfile:
         logfile.close()
 

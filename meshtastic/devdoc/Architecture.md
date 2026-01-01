@@ -175,7 +175,7 @@ BLEInterface "1" o-down- "1" BLEClient
 ```
 
 ```plantuml
-title Level 1 classes: Interface to radio: Queuing, Heartbeat
+title Level 2 classes: Interface to radio: Queuing, Heartbeat
 interface IMeshInterface {
     __ functions __
     -handleFromRadio()
@@ -200,6 +200,7 @@ interface IRadioPacket <<protobuf>>{
 class MeshInterface {
     queue
     heartbeatTimer
+    status
     -sendToRadio()
     -handleFromRadio()
     startCommunication()
@@ -233,6 +234,66 @@ MeshInterface --> RadioInterface: uses
 
 
 ```
+#### Status handling
+Status data contains:
+* isConnected: all initial data has been transferred from radio to client
+* rebooted: timestamp of last reboot.
+* error: Any error code including timestamp
+
+Whenever a change in the status occurs, the new data will be published over pub-sub
+
+#### Queue handling
+
+This concerns mainly the transmit queue to prevent overflow of the radio 
+processing queue. The radio transmits the current queue level with a
+specific QueueStatus packet which then can be used in a XON/XOFF manner to
+control the flow of data from MeshInterface to the radio.
+Max queue places: N=16
+Stop sending at: xoff = N-2 = 14
+Resume sending at: xon = N/2 = 8
+
+#### Control flow
+Mesh packets contain a message ID, which can be used to validate that
+the message has been processed correctly within the radio (Actually 
+it happens quite often, that messages get lost). A lost package should be 
+resent if no ACK is receieved within a resend time-out.
+
+```plantuml
+title Level 2: Control flow of radio packets
+participant ProtocolHandler as ph
+participant MeshInerface as mi
+participant Queue as q
+participant "Waiting \nAcknowledgements" as ack
+participant RadioInterface as ri
+
+== receive packet from higher level ==
+ph -> mi: SendPacket
+mi -> q: put
+note right: when input q reaches a certain level, an error should be raised
+
+== handle packets to send from queue ==
+alt xon active
+    mi <- q: pull
+    mi -> ri: send
+    mi -> ack: put (ID, timestamp, msg)
+end
+
+== handle acknowledgements ==
+ri -> mi: getAck
+mi -> mi: check ID
+mi -> ack: remove
+
+== handle time-outs ==
+mi -> ack: check time-outs
+alt timeout found
+    mi <- ack: pull entry
+    mi -> q: put msg
+end
+
+== handle queue levels ==
+mi <- ri: receive QueueStatus
+mi -> mi: set xon/xoff
+```
 
 ### Level 3: Higher Level Packets
 
@@ -242,7 +303,12 @@ Those packets are:
 - MqttClientProxyMessage
 - LogRecord
 - ClientNotification
-- initial config data: MyNodeInfo, NodeInfo, Config, ModuleConfig, Channel, DeviceMetaData, DeviceUIConfig
+- Config-Data*
+- ModuelConfig-Data*
+- Channel-Data*
+- initial config data: MyNodeInfo, NodeInfo, DeviceMetaData, DeviceUIConfig
+
+*) Also received during initial config transmission
 
 Those packets need to be decoded according to their content by the appropriate handler
 Handlers should register themselves at the receiver, so they can called when
@@ -336,15 +402,24 @@ Child Topics: according to the applications discovered:
 
 SubTopics of these are application specific:
 
-| Child topic        | Sub topic | Comment                                                       |
-|--------------------|-----------|---------------------------------------------------------------|
-| Logging            | Receive   | Logging app will receive a new entry                          |
-| StartCommunication | Start     | Trigger communication start                                   |
-|                    | Receive   | a new data part is received, the data will explain itself     |
-|                    | Finish    | all data received, app can be terminated                      |
-| Command            | Send      | send a request from application to protocol handler           |
-|                    | Receive   | receive a response, this might be only part ot the whole data |
-|                    | Finish    | all packets received, command can be terminated               |
+| Child topic        | Sub topic      | Comment                                                       |
+|--------------------|----------------|---------------------------------------------------------------|
+| Logging            | Receive        | Logging app will receive a new entry                          |
+| StartCommunication | Start          | Trigger communication start                                   |
+|                    | Receive        | a new data part is received, the data will explain itself     |
+|                    | Finish         | all data received, app can be terminated                      |
+| Command            | Send           | send a request from application to protocol handler           |
+|                    | Receive        | receive a response, this might be only part ot the whole data |
+|                    | Finish         | all packets received, command can be terminated               |
+| MeshInterface      | Status         | update message with new status data                           |
+| MeshModel          | Config         | new configuration settings data                               |
+|                    | ModuleConfig   | new module configuration settings data                        |
+|                    | Channel        | new channel configuration data                                |
+|                    | MyInfo         | new MyInfo data                                               |
+|                    | NodeInfo       | new node info data                                            |
+|                    | DeviceMetaData | new device meta data                                          |
+|                    | DeviceUIConfig | new UI config data                                            |
+
 
 Callables shall be named with the name of the Sub-topic, adding a prefix "on", e.g. "onReceive"
 
@@ -420,4 +495,57 @@ note bottom of PacketHandlerManager
     Will be started once and run till shutdown, independent of 
     applications, which might appear and disappear in the meantime
 end note
+```
+```plantuml
+title Sequence for initiating reading initial configuration via a cmd
+participant Cmd as cmd
+participant ProtocolHandler as ph
+collections MeshModel as mm
+participant MeshInterface as mi
+participant RadioInterface as ri
+
+cmd -> ph: send "Start"
+note right: using pub-sub 
+ph -> ph: prepare protobuf
+ph -> mi: send packet
+mi -> ri: trigger rading threads
+note right: to be done when reading the first time
+mi -> ri: transfer ToRadio
+note right: handle queue etc.
+ri -> mi: transfer FromRadio
+note right: handle internal messages directly
+mi -> ph: callback with protobuf packet
+ph -> ph: decode packet
+ph -> mm: collect data
+== Other packets arriving ==
+ri -> mi: transfer FromRadio
+note right: receiving "config_complete"
+mi -> ph: callback with protobuf packet
+ph -> mm: get data
+mm --> ph: collected data
+ph -> cmd: send data
+```
+
+```plantuml
+title Sequence after reboot of radio
+note across 
+config data needs to be read and forwarded to the app once the
+radio is rebooting.
+end note
+participant CmdSet as cmd
+participant ProtocolHandler as ph
+collections MeshModel as mm
+participant MeshInterface as mi
+participant RadioInterface as ri
+
+mi -> ri: Send packet
+note right: this packet will force a reboot of the radio
+ri -> mi: FromRadio
+note right: signalling reboot
+mi -> ph: callback
+note right: need to signal a reboot
+ph -> cmd: finished
+note right: signal execution of command, but with a reboot.
+
+
 ```

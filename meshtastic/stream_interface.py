@@ -51,14 +51,14 @@ class StreamInterface(RadioInterfaceBase):
         self.cur_log_line = ""
 
         # FIXME, figure out why daemon=True causes reader thread to exit too early
-        self._rxThread = threading.Thread(target=self._receiveFromRadioImpl, args=(), daemon=True, name=f"{self.__class__.__name__}_stream_reader")
+        self._rxThread = threading.Thread(target=self._receiveFromRadioImpl, args=(), daemon=True, name=f"{self.__class__.__name__}")
 
     # def connectAndGetConfig(self, cmdTxt: str, cb, timeout: int = 300):
     #     """Start communication with radio and retrieve the actual configuration"""
     #     self.connect()
     #     super().connectAndGetConfig(cmdTxt, cb)
     #
-    def connect(self, address: str) -> None:
+    def connect(self) -> None:
         """Connect to our radio
 
         Normally this is called automatically by the constructor, but if you
@@ -170,17 +170,13 @@ class StreamInterface(RadioInterfaceBase):
                             ptr == HEADER_LEN - 1
                         ):  # we _just_ finished reading the header, validate length
                             if packetlen > MAX_TO_FROM_RADIO_SIZE:
-                                self._rxBuf = (
-                                    empty  # length was out out bounds, restart
-                                )
+                                self._rxBuf = empty  # length was out out bounds, restart
 
                         if len(self._rxBuf) != 0 and ptr + 1 >= packetlen + HEADER_LEN:
                             try:
                                 self._rcvCallback(self._rxBuf[HEADER_LEN:])
                             except Exception as ex:
-                                logger.error(
-                                    f"Error while handling message from radio {ex}"
-                                )
+                                logger.error(f"Error while handling message from radio {ex}")
                                 traceback.print_exc()
                             self._rxBuf = empty
                 else:

@@ -21,7 +21,7 @@ class IRadioInterface(metaclass=abc.ABCMeta):
                 NotImplemented)
 
     @abc.abstractmethod
-    def connect(self, address: str) -> Any:
+    def connect(self) -> None:
         """Connect to the radio interface: open the connection to address"""
         raise NotImplementedError("Subclass must implement this method")
 
@@ -68,8 +68,8 @@ class SimulatedInterface(RadioInterfaceBase):
     def __init__(self, address: str, rcvCallback: Callable[[bytes], None], logCallback: Callable[[str], None]) -> None:
         super().__init__(address, rcvCallback, logCallback)
 
-    def connect(self, address: str) -> None:
-        logger.debug(f"Simulated Connect to: {address}")
+    def connect(self) -> None:
+        logger.debug(f"Simulated Connect")
 
     def close(self) -> None:
         logger.debug("Simulated Close")
