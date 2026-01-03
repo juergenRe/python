@@ -23,9 +23,11 @@ class InterfaceFactory:
             "ble": BLEInterface
         }
 
-    def selectInterfaceType(self, ble, host, port) -> tuple:
+    def selectInterfaceType(self, ble, host, port, noProto) -> tuple:
         """return the interface class and the address parameter according to the arguments supplied
         during the call of the CLI"""
+        if noProto:
+            return None, ''     #Fixme: to be extened with additional interface type
         if ble:
             param = ble if ble != "any" else None
             return self.interfaces["ble"], param
@@ -56,14 +58,15 @@ class InterfaceFactory:
                          ble: str = None,
                          host: str = None,
                          serial: str = None,
+                         noProto: bool = False,
                          level: int = 0,
                          **kwargs) -> IRadioInterface| None:
         """internal function to create the interface with fallback in case of error on opening"""
-        ifceClass, param = self.selectInterfaceType(ble, host, serial)
+        ifceClass, param = self.selectInterfaceType(ble, host, serial, noProto)
         if ifceClass is None:
             # no interface defined. Try to find a serial port to use
             serial = self.findSerialPort()
-            ifceClass, param = self.selectInterfaceType(ble, host, serial)
+            ifceClass, param = self.selectInterfaceType(ble, host, serial, noProto)
 
             # if still no port available, select tcp and localhost (this might fail when trying to connect)
             if ifceClass is None:
@@ -88,10 +91,11 @@ class InterfaceFactory:
                     ble: str = None,
                     host: str = None,
                     serial: str = None,
+                    noProto: bool = False,
                     **kwargs) -> IRadioInterface | None:
         """create an instance of the needed interface according passed kwargs"""
         if host:
             if ":" not in host:
                 host = f"{host}:{DEFAULT_TCP_PORT}"
 
-        return self._createInterfaceInt(ble, host, serial, 0, **kwargs)
+        return self._createInterfaceInt(ble, host, serial, noProto, 0, **kwargs)

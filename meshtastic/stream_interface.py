@@ -134,7 +134,7 @@ class StreamInterface(RadioInterfaceBase):
 
     def _receiveFromRadioImpl(self) -> None:
         """The reader thread that reads bytes from our stream"""
-        logger.debug("in __reader()")
+        logger.debug("Enter Thread")
         empty = bytes()
 
         try:
@@ -183,23 +183,14 @@ class StreamInterface(RadioInterfaceBase):
                     # logger.debug(f"timeout")
                     pass
         except serial.SerialException as ex:
-            if (
-                not self._wantExit
-            ):  # We might intentionally get an exception during shutdown
-                logger.warning(
-                    f"Meshtastic serial port disconnected, disconnecting... {ex}"
-                )
+            if not self._wantExit:  # We might intentionally get an exception during shutdown
+                logger.warning(f"Meshtastic serial port disconnected, disconnecting... {ex}")
         except OSError as ex:
-            if (
-                not self._wantExit
-            ):  # We might intentionally get an exception during shutdown
-                logger.error(
-                    f"Unexpected OSError, terminating meshtastic reader... {ex}"
-                )
+            if not self._wantExit:  # We might intentionally get an exception during shutdown
+                logger.error(f"Unexpected OSError, terminating meshtastic reader... {ex}")
         except Exception as ex:
-            logger.error(
-                f"Unexpected exception, terminating meshtastic reader... {ex}"
-            )
+            logger.error(f"Unexpected exception, terminating meshtastic reader...")
+            logger.error(f"Exception information:\n {traceback.format_exc()}")
         finally:
-            logger.debug("reader is exiting")
+            logger.debug("Leaving Thread")
             # self._disconnected()

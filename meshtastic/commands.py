@@ -53,9 +53,9 @@ class GetConfigCommand(Command):
         self.answerEvent.clear()
         return {'Error': None, 'Data': self.answerQueue.popleft()}
 
-    def onGetConfigFinished(self):
+    def onGetConfigFinished(self, code: str):
         """callback when command is finished"""
-        logger.debug("GetConfigFinished")
+        logger.debug(f"GetConfigFinished with code: {code}")
         self.answerEvent.set()
 
     def onReceiveData(self, field: str, data: dict):

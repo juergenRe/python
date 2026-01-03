@@ -13,6 +13,7 @@ import logging
 import platform
 import sys
 import time
+from datetime import datetime
 from io import TextIOWrapper
 
 try:
@@ -38,6 +39,7 @@ from meshtastic.command_factory import CommandFactory
 from meshtastic.command_executor import CommandExecutor
 from meshtastic.mesh_model import MeshModel
 from meshtastic.protocol_manager import ProtocolHandlerManager
+from meshtastic.topic_map import useNotifyByWriteFileEx
 
 from meshtastic import BROADCAST_ADDR, mt_config, remote_hardware
 try:
@@ -1295,6 +1297,7 @@ def common():
         meshtastic.util.our_exit("BLE scan finished", 0)
 
     mt_config.serialLogfile = configureSerialLog(args.seriallog, args.noproto)
+    mt_config.pubsubLogfile = configurePubSubLogging(args.debug)
 
     if have_powermon:
         create_power_meter()
@@ -1331,21 +1334,23 @@ def common():
         "ble": args.ble,
         "host": args.host,
         "serial": args.port,
+        "noProto": args.noproto,
     }
     ifceArgs = {
-        "debugOut": mt_config.serialLogfile,
-        "noProto": args.noproto,
-        "noNodes": args.no_nodes,
         "timeout": args.timeout
+    }
+    phArgs = {
+        "debugOut": mt_config.serialLogfile,
+        "noNodes": args.no_nodes,
     }
     argDict = vars(args)
     argsKeys = list(argDict.keys())
     cmdList = CommandFactory(argsKeys).createCommandList(vars(args))
     client = MeshInterface(ifceType, **ifceArgs)
-    pm = ProtocolHandlerManager(client)
-    pm.instantiateHandlers()
-    mesh = MeshModel()
-    CommandExecutor(pm, mesh, args.timeout).execute(cmdList)
+    with ProtocolHandlerManager(client) as pm:
+        pm.instantiateHandlers(**phArgs)
+        mesh = MeshModel()
+        CommandExecutor(pm, mesh, args.timeout).execute(cmdList)
 
     # We assume client is fully connected now
     # onConnected(client)
@@ -1371,7 +1376,7 @@ def configureSerialLog(serLogCfg: str | None, cfgNoproto: bool) -> io.TextIOWrap
     """setup file for serial log if configured so"""
     logfile = None
     if serLogCfg:
-        if serLogCfg  == "stdout":
+        if serLogCfg == "stdout":
             logfile = sys.stdout
         elif len(serLogCfg) > 0:
             # Note: using "line buffering"
@@ -1388,19 +1393,31 @@ def configureSerialLog(serLogCfg: str | None, cfgNoproto: bool) -> io.TextIOWrap
     return logfile
 
 
+def configurePubSubLogging(cfgDebug: bool) -> io.TextIOWrapper | None:
+    """setup logging for pub/sub: just open distinct file"""
+    logfile = None
+    if cfgDebug:
+        logfile = open('pubsub.log', 'w+', buffering=1, encoding="utf8")
+        useNotifyByWriteFileEx(logfile)
+    return logfile
+
+
 def main():
     """Perform command line meshtastic operations"""
-    parser = argparse.ArgumentParser(
-        add_help=False,
-        epilog="If no connection arguments are specified, we search for a compatible serial device, "
-        "and if none is found, then attempt a TCP connection to localhost.",
-    )
-    mt_config.parser = parser
-    initParser()
-    common()
-    logfile = mt_config.serialLogfile
-    if logfile:
-        logfile.close()
+    try:
+        parser = argparse.ArgumentParser(
+            add_help=False,
+            epilog="If no connection arguments are specified, we search for a compatible serial device, "
+            "and if none is found, then attempt a TCP connection to localhost.",
+        )
+        mt_config.parser = parser
+        initParser()
+        common()
+    finally:
+        if lf := mt_config.serialLogfile:
+            lf.close()
+        if lf := mt_config.pubsubLogfile:
+            lf.close()
 
 
 def tunnelMain():

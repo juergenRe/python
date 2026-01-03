@@ -5,6 +5,8 @@ import logging
 from typing import Any, Callable
 from pathlib import Path
 
+from google.protobuf.message import Message
+
 from meshtastic.protocol_interface import IProtocolHandler
 from meshtastic.mesh_interface import MeshInterface
 from meshtastic.protobuf import mesh_pb2
@@ -12,6 +14,9 @@ from meshtastic.protobuf import mesh_pb2
 # Name definitions for protocol handler types
 UNKNOWN_HANDLER = 'Unknown'
 START_CONFIG_HANDLER = 'StartConfig'
+LOGGING_HANDLER = 'Logging'
+CHANNEL_HANDLER = 'ChannelData'
+CONFIG_HANDLER = 'ConfigHandler'
 
 
 class ProtocolHandlerBase(IProtocolHandler):
@@ -22,10 +27,8 @@ class ProtocolHandlerBase(IProtocolHandler):
                 callable(subclass.receivePacket) and
                 hasattr(subclass, 'sendPacket') and
                 callable(subclass.sendPacket) and
-                hasattr(subclass, 'addHandler') and
-                callable(subclass.addHandler) and
-                hasattr(subclass, 'removeHandler') and
-                callable(subclass.removeHandler) or
+                hasattr(subclass, 'closeHandler') and
+                callable(subclass.closeHandler) or
                 NotImplemented)
 
     def __init__(self, ifMesh: MeshInterface) -> None:
@@ -49,19 +52,16 @@ class NotImplementedHandler(ProtocolHandlerBase):
     """covers any unimplemented or unknown protocol as default.
     Typically, will ignore any messages, except during debug"""
 
-    def __init__(self, ifMesh: MeshInterface) -> None:
+    def __init__(self, ifMesh: MeshInterface, **kwargs) -> None:
         super().__init__(ifMesh)
         self.hdlrType: str | None = UNKNOWN_HANDLER
 
-    def receivePacket(self, packet) -> None:
+    def receivePacket(self, field: str, packet: Message) -> None:
         pass
 
     def sendPacket(self, data: dict) -> Any:
         pass
 
-    def addHandler(self, address: str) -> Any:
-        pass
-
-    def removeHandler(self, address: str) -> Any:
+    def closeHandler(self) -> Any:
         pass
 

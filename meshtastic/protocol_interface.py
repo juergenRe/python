@@ -2,6 +2,8 @@
 import abc
 from typing import Any, Callable
 
+from google.protobuf.message import Message
+
 
 class IProtocolHandler(metaclass=abc.ABCMeta):
     """The interface definition for all protocol handlers"""
@@ -15,14 +17,12 @@ class IProtocolHandler(metaclass=abc.ABCMeta):
                 callable(subclass.handlerType) and
                 hasattr(subclass, 'isRegistered') and
                 callable(subclass.isRegistered) and
-                hasattr(subclass, 'addHandler') and
-                callable(subclass.addHandler) and
-                hasattr(subclass, 'removeHandler') and
-                callable(subclass.removeHandler) or
+                hasattr(subclass, 'closeHandler') and
+                callable(subclass.closeHandler) or
                 NotImplemented)
 
     @abc.abstractmethod
-    def receivePacket(self, packet) -> None:
+    def receivePacket(self, field: str, packet: Message) -> None:
         """Abstract method to receive a packet from underlying level and decode it to a message"""
         raise NotImplementedError("Subclass must implement this method")
 
@@ -45,13 +45,8 @@ class IProtocolHandler(metaclass=abc.ABCMeta):
         raise NotImplementedError("Subclass must implement this method")
 
     @abc.abstractmethod
-    def addHandler(self, address: str) -> Any:
-        """Abstract method to remove a protocol handler"""
-        raise NotImplementedError("Subclass must implement this method")
-
-    @abc.abstractmethod
-    def removeHandler(self, address: str) -> Any:
-        """Abstract method to remove a protocol handler"""
+    def closeHandler(self) -> Any:
+        """Abstract method to shut down a protocol handler"""
         raise NotImplementedError("Subclass must implement this method")
 
 

@@ -42,6 +42,16 @@ from meshtastic import (
     protocols,
     publishingThread,
 )
+from meshtastic.util import (
+    Acknowledgment,
+    Timeout,
+    convert_mac_addr,
+    message_to_json,
+    our_exit,
+    remove_keys_from_dict,
+    stripnl,
+)
+
 from meshtastic.protobuf import mesh_pb2, portnums_pb2, telemetry_pb2
 from meshtastic.util import Acknowledgment, Timeout, convert_mac_addr, message_to_json, our_exit, remove_keys_from_dict, stripnl
 
@@ -126,9 +136,7 @@ class MeshInterface:  # pylint: disable=R0902
         self,
         ifceType: dict,
         timeout: int = 300,
-        noNodes: bool = False,
-        debugOut: TextIOWrapper | None = None,
-        noProto: bool = False,
+        noNodes: bool = False
     ) -> None:
         """Constructor
 
@@ -141,8 +149,6 @@ class MeshInterface:  # pylint: disable=R0902
         """
         self._timeout: Timeout = Timeout(maxSecs=timeout)
         self.noNodes: bool = noNodes
-        self.debugOut = debugOut
-        self.noProto: bool = noProto
 
         self.interface: IRadioInterface | None = None
         self.configId: int | None = None
@@ -151,6 +157,7 @@ class MeshInterface:  # pylint: disable=R0902
             'rebooted': self._handleReboot,
             'queueStatus': self._handleQueueStatus
         }
+        self.internalHandlers: list[str] = list(self.registeredHandlers.keys())
         self.status: MeshInterfaceStatus = MeshInterfaceStatus()
         self.heartbeatTimer: threading.Timer | None = None
         self.processingThread: threading.Thread
@@ -215,7 +222,7 @@ class MeshInterface:  # pylint: disable=R0902
         pub.sendMessage(topic_map.SUBS_MI_STATUS_PUB, data=statusDict)
         logger.debug(f"got sub status request: return status {self.status} ")
 
-    def startConnection(self, cmdTxt: str, timeout: int = 300) -> None:
+    def startConnection(self, cmdTxt: str, timeout: int = 300) -> int:
         """Establish connection to radio and get initial configuration"""
         self.interface.connect()
         if not self.processingThread.is_alive():
@@ -223,9 +230,10 @@ class MeshInterface:  # pylint: disable=R0902
 
         msg, msgId = self._createStartConfigMsg(self.configId, self.noNodes)
         self.pendingCmd[msgId] = (cmdTxt, time.time() + timeout)
-        self.configId = msgId
         self._sendToRadio(msg)
+        self.configId = msgId
         logger.debug(f"created start config msg using {msgId} ")
+        return msgId
 
     def close(self):
         """Shutdown this interface"""
@@ -247,12 +255,15 @@ class MeshInterface:  # pylint: disable=R0902
 
     def unregisterHandler(self, fieldName: str) -> bool:
         """delete protocol handler from dict"""
-        if fieldName in self.registeredHandlers:
+        if fieldName in self.registeredHandlers and fieldName not in self.internalHandlers:
             del self.registeredHandlers[fieldName]
             return True
         return False
 
     def _createStartConfigMsg(self, actId: int, noNodes: bool) -> tuple:
+        """create start config message
+        FixMe: to be relocated to protocol handler, it has nothing to do with transport tasks
+        """
         startConfig = mesh_pb2.ToRadio()
         if actId is None or not noNodes:
             actId = random.randint(0, 0xFFFFFFFF)
@@ -306,7 +317,9 @@ class MeshInterface:  # pylint: disable=R0902
             self.txQueue.append(toRadio)
 
     def _handleLogLine(self, logline: str) -> None:
-        logger.debug(f"Radio Log: {logline}")
+        """Capture serial log from radio and write it to the debug file"""
+        cb = self.registeredHandlers.get('log_record')
+        cb('log_record', logline)
 
     def _handleId(self):
         pass
@@ -314,11 +327,12 @@ class MeshInterface:  # pylint: disable=R0902
     def _handleReboot(self):
         pass
     
-    def _handleQueueStatus(self, queueStatus) -> None:
-        self.qs = QueueStatus(**MessageToDict(queueStatus))
+    def _handleQueueStatus(self, packet: mesh_pb2.FromRadio) -> None:
+        d = MessageToDict(packet.QueueStatus)
+        self.qs = QueueStatus(**d)
         logger.debug(f"Queue Status: {self.qs}")
 
-        if queueStatus.res:
+        if 'res' in d:
             return
 
         # # logger.warn("queue: " + " ".join(f'{k:08x}' for k in self.queue))
@@ -346,12 +360,14 @@ class MeshInterface:  # pylint: disable=R0902
             raise ex
 
         fields_raw = mesh_pb2.FromRadio().DESCRIPTOR.fields_by_name
+        logger.debug(f"Dispatch Message {stripnl(fromRadio)}")
         for field in fields_raw.keys():
             try:
                 if fromRadio.HasField(field):
                     cb = self.registeredHandlers[field]
-                    cb(fromRadio)
+                    cb(field, fromRadio)
             except ValueError:      # ignore HasField('id) exception
-                pass
+                if field != 'id':
+                    logger.debug(f"Error while parsing FromRadio field:{field}")
             except Exception as ex:
-                logger.debug(f"Error while checking for field {field} is contained in message {fromRadio}")
+                logger.debug(f"Error while checking for field {field} is contained in message {stripnl(fromRadio)} ex: {ex}")

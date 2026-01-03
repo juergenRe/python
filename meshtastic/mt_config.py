@@ -25,6 +25,7 @@ def reset():
     parser = None
     channel_index = None
     serialLogfile = None
+    pubsubLogfile = None
     tunnelInstance = None
     # TODO: to migrate to camel_case for v1.3 change this value to True
     camel_case = False
@@ -35,5 +36,7 @@ args = None
 parser = None
 channel_index = None
 serialLogfile = None
+pubsubLogfile = None
 tunnelInstance: Optional[Any] = None
 camel_case = False
+
