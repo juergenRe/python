@@ -341,7 +341,7 @@ interface IProtocolHandler {
 class BaseProtocolHandler 
 class MeshPacketHandler
 
-class PacketHandlerManager{
+class ProtocolManager{
     list: ProtocolHandler
     rcvQueue
     createHandler()
@@ -360,7 +360,7 @@ BaseProtocolHandler <|-- LoggingHandler
 BaseProtocolHandler <|-- UnknownHandler 
 BaseProtocolHandler "1" o-> "1" IMeshInterface: "       "
 
-PacketHandlerManager --> IProtocolHandler: create
+ProtocolManager --> IProtocolHandler: create
 
 note bottom of UnknownHandler
     used for every otherwise unknown 
@@ -463,18 +463,18 @@ class Node {
 
 class pub
 
-class PacketHandlerManager <<singleton>>
+class ProtocolManager <<singleton>>
 
-PacketHandlerManager "1" -right-o "1" Starter
-Cmd "1" *-- "1" MeshModel: uses
+ProtocolManager "1" -right-o "1" Starter
+Cmd "N" *-- "1" MeshModel: uses
 CmdExecutor "1" o-right- "N" Cmd: "executes   "
 CmdFactory "1" -left-> "N" Cmd: "        "
 Starter -up-> CmdFactory
 MeshModel "1" *-- "N" Node: contains
 Starter -left-> MeshModel: "creates "
 Starter -up-> CmdExecutor: instantiate
-PacketHandlerManager .up.> pub: "subs Command.Send >"
-PacketHandlerManager ..> pub: "subs StartComm.Start >"
+ProtocolManager .up.> pub: "subs Command.Send >"
+ProtocolManager ..> pub: "subs StartComm.Start >"
 Cmd .up.> pub: "subs *.Receive >"
 Cmd ..> pub: "subs *.Finish >"
 note top of Cmd
@@ -489,7 +489,7 @@ note bottom of Starter
     for the creation of a list of Cmd
 end note
 
-note bottom of PacketHandlerManager
+note bottom of ProtocolManager
     responsible to make the link between the protocol decoding
     and the application which needs this data
     Will be started once and run till shutdown, independent of 
@@ -504,6 +504,7 @@ collections MeshModel as mm
 participant MeshInterface as mi
 participant RadioInterface as ri
 
+cmd --> cmd: subscribe to ProtocolHandler(s)
 cmd -> ph: send "Start"
 note right: using pub-sub 
 ph -> ph: prepare protobuf
@@ -512,11 +513,13 @@ mi -> ri: trigger rading threads
 note right: to be done when reading the first time
 mi -> ri: transfer ToRadio
 note right: handle queue etc.
-ri -> mi: transfer FromRadio
+ri -[#red]> mi: transfer FromRadio
 note right: handle internal messages directly
-mi -> ph: callback with protobuf packet
-ph -> ph: decode packet
-ph -> mm: collect data
+mi -[#red]> ph: callback with protobuf packet
+ph -[#red]> ph: decode packet
+ph -[#red]> cmd: callback with data
+cmd --> cmd: Transfer data to main thread
+cmd -> mm: collect data
 == Other packets arriving ==
 ri -> mi: transfer FromRadio
 note right: receiving "config_complete"
@@ -547,5 +550,105 @@ note right: need to signal a reboot
 ph -> cmd: finished
 note right: signal execution of command, but with a reboot.
 
+```
+#### Handling of Threads
 
+Actually, the received data from a radio is returned in a different thread.
+We thus need to ensure correct writing of data into the MeshModel,
+because this one is designed to work in the main thread.
+
+The idea here is to make the transfer of data from the receiving
+thread into the main thread within the executing command:
+* When data is transferred via a callback, this data will
+be written into a queue.
+* Queue contents then are taken in the main thread and further processed.
+
+
+### MeshModel
+
+MeshModel shall keep all data retrieved from the connected radio. These are
+* Local node infos
+* Local node configurations (config, module config)
+* Remote node infos
+
+The storage shall be based on standard Python data structures. Names shall correspond to what is 
+used in the protobufs, so that new elements can be added easily and without copy-paste but by 
+adding some configuration data resp. automatically by inspecting the data.
+
+#### Actual data elements used
+
+* my_info: device identification data
+* deviceuiConfig: screen settings
+* metadata: describes some capabilities of the local connected device
+* channel: channel description and their keys
+* config, moduleConfig: N slots describing each a distinct set of settings.
+* node_info: describing properties of a node
+
+The radio will only send certain fields for each data element. So, all fields might be missing. 
+E.g. this is true for the node_info packets for remote nodes after a factory reset (no nodes 
+are found so far) or when calling with `--no-nodes` parameter. Newer firmware releases will 
+also add more fields. However, `nodenum` will always be available
+
+Those variations shall be handled by the MeshModel itself.
+
+All available fields are defined via the protobuf messages and can be retrieved from there.
+
+#### Structure
+
+Basically, the MeshModel is a list of nodes and the ID of the local connected node. 
+All nodes shall behave exactly the same, independent if it is a local or remote node.
+
+```plantuml
+title MeshModel details
+
+class MeshModel {
+    localNode: int
+    nodes: list
+    getLocalNode()
+    getNode(nodeNum)
+}
+
+class Node {
+    isLocal: bool
+    nodeNum: int
+    node_info: NodeInfo
+    my_info: dict
+    metadata: dict
+    deviceuiConfig: dict
+    config: dict
+    moduleConfig: dict
+    channels: list[dict]
+    getData(blockName)
+    setData(blockName, dict)
+    getField(blockName, fieldName)
+    setField(blockName, fieldName, data)
+}
+
+class NodeInfo {
+    nodeNum: int
+    user: dict
+    position: dict
+    snr: float
+    lastheard: int
+    hops_away: int
+    device_metrics: dict
+    is_favorite: bool
+    
+}
+
+MeshModel "1" *-- "1..N" Node
+Node "1" *-- "1" NodeInfo
+
+note right of Node
+    //nodeNum// and //node_info// are always present. Other parts only if
+    this node is a local node, otherwise None (//isLocal// as shortcut)
+    //getData()// will return a complete dict of data, e.g. metadata
+    //getField()// will return exactly one field of a block.
+    If not present, the method will return None
+end note
+
+note right of NodeInfo
+    at least the node info of the local node is present including
+    //nodenum// and //user//
+end note
 ```
