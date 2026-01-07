@@ -53,8 +53,7 @@ KNOWN_HANDLERS = [
     'meshtastic.protocol_base.DefaultHandler',
     'meshtastic.protocol_start_config.StartConfigHandler',
     'meshtastic.protocol_logging.LoggingHandler',
-    'meshtastic.protocol_channel_data.ChannelHandler',
-    'meshtastic.protocol_config_data.ConfigHandler'
+    'meshtastic.protocol_channel_data.ChannelHandler'
 ]
 
 

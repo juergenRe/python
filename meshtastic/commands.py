@@ -1,30 +1,20 @@
 """Definitions for the commands which can be executed from meshtastic"""
-import enum
 import logging
 from abc import abstractmethod
 from collections import deque
 from threading import Event
-from enum import Enum
+import json
 
 from pubsub import pub  # type: ignore[import-untyped]
 import topic_map
 
 from meshtastic import BROADCAST_ADDR, LOCAL_ADDR, BROADCAST_NUM
 from meshtastic.mesh_model import MeshModel, Node, NodeInfo
+from meshtastic.command_interface import ICommand, CmdError
 
 logger = logging.getLogger(__name__)
 
-class CmdError(enum.Enum):
-    """Enumerations for command return/error values"""
-    OK = 0
-    ERROR = 1   # generic error without further spec
-    TIMEOUT = 2
-    NO_DATA = 3
-    INCOMPLETE_DATA = 4
-
-
-
-class Command:
+class Command(ICommand):
     """Base class for all command implementations"""
     def __init__(self, destNode: str | None, chIndex: int | None, parameter: list):
         self.destinationNode: None | int = destNode
@@ -37,7 +27,7 @@ class Command:
         self.answerQueue: deque = deque()
 
     @abstractmethod
-    def execute(self, model: MeshModel, timeout: int) -> dict:
+    def execute(self, model: MeshModel, timeout: int) -> tuple:
         """Executes the command"""
         raise NotImplementedError(f"Unknown Command")
 
@@ -47,7 +37,7 @@ class UnknownCommand(Command):
     def __init__(self, destNode: str | None, chIndex: int | None, parameter: list):
         super().__init__(None, None, [])
 
-    def execute(self, model: MeshModel, timeout: int):
+    def execute(self, model: MeshModel, timeout: int) -> tuple:
         raise NotImplementedError(f"Unknown Command")
 
 
@@ -70,14 +60,14 @@ class GetConfigCommand(Command):
             self.answerEvent.clear()
             return CmdError.TIMEOUT, "Connection to radio timed out"
         self.answerEvent.clear()
-        if len (self.answerQueue) == 0:
+        if len(self.answerQueue) == 0:
             logger.debug(f"No data received")
             return CmdError.NO_DATA, "Error: No data received"
 
         try:
             # pop all data from queue and put it into an intermediate dict
             receivedData = {'node_info': [], 'channel': {}, 'config': {}, 'moduleConfig': {}}
-            while len (self.answerQueue) > 0:
+            while len(self.answerQueue) > 0:
                 field, newData = self.answerQueue.popleft()
                 if field not in receivedData:
                     receivedData[field] = newData
@@ -88,9 +78,9 @@ class GetConfigCommand(Command):
                     if isinstance(data, dict):
                         data.update(newData)
 
-            # now transfer data to the mesh model. All data except the first node_info belong to the localnode
+            # now transfer data to the mesh model. All data except the first node_info belong to the localNode
             # first find this node num from the data
-            if not 'my_info' in receivedData:
+            if 'my_info' not in receivedData:
                 logger.debug(f"No 'my_info' data received. Data incomplete, cannot proceed.")
                 return CmdError.INCOMPLETE_DATA, "Error: No 'my_info' data received. Data incomplete, cannot proceed."
             else:
@@ -142,8 +132,55 @@ class InfoCommand(Command):
     def __init__(self, destNode: str | None, chIndex: int | None, parameter: list = ()):
         super().__init__(destNode, chIndex, parameter)
 
-    def execute(self, model: MeshModel, timeout: int):
+    def formatAsJson(self, node: Node, field: str, prefix: str) -> str:
+        """format an info entry"""
+        data = node.getField(field)
+        if data is None:
+            s = ""
+        else:
+            s = f"{prefix}{json.dumps(data)}"
+        return s
+
+    def execute(self, model: MeshModel, timeout: int) -> tuple:
+        """Show human-readable summary about this object"""
         logger.debug(f"Execute {self.cmdName} {self.destinationNode}")
+        localNode: Node = model.getLocalNode()
+        outList: list = []
+
+        longName, shortName = localNode.getName()
+
+        outList.append(f"Owner: {longName} ({shortName})")
+        outList.append(self.formatAsJson(localNode, 'my_info', '\nMy info: '))
+        outList.append(self.formatAsJson(localNode, 'metadata', '\nMetadata: '))
+        outList.append("\n\nNodes in mesh: ")
+        nodes = {}
+        for node in model.nodes.values():
+            # if macaddr := node.getDataElement('user', 'macaddr'):
+            #     # decode the base64 value
+            #     addr = convert_mac_addr(val)
+            #     n2["user"]["macaddr"] = addr
+
+            # use id as dictionary key for correct json format in list of nodes
+            nodeid = node.getDataElement('user', 'id')
+            if nodeid is not None:
+                nodes[nodeid] = node
+        outList.append(json.dumps(nodes, indent=2))
+
+        infos = ''.join(outList)
+        print(infos)
+        return CmdError.OK, infos
+
+        # prefs = ""
+        # if self.localConfig:
+        #     prefs = message_to_json(self.localConfig, multiline=True)
+        # print(f"Preferences: {prefs}\n")
+        # prefs = ""
+        # if self.moduleConfig:
+        #     prefs = message_to_json(self.moduleConfig, multiline=True)
+        # print(f"Module preferences: {prefs}\n")
+        # self.showChannels()
+        #
+        # return CmdError.OK, ""
 
 
 class SetCommand(Command):
@@ -151,5 +188,6 @@ class SetCommand(Command):
     def __init__(self, destNode: str | None, chIndex: int | None, parameter: list = ()):
         super().__init__(destNode, chIndex, parameter)
 
-    def execute(self, model: MeshModel, timeout: int):
+    def execute(self, model: MeshModel, timeout: int) -> tuple:
         logger.debug(f"Execute {self.cmdName} {self.destinationNode}")
+        return CmdError.OK, ""

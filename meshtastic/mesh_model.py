@@ -16,18 +16,19 @@ class SubDict:
 
     @property
     def nodeNum(self) -> int:
+        """return integer node number"""
         return self._nodeNum
 
     def getField(self, field: str) -> Any:
         """returns the value for the given field (1st level of dict)"""
         return self._data.get(field)
 
-    def getDataElement(self, field: str, key: str) -> Any:
+    def getDataElement(self, field: str, key: str, default: Any = None) -> Any:
         """gets the data element with the given key from sub-dictionary (2nd level)"""
         data = self._data.get(field)
         if isinstance(data, dict):
-            return data.get(key)
-        return None
+            return data.get(key, default)
+        return default
 
     # use deepcopy here to ensure we create new objects independent of previous threading context
     def setField(self, field: str, value: Any) -> None:
@@ -67,6 +68,12 @@ class Node(SubDict):
         locFlag = '<local>' if self._isLocal else ''
         return f"Node(0x{self._nodeNum:08x} {locFlag} {name})"
 
+    def getName(self) -> tuple[str, str]:
+        """return long and short name of this node. Return empty strings if not present"""
+        longName: str = self._nodeInfo.getDataElement('user', 'long_name', '')
+        shortName: str = self._nodeInfo.getDataElement('user', 'long_name', '')
+        return longName, shortName
+
     @property
     def isLocal(self) -> bool:
         """Getter for _isLocal"""
@@ -90,12 +97,12 @@ class MeshModel:
     """Keeps all data about the mesh entities during execution of a command."""
 
     def __init__(self) -> None:
-        self._nodes: dict[int, Node] = {}
+        self.nodes: dict[int, Node] = {}
         self._localNodeNum: int = -1
 
     def getLocalNode(self) -> Node | None:
         """returns the local node object"""
-        return self._nodes.get(self._localNodeNum)
+        return self.nodes.get(self._localNodeNum)
 
     def getLocalNodeNum(self) -> int:
         """returns the local node number"""
@@ -107,17 +114,17 @@ class MeshModel:
     #
     def getNode(self, nodeNum: int) -> Node | None:
         """returns the node with the given nodeNum"""
-        return self._nodes.get(nodeNum)
+        return self.nodes.get(nodeNum)
 
     def getNodeIds(self) ->list[int]:
         """returns a list of all node numbers listed in the mesh"""
-        return list(self._nodes.keys())
+        return list(self.nodes.keys())
 
     def addNode(self, node: Node, overwrite: bool = True) -> None:
         """adds the node information to the dictionary of nodes.
         if overwrite is True: silently overwrite any existing entry. Otherwise raise an error"""
-        if node.nodeNum in self._nodes and not overwrite:
+        if node.nodeNum in self.nodes and not overwrite:
             raise RuntimeError(f'Node {node} cannot added because it already exists in the mesh')
-        self._nodes[node.nodeNum] = node
+        self.nodes[node.nodeNum] = node
         if node.isLocal:
             self._localNodeNum = node.nodeNum

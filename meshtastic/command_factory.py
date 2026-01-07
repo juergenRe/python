@@ -46,9 +46,11 @@ class CommandFactory:
                 elif isinstance(params, bool) and params is False:
                     pass    # do nothing in case of non-set bool params
                 else:
-                    self.instantiateCommand(
-                        self.cmdDict.get(argName, 'UnknownCommand'),
-                        destNode, chIndex, params)
+                    cmdList.append(
+                        self.instantiateCommand(
+                            self.cmdDict.get(argName, 'UnknownCommand'),
+                            destNode, chIndex, params)
+                    )
         return cmdList
 
     def instantiateCommand(self, cmdName: str, destNode, chIndex, param) -> Command:

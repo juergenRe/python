@@ -1,295 +1,179 @@
-2026-01-07T10:49:25.165238 PUBSUB: Create T<meshtastic>
-2026-01-07T10:49:25.165238 PUBSUB: Create T<meshtastic.mi_status_request>
-2026-01-07T10:49:25.165238 PUBSUB: Subscribe   L<MeshInterface.onStatusRequest> T<meshtastic.mi_status_request> 
-2026-01-07T10:49:25.165238 PUBSUB: Create T<meshtastic.mi_connected>
-2026-01-07T10:49:25.165238 PUBSUB: Subscribe   L<MeshInterface.onConnected> T<meshtastic.mi_connected> 
-2026-01-07T10:49:25.165238 PUBSUB: Create T<meshtastic.mi_disconnect>
-2026-01-07T10:49:25.165238 PUBSUB: Subscribe   L<MeshInterface.onDisconnect> T<meshtastic.mi_disconnect> 
-2026-01-07T10:49:25.165238 PUBSUB: Create T<meshtastic.stcomm_start>
-2026-01-07T10:49:25.165238 PUBSUB: Subscribe   L<StartConfigHandler.onMessageStart> T<meshtastic.stcomm_start> 
-2026-01-07T10:49:26.111363 PUBSUB: Create T<meshtastic.mi_status_publish>
-2026-01-07T10:49:26.111363 PUBSUB: Subscribe   L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish> 
-2026-01-07T10:49:26.111363 PUBSUB: Send Pre    L<None> T<meshtastic.mi_status_request>
-2026-01-07T10:49:26.111363 PUBSUB: Send In     L<MeshInterface.onStatusRequest> T<meshtastic.mi_status_request>
-2026-01-07T10:49:26.112369 PUBSUB: Send Pre    L<None> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:26.112369 PUBSUB: Send In     L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:26.112369 PUBSUB: Send Post   L<None> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:26.113368 PUBSUB: Send Post   L<None> T<meshtastic.mi_status_request>
-2026-01-07T10:49:26.550681 PUBSUB: Create T<meshtastic.stcomm_finish>
-2026-01-07T10:49:26.550681 PUBSUB: Subscribe   L<GetConfigCommand.onGetConfigFinished> T<meshtastic.stcomm_finish> 
-2026-01-07T10:49:26.550681 PUBSUB: Create T<meshtastic.stcomm_receive>
-2026-01-07T10:49:26.550681 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.stcomm_receive> 
-2026-01-07T10:49:26.550681 PUBSUB: Create T<meshtastic.my_info_publish>
-2026-01-07T10:49:26.550681 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.my_info_publish> 
-2026-01-07T10:49:26.550681 PUBSUB: Create T<meshtastic.metadata_publish>
-2026-01-07T10:49:26.550681 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.metadata_publish> 
-2026-01-07T10:49:26.550681 PUBSUB: Create T<meshtastic.channel_publish>
-2026-01-07T10:49:26.550681 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish> 
-2026-01-07T10:49:26.550681 PUBSUB: Create T<meshtastic.config_publish>
-2026-01-07T10:49:26.550681 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish> 
-2026-01-07T10:49:26.550681 PUBSUB: Create T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:26.550681 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish> 
-2026-01-07T10:49:26.550681 PUBSUB: Send Pre    L<None> T<meshtastic.stcomm_start>
-2026-01-07T10:49:26.550681 PUBSUB: Send In     L<StartConfigHandler.onMessageStart> T<meshtastic.stcomm_start>
-2026-01-07T10:49:27.704519 PUBSUB: Send Post   L<None> T<meshtastic.stcomm_start>
-2026-01-07T10:49:27.819631 PUBSUB: Create T<meshtastic.log>
-2026-01-07T10:49:27.819631 PUBSUB: Create T<meshtastic.log.line>
-2026-01-07T10:49:27.819631 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.819631 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.820636 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.820636 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.902149 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.902149 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.918098 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.918098 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.927655 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.927655 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.933762 PUBSUB: Send Pre    L<None> T<meshtastic.my_info_publish>
-2026-01-07T10:49:27.933762 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.my_info_publish>
-2026-01-07T10:49:27.933762 PUBSUB: Send Post   L<None> T<meshtastic.my_info_publish>
-2026-01-07T10:49:27.933762 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.933762 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.933762 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.933762 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.949614 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:27.949614 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:27.949614 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.965662 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.965662 PUBSUB: Send Pre    L<None> T<meshtastic.metadata_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.metadata_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Post   L<None> T<meshtastic.metadata_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.965662 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.981527 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.981527 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
-2026-01-07T10:49:27.981527 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.981527 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.997626 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:27.997626 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:27.997626 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:27.997626 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.997626 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:27.997626 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:27.997626 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:27.997626 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.013648 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.013648 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.013648 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.013648 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.013648 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.013648 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.013648 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.029343 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.029343 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.029343 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.029343 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.029343 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.029343 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.029343 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.029343 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.045138 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.045138 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.045138 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.045138 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.045138 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.045138 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.045138 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.045138 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.045138 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.045138 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.060842 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.060842 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.060842 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.060842 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.060842 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.076625 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.076625 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.076625 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.076625 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.076625 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.076625 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.076625 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.076625 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.076625 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.076625 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.092447 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.092447 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.092447 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.092447 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.092447 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.092447 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.092447 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.092447 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.108161 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.108161 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.108161 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.108161 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.108161 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.108161 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.108161 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.108161 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.108161 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.108161 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.123886 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.123886 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.123886 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.123886 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.123886 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.127647 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.127647 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.127647 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.127647 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.127647 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.139639 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.139639 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.139639 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.139639 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.139639 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.139639 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.139639 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.139639 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.139639 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.139639 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.155573 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.155573 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.155573 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.155573 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.155573 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.155573 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.155573 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.155573 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.155573 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.155573 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.171637 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.171637 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.171637 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.171637 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.171637 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.187622 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.187622 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.188758 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.188758 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.188758 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.188758 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.188758 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.188758 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.188758 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:28.188758 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
-2026-01-07T10:49:28.204636 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.204636 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.204636 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.220355 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.220355 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.220355 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.220355 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.220355 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.220355 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.227659 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.227659 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.227659 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:28.236122 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.236122 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.236122 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.236122 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.251975 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.251975 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.251975 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.251975 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.274219 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.274219 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.284219 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.284219 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.293437 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.293437 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.303847 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.303847 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.312411 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.312411 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.323414 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.323414 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.331538 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.331538 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.341538 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.342537 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.350433 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.350433 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.360436 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.360436 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.366436 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.366436 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.366436 PUBSUB: Send Pre    L<None> T<meshtastic.stcomm_finish>
-2026-01-07T10:49:28.366436 PUBSUB: Send In     L<GetConfigCommand.onGetConfigFinished> T<meshtastic.stcomm_finish>
-2026-01-07T10:49:28.366436 PUBSUB: Send Post   L<None> T<meshtastic.stcomm_finish>
-2026-01-07T10:49:28.366436 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.366436 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.397484 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.397484 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.407595 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.407595 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.427467 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.427467 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.438850 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.438850 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.462055 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.462055 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.470270 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.470270 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.495308 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.495308 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.509437 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:28.509437 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:29.524938 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.stcomm_receive>
-2026-01-07T10:49:29.524938 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.my_info_publish>
-2026-01-07T10:49:29.525945 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.metadata_publish>
-2026-01-07T10:49:29.525945 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
-2026-01-07T10:49:29.525945 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
-2026-01-07T10:49:29.525945 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
-2026-01-07T10:49:29.525945 PUBSUB: Send Pre    L<None> T<meshtastic.mi_connected>
-2026-01-07T10:49:29.525945 PUBSUB: Send In     L<MeshInterface.onConnected> T<meshtastic.mi_connected>
-2026-01-07T10:49:29.525945 PUBSUB: Send Pre    L<None> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:29.525945 PUBSUB: Send In     L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:29.525945 PUBSUB: Send Post   L<None> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:29.525945 PUBSUB: Create T<meshtastic.connection>
-2026-01-07T10:49:29.525945 PUBSUB: Create T<meshtastic.connection.established>
-2026-01-07T10:49:29.525945 PUBSUB: Send Pre    L<None> T<meshtastic.connection.established>
-2026-01-07T10:49:29.525945 PUBSUB: Send Post   L<None> T<meshtastic.connection.established>
-2026-01-07T10:49:29.527477 PUBSUB: Send Post   L<None> T<meshtastic.mi_connected>
-2026-01-07T10:49:29.633133 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:29.633133 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:29.633133 PUBSUB: Send Pre    L<None> T<meshtastic.log.line>
-2026-01-07T10:49:29.642647 PUBSUB: Send Post   L<None> T<meshtastic.log.line>
-2026-01-07T10:49:50.350000 PUBSUB: Send Pre    L<None> T<meshtastic.mi_disconnect>
-2026-01-07T10:49:50.350000 PUBSUB: Send In     L<MeshInterface.onDisconnect> T<meshtastic.mi_disconnect>
-2026-01-07T10:49:50.709140 PUBSUB: Send Pre    L<None> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:50.709140 PUBSUB: Send In     L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:50.709140 PUBSUB: Send Post   L<None> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:50.709140 PUBSUB: Create T<meshtastic.connection.lost>
-2026-01-07T10:49:50.709140 PUBSUB: Send Pre    L<None> T<meshtastic.connection.lost>
-2026-01-07T10:49:50.709140 PUBSUB: Send Post   L<None> T<meshtastic.connection.lost>
-2026-01-07T10:49:50.709140 PUBSUB: Send Post   L<None> T<meshtastic.mi_disconnect>
-2026-01-07T10:49:50.709140 PUBSUB: Unsubscribe L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish>
-2026-01-07T10:49:50.709140 PUBSUB: Dead Listn  L<GetConfigCommand.onGetConfigFinished> T<meshtastic.stcomm_finish>
-2026-01-07T10:49:50.709140 PUBSUB: Unsubscribe L<StartConfigHandler.onMessageStart> T<meshtastic.stcomm_start>
+2026-01-07T16:17:00.774494 PUBSUB: Create T<meshtastic>
+2026-01-07T16:17:00.784861 PUBSUB: Create T<meshtastic.mi_status_request>
+2026-01-07T16:17:00.784861 PUBSUB: Subscribe   L<MeshInterface.onStatusRequest> T<meshtastic.mi_status_request> 
+2026-01-07T16:17:00.784861 PUBSUB: Create T<meshtastic.mi_connected>
+2026-01-07T16:17:00.784861 PUBSUB: Subscribe   L<MeshInterface.onConnected> T<meshtastic.mi_connected> 
+2026-01-07T16:17:00.784861 PUBSUB: Create T<meshtastic.mi_disconnect>
+2026-01-07T16:17:00.786083 PUBSUB: Subscribe   L<MeshInterface.onDisconnect> T<meshtastic.mi_disconnect> 
+2026-01-07T16:17:00.790155 PUBSUB: Create T<meshtastic.stcomm_start>
+2026-01-07T16:17:00.790155 PUBSUB: Subscribe   L<StartConfigHandler.onMessageStart> T<meshtastic.stcomm_start> 
+2026-01-07T16:17:06.458368 PUBSUB: Create T<meshtastic.mi_status_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Subscribe   L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish> 
+2026-01-07T16:17:06.458368 PUBSUB: Send Pre    L<None> T<meshtastic.mi_status_request>
+2026-01-07T16:17:06.458368 PUBSUB: Send In     L<MeshInterface.onStatusRequest> T<meshtastic.mi_status_request>
+2026-01-07T16:17:06.458368 PUBSUB: Send Pre    L<None> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Send In     L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Send Post   L<None> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Send Post   L<None> T<meshtastic.mi_status_request>
+2026-01-07T16:17:06.458368 PUBSUB: Create T<meshtastic.stcomm_finish>
+2026-01-07T16:17:06.458368 PUBSUB: Subscribe   L<GetConfigCommand.onGetConfigFinished> T<meshtastic.stcomm_finish> 
+2026-01-07T16:17:06.458368 PUBSUB: Create T<meshtastic.stcomm_receive>
+2026-01-07T16:17:06.458368 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.stcomm_receive> 
+2026-01-07T16:17:06.458368 PUBSUB: Create T<meshtastic.my_info_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.my_info_publish> 
+2026-01-07T16:17:06.458368 PUBSUB: Create T<meshtastic.metadata_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.metadata_publish> 
+2026-01-07T16:17:06.458368 PUBSUB: Create T<meshtastic.channel_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish> 
+2026-01-07T16:17:06.458368 PUBSUB: Create T<meshtastic.config_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish> 
+2026-01-07T16:17:06.458368 PUBSUB: Create T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.458368 PUBSUB: Subscribe   L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish> 
+2026-01-07T16:17:06.458368 PUBSUB: Send Pre    L<None> T<meshtastic.stcomm_start>
+2026-01-07T16:17:06.458368 PUBSUB: Send In     L<StartConfigHandler.onMessageStart> T<meshtastic.stcomm_start>
+2026-01-07T16:17:06.563460 PUBSUB: Send Post   L<None> T<meshtastic.stcomm_start>
+2026-01-07T16:17:06.698276 PUBSUB: Send Pre    L<None> T<meshtastic.my_info_publish>
+2026-01-07T16:17:06.698276 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.my_info_publish>
+2026-01-07T16:17:06.698276 PUBSUB: Send Post   L<None> T<meshtastic.my_info_publish>
+2026-01-07T16:17:06.763734 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.763734 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.763734 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.metadata_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.metadata_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.metadata_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.channel_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.764358 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.814130 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.870168 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.870168 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.870168 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.870168 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.870168 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.870168 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.871166 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.871166 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.871166 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.871166 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.871166 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.871166 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.871166 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.872166 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.872166 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.872166 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.872166 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.872166 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.872166 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.872166 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.872166 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.873166 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.873166 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.873166 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Pre    L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Post   L<None> T<meshtastic.config_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Pre    L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send In     L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:06.923842 PUBSUB: Send Post   L<None> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:07.032657 PUBSUB: Send Pre    L<None> T<meshtastic.stcomm_finish>
+2026-01-07T16:17:07.032657 PUBSUB: Send In     L<GetConfigCommand.onGetConfigFinished> T<meshtastic.stcomm_finish>
+2026-01-07T16:17:07.032657 PUBSUB: Send Post   L<None> T<meshtastic.stcomm_finish>
+2026-01-07T16:17:14.581334 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.stcomm_receive>
+2026-01-07T16:17:14.581334 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.my_info_publish>
+2026-01-07T16:17:14.581334 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.metadata_publish>
+2026-01-07T16:17:14.581334 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.channel_publish>
+2026-01-07T16:17:14.581334 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.config_publish>
+2026-01-07T16:17:14.581334 PUBSUB: Unsubscribe L<GetConfigCommand.onReceiveData> T<meshtastic.nodeinfo_publish>
+2026-01-07T16:17:14.581334 PUBSUB: Send Pre    L<None> T<meshtastic.mi_connected>
+2026-01-07T16:17:14.581334 PUBSUB: Send In     L<MeshInterface.onConnected> T<meshtastic.mi_connected>
+2026-01-07T16:17:14.581334 PUBSUB: Send Pre    L<None> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:14.581334 PUBSUB: Send In     L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:14.581334 PUBSUB: Send Post   L<None> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:14.581334 PUBSUB: Create T<meshtastic.connection>
+2026-01-07T16:17:14.581334 PUBSUB: Create T<meshtastic.connection.established>
+2026-01-07T16:17:14.581334 PUBSUB: Send Pre    L<None> T<meshtastic.connection.established>
+2026-01-07T16:17:14.581334 PUBSUB: Send Post   L<None> T<meshtastic.connection.established>
+2026-01-07T16:17:14.581334 PUBSUB: Send Post   L<None> T<meshtastic.mi_connected>
+2026-01-07T16:17:23.359074 PUBSUB: Dead Listn  L<GetConfigCommand.onGetConfigFinished> T<meshtastic.stcomm_finish>
+2026-01-07T16:17:43.449585 PUBSUB: Send Pre    L<None> T<meshtastic.mi_disconnect>
+2026-01-07T16:17:43.449585 PUBSUB: Send In     L<MeshInterface.onDisconnect> T<meshtastic.mi_disconnect>
+2026-01-07T16:17:51.570013 PUBSUB: Send Pre    L<None> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:51.570013 PUBSUB: Send In     L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:51.570013 PUBSUB: Send Post   L<None> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:51.570013 PUBSUB: Create T<meshtastic.connection.lost>
+2026-01-07T16:17:51.570013 PUBSUB: Send Pre    L<None> T<meshtastic.connection.lost>
+2026-01-07T16:17:51.570013 PUBSUB: Send Post   L<None> T<meshtastic.connection.lost>
+2026-01-07T16:17:51.570013 PUBSUB: Send Post   L<None> T<meshtastic.mi_disconnect>
+2026-01-07T16:17:51.570013 PUBSUB: Unsubscribe L<CommandExecutor.onStatusReceive> T<meshtastic.mi_status_publish>
+2026-01-07T16:17:51.574217 PUBSUB: Unsubscribe L<StartConfigHandler.onMessageStart> T<meshtastic.stcomm_start>

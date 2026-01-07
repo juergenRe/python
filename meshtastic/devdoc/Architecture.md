@@ -652,3 +652,52 @@ note right of NodeInfo
     //nodenum// and //user//
 end note
 ```
+
+### Admin Messages
+
+Admin Messages are used to transfer configuration data to/from remote nodes. For the local connected node, no 
+admin messages are needed. Prior to sending such a message, a session passkey for the addressed node needs to 
+be requested. This passkey is then stored till exit of the application within the node data.
+
+Here are some data elements can be accessed via an admin message (also refer to protobuf definition for complete
+and actual message list):
+
+| Request                                    | Response                                    | Note                                     |
+|--------------------------------------------|---------------------------------------------|------------------------------------------|
+| get_channel_request                        | get_channel_response                        | send chNo + 1 to avoid sending a 0       |
+| get_owner_request                          | get_owner_response                          |                                          |
+| get_config_request                         | get_config_response                         | there are 10 config types defined        |
+| get_module_config_request                  | get_module_config_response                  | there are 13 module config types defined |
+| get_canned_message_module_messages_request | get_canned_message_module_messages_response |                                          |
+| get_device_metadata_request                | get_device_metadata_response                |                                          |
+| get_ringtone_request                       | get_ringtone_response                       |                                          |
+| get_device_connection_status_request       | get_device_connection_status_response       |                                          |
+| set_ham_mode                               |                                             |                                          |
+| get_node_remote_hardware_pins_request      | get_node_remote_hardware_pins_response      |                                          |
+| enter_dfu_mode_request                     |                                             |                                          |
+| delete_file_request                        |                                             |                                          |
+| set_scale                                  |                                             |                                          |
+| backup_preferences                         |                                             |                                          |
+| restore_preferences                        |                                             |                                          |
+| remove_backup_preferences                  |                                             |                                          | 
+| send_input_event                           |                                             |                                          |
+| set_owner                                  |                                             |                                          |
+| set_channel                                |                                             |                                          |
+| set_config                                 |                                             |                                          |
+| set_module_config                          |                                             |                                          |
+| set_canned_message_module_messages         |                                             |                                          |
+| set_ringtone_message                       |                                             |                                          |
+| begin_edit_settings                        |                                             | Opens a transaction                      |
+| commit_edit_settings                       |                                             | completes the open transaction           |
+| remove_favorite_node                       |                                             |                                          |
+| set_fixed_position                         |                                             |                                          |
+| remove_fixed_position                      |                                             |                                          |
+| set_time_only                              |                                             |                                          |
+ 
+In general:
+- a request will give a response after some time
+- the request can carry parameters, e.g. a channel index
+- when there is no answer containing data, an ACK will be received for remote nodes
+- for requests setting new data, the new data block will be sent. An ACK is expected.
+
+

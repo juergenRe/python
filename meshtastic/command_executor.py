@@ -22,28 +22,36 @@ class CommandExecutor:
 
     def execute(self, commands: list[Command]):
         """Executes the given list of commands"""
-        errCode: CmdError
-        pub.subscribe(self.onStatusReceive, topic_map.SUBS_MI_STATUS_PUB)
-        pub.sendMessage(topic_map.SUBS_MI_STATUS_REQ)
-        logger.debug(f"Starting execution of commands")
-        while self.meshStatus is None:
-            time.sleep(0.1)
-        if not self.meshStatus['isConnected']:
-            cmd = GetConfigCommand(None, None, [])
-            errCode, msg = cmd.execute(self.meshModel, self.timeout)
-            logger.debug(f"GetConfig data: Execution result: {errCode}, '{msg}'")
-            if errCode == CmdError.OK:
-                pub.sendMessage(topic_map.SUBS_MI_CONNECTED)
+        try:
+            errCode: CmdError
+            pub.subscribe(self.onStatusReceive, topic_map.SUBS_MI_STATUS_PUB)
+            pub.sendMessage(topic_map.SUBS_MI_STATUS_REQ)
+            logger.debug(f"Starting execution of commands")
+            while self.meshStatus is None:
+                time.sleep(0.1)
+            if not self.meshStatus['isConnected']:
+                cmd = GetConfigCommand(None, None, [])
+                errCode, msg = cmd.execute(self.meshModel, self.timeout)
+                logger.debug(f"GetConfig data: Execution result: {errCode}, '{msg}'")
+                if errCode == CmdError.OK:
+                    if 'export_config' not in commands[0].cmdName:
+                        print("Connected to radio")
+                    pub.sendMessage(topic_map.SUBS_MI_CONNECTED)
 
-        # Close connection
-        lastts = self.meshStatus['tsUnconnected']
-        pub.sendMessage(topic_map.SUBS_MI_DISCONNECT)
-        while self.meshStatus['tsUnconnected'] == lastts:
-            time.sleep(0.1)
-        logger.debug(f"Interface successfully disconnected")
+            for cmd in commands:
+                errCode, msg = cmd.execute(self.meshModel, self.timeout)
+                if errCode != CmdError.OK:
+                    raise RuntimeError(msg)
+        finally:
+            # Close connection
+            lastts = self.meshStatus['tsUnconnected']
+            pub.sendMessage(topic_map.SUBS_MI_DISCONNECT)
+            while self.meshStatus['tsUnconnected'] == lastts:
+                time.sleep(0.1)
+            logger.debug(f"Interface successfully disconnected")
 
-        pub.unsubscribe(self.onStatusReceive, topic_map.SUBS_MI_STATUS_PUB)
-        logger.debug(f"Finishing execution of commands")
+            pub.unsubscribe(self.onStatusReceive, topic_map.SUBS_MI_STATUS_PUB)
+            logger.debug(f"Finishing execution of commands")
 
     def onStatusReceive(self, data: dict):
         """Receive status message from mesh/radio"""

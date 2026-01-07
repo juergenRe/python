@@ -1,57 +1,48 @@
-[32mINFO  [0m| 10:49:28 257369 [SerialConsole] [32mClient wants config, nonce=313973098
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mState: SERIAL
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mGot 6 files in manifest
-[0m[32mINFO  [0m| 10:49:28 257369 [SerialConsole] [32mStart API client config millis=257369175
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mFromRadio=STATE_SEND_MY_INFO
-[0m[32mINFO  [0m| 10:49:28 257369 [SerialConsole] [32mgetFromRadio=STATE_SEND_UIDATA
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend My NodeInfo
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend device metadata
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend channels 8
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: device
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: position
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: power
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: network
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: display
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: lora
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: bluetooth
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: security
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend config: sessionkey
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: mqtt
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: serial
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: ext notification
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: store forward
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: range test
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: telemetry
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: canned message
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: audio
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: remote hardware
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: neighbor info
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: ambient lighting
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: detection sensor
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mSend module config: paxcounter
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mDone sending 5 of 5 nodeinfos millis=257369498
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mFile: /prefs/channels.proto (106) bytes
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
-[0m[34mDEBUG [0m| 10:49:28 257369 [SerialConsole] [34mFile: /prefs/config.proto (247) bytes
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFile: /prefs/device.proto (129) bytes
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFile: /prefs/module.proto (100) bytes
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFile: /prefs/nodes.proto (708) bytes
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFile: /static/.gitkeep (0) bytes
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
-[0m[32mINFO  [0m| 10:49:29 257369 [SerialConsole] [32mConfig Send Complete millis=257369622
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mphone downloaded packet (id=0x9eb824fa fr=0xdb296c08 to=0xffffffff, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=67 rxtime=1767778986 priority=10)
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mphone downloaded packet (id=0xdb74878e fr=0xc5db8a75 to=0xffffffff, transport = 1, WantAck=0, HopLim=3 Ch=0x0 Portnum=67 rxtime=1767779097 rxSNR=6.25 rxRSSI=-
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mphone downloaded packet (id=0xf2ddb78f fr=0xc5db8a75 to=0xffffffff, transport = 1, WantAck=0, HopLim=3 Ch=0x0 Portnum=67 rxtime=1767779132 rxSNR=5.5 rxRSSI=-2
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
-[0m[34mDEBUG [0m| 10:49:29 257369 [SerialConsole] [34mphone downloaded packet (id=0x41559d7b fr=0x1a6aeb85 to=0xffffffff, transport = 1, WantAck=0, HopLim=3 Ch=0x0 Portnum=67 rxtime=1767779224 rxSNR=6.25 rxRSSI=-
-[0m[32mINFO  [0m| 10:49:29 257369 [Screen] [32mTurn on screen
-[0m[34mDEBUG [0m| 10:49:30 257370 [SerialConsole] [34mGot client heartbeat
-[0m[34mDEBUG [0m| 10:49:30 257370 [SerialConsole] [34mFromRadio=STATE_SEND_QUEUE_STATUS, numbytes=6
+[32mINFO  [0m| 11:28:45 259725 [SerialConsole] [32mClient wants config, nonce=3183420087
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mState: SERIAL
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mGot 6 files in manifest
+[0m[32mINFO  [0m| 11:28:45 259725 [SerialConsole] [32mStart API client config millis=259725722
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mFromRadio=STATE_SEND_MY_INFO
+[0m[32mINFO  [0m| 11:28:45 259725 [SerialConsole] [32mgetFromRadio=STATE_SEND_UIDATA
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend My NodeInfo
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend device metadata
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend channels 8
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: device
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: position
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: power
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: network
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: display
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: lora
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: bluetooth
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: security
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend config: sessionkey
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: mqtt
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: serial
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: ext notification
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: store forward
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: range test
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: telemetry
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: canned message
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: audio
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: remote hardware
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: neighbor info
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: ambient lighting
+[0m[34mDEBUG [0m| 11:28:45 259725 [SerialConsole] [34mSend module config: detection sensor
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mSend module config: paxcounter
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mDone sending 5 of 5 nodeinfos millis=259726045
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFile: /prefs/channels.proto (106) bytes
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFile: /prefs/config.proto (247) bytes
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFile: /prefs/device.proto (129) bytes
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFile: /prefs/module.proto (100) bytes
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFile: /prefs/nodes.proto (708) bytes
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFile: /static/.gitkeep (0) bytes
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[32mINFO  [0m| 11:28:45 259726 [SerialConsole] [32mConfig Send Complete millis=259726169
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
+[0m[34mDEBUG [0m| 11:28:45 259726 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
