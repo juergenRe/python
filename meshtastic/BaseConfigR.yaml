@@ -1,0 +1,84 @@
+# start of Meshtastic configure yaml
+channel_url: https://meshtastic.org/e/#CgcSAQE6AggNEg8IATgDQANIAVAbaAHABgE
+config:
+  bluetooth:
+    enabled: true
+    fixedPin: 123456
+    mode: FIXED_PIN
+  device:
+    nodeInfoBroadcastSecs: 10800
+    rebroadcastMode: LOCAL_ONLY
+    serialEnabled: true
+  display:
+    screenOnSecs: 600
+    wakeOnTapOrMotion: true
+  lora:
+    hopLimit: 3
+    ignoreMqtt: true
+    region: EU_868
+    sx126xRxBoostedGain: true
+    txEnabled: true
+    txPower: 27
+    usePreset: true
+  mqtt:
+    encryptionEnabled: false
+  network:
+    ipv4Config:
+      dns: 134744072
+    ntpServer: meshtastic.pool.ntp.org
+  position:
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 30
+    fixedPosition: true
+    gpsAttemptTime: 900
+    gpsMode: ENABLED
+    gpsUpdateInterval: 3600
+    positionBroadcastSecs: 259200
+    positionBroadcastSmartEnabled: false
+    positionFlags: 811
+  power:
+    isPowerSaving: true
+    lsSecs: 300
+    minWakeSecs: 10
+    onBatteryShutdownAfterSecs: 30
+    sdsSecs: 4294967295
+    waitBluetoothSecs: 60
+  security:
+    privateKey: base64:8EtB3/bIFrSVoSXFQX5VBdOYqFy+FQCACQhBJNdJoXA=
+    publicKey: base64:he3KdoOWGABSk5MtjNIxnhUS7PTjIbiH4FsUaXGCDVU=
+    serialEnabled: true
+is_unmessagable: false
+location:
+  alt: 437
+  lat: 47.1072768
+  lon: 7.3138176
+module_config:
+  ambientLighting:
+    blue: 117
+    current: 10
+    green: 138
+    red: 219
+  detectionSensor:
+    detectionTriggerType: LOGIC_HIGH
+    minimumBroadcastSecs: 45
+  externalNotification:
+    active: true
+    alertMessage: true
+    enabled: true
+    nagTimeout: 60
+    output: 36
+    outputMs: 1000
+  mqtt:
+    address: mqtt.meshtastic.org
+    encryptionEnabled: true
+    mapReportSettings:
+      publishIntervalSecs: 3600
+    password: large4cats
+    root: msh/EU_868
+    username: meshdev
+  telemetry:
+    deviceUpdateInterval: 1800
+    environmentUpdateInterval: 1800
+owner: Meshtastic 8a75
+owner_short: 8a75
+ringtone: 24:d=32,o=5,b=565:f6,p,f6,4p,p,f6,p,f6,2p,p,b6,p,b6,p,b6,p,b6,p,b,p,b,p,b,p,b,p,b,p,b,p,b,p,b,1p.,2p.,p

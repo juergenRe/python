@@ -1,0 +1,63 @@
+# start of Meshtastic configure yaml
+channel_url: https://meshtastic.org/e/#ChQSBN6tvu8aBnNwcmF3bCgBOgIIIBIMCAE4AUADSAFQHmgB
+config:
+  bluetooth:
+    enabled: true
+    fixedPin: 123456
+  device:
+    role: CLIENT_BASE
+    rebroadcastMode: LOCAL_ONLY
+    nodeInfoBroadcastSecs: 10800
+    buzzerMode: DISABLED
+    ledHeartbeatDisabled: false
+  display:
+    screenOnSecs: 600
+    use12hClock: false
+  lora:
+    hopLimit: 3
+    region: US
+    sx126xRxBoostedGain: true
+    txEnabled: true
+    txPower: 30
+    usePreset: true
+    modemPreset: SHORT_FAST
+  mqtt:
+    encryptionEnabled: false
+  network:
+    enabledProtocols: 1
+    ntpServer: meshtastic.pool.ntp.org
+  position:
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 30
+    gpsMode: NOT_PRESENT
+    gpsUpdateInterval: 120
+    positionBroadcastSecs: 900
+    positionBroadcastSmartEnabled: true
+    positionFlags: 811
+  power:
+    lsSecs: 300
+    minWakeSecs: 10
+    sdsSecs: 4294967295
+    waitBluetoothSecs: 60
+    isPowerSaving: false
+  security:
+    privateKey: base64:YI4/an2azhllmRzY9xersJS7oR9fM0q4MWrC3N8KrX0=
+    publicKey: base64:Y6jHVMlyOIQtxxT7Yc3Q/FVxkWa/jRxqawy2lIzSMEk=
+    serialEnabled: true
+module_config:
+  ambientLighting:
+    blue: 220
+    current: 10
+    green: 248
+    red: 217
+  detectionSensor:
+    detectionTriggerType: LOGIC_HIGH
+    minimumBroadcastSecs: 45
+  mqtt:
+    address: mqtt.meshtastic.org
+    encryptionEnabled: true
+    password: large4cats
+    root: msh
+    username: meshdev
+owner: Meshtastic f8dc
+owner_short: f8dc

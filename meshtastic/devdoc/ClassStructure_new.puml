@@ -1,0 +1,175 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface MeshIfcDef <<implicit>> {
+    __ functions __
+    -handleFromRadio()
+    -sendToRadio()
+    connect()
+    disconnect()
+    == creation parameters ==
+    clientAddress: str
+    connectNow: bool
+    timeout: int = 300
+    noNodes: bool
+    debugOut: TextIOWrapper
+    noProto: bool
+}
+
+interface RadioPacket {
+    toRadio: pb
+    fromRadio: pb
+}
+
+
+abstract class StreamInterface {
+    -rxThread
+    connect()
+    close()
+    {abstract}-readBytes()
+    {abstract}-writeBytes()
+    -reader()
+    -sendToRadioImpl()
+    -startConfig()
+}
+
+class TCPInterface {
+    hostname:portnumber
+    socket
+    open()
+    close()
+    -writeBytes()
+    -readBytes()
+}
+
+class SerialInterface{
+    devPath: str
+    stream: Serial
+    open()
+    close()
+    -writeBytes()
+    -readBytes()
+}
+
+class BLEInterface {
+    -receiveThread
+    client: BLEClient
+    -startConfig()
+    -receiveFromRadioImpl()
+    -sendToRadioImpl()
+    connect()
+    close()
+}
+
+class BLEClient <<async>> {
+    connect()
+    disconnect()
+    close()
+    discover()
+}
+
+class NoProtoInterface {
+    -sendToRadio()
+    -handleFromRadio()
+    connect()
+    disconnect()
+}
+
+note top of NoProtoInterface
+    implements the case where one don't want to have
+    real communication but want to test the remaining
+    parts
+end note
+
+note right of SerialInterface::devPath
+    ser. port number
+end note
+
+class MeshInterface {
+    queue
+    {abstract} -sendToRadioImpl()
+    -sendToRadio()
+    -handleFromRadio()
+    connect()
+    disconnect()
+    readConfig()
+    heartbeatTimer
+}
+
+note left of MeshInterface
+    This class takes too much responsibilities, it need
+    to be split up. Interface should be responsible to
+    transfer the data, but not process them.
+    Responsibilities:
+    - sending/receiving radio packets (toRadio/fromRadio)
+    - manage rcv/snd queues
+    - manage ack of msg id
+    - send heartbeat
+    - manage timeouts
+end note
+
+
+class CmdExecutor {
+    iface
+    MeshModel
+}
+
+class Cmd {
+    destinationNode
+    transactionNo
+    cmd
+    parameter
+}
+
+note top of Cmd
+    transactionNo will group commands together
+    during sending of data. Value 0: no grouping
+end note
+
+class CmdFactory <<singleton>> {
+    createCmdList()
+    createCmd()
+}
+
+class Starter {
+    argumentParser
+}
+
+class MeshModel {
+    localNode
+    nodes
+}
+
+class Tunnel
+class Node {
+    nodeNum
+    localConfig: pb
+    moduleConfig: pb
+    channels: list
+}
+
+StreamInterface --|> MeshInterface
+SerialInterface --|> StreamInterface
+TCPInterface --|> StreamInterface
+BLEInterface --|> MeshInterface
+NoProtoInterface --|> MeshInterface
+
+MeshIfcDef --> RadioPacket: uses
+MeshInterface ..|> MeshIfcDef
+
+BLEInterface "1" o- "1" BLEClient
+MeshInterface "1" -right-o "1" CmdExecutor
+CmdExecutor "1" *-- "1" MeshModel: uses
+CmdExecutor "1" *-right- "N" Cmd
+CmdFactory "1" -left-> "N" Cmd
+Starter -up-> CmdFactory
+MeshModel "1" *-- "N" Node: contains
+Starter -left-> MeshModel: creates
+
+note bottom of Starter
+    represents the main program,
+    collecting all arguments and
+    passing them to the CmdFactory
+    for the creation of a list of Cmd
+end note
+@enduml

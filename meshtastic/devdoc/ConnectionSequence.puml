@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Executor -> Interface: connectAndGetConfig(cb)
+Interface -> Interface: send(getConfig)
+Interface -> MessageTracker: store request(cb, msgId, timeout)
+Interface -> Radio: Message(ToRadio)
+Radio --> Interface: Message(FromRadio)
+Interface --> Interface: process message
+Interface --> MessageTracker: remove request
+Interface --> Executor: callback
+@enduml

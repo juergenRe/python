@@ -1,0 +1,73 @@
+# start of Meshtastic configure yaml
+canned_messages: Hi|Bye|Yes|No|Ok
+channel_url: https://meshtastic.org/e/#CgcSAQE6AggNCi8SIN-lFpUwOYY1yB2MKUuKMhE_NGFA4eVwoQW_DInCRZDTGgNUTUQoATABOgIIDRIPCAE4A0ADSAFQG2gBwAYB
+config:
+  bluetooth:
+    enabled: false
+    fixedPin: 123456
+    mode: FIXED_PIN
+  device:
+    ledHeartbeatDisabled: true
+    nodeInfoBroadcastSecs: 10800
+    rebroadcastMode: LOCAL_ONLY
+    serialEnabled: true
+    tzdef: GMT-1GMT,M3.5.0,M10.4.0/3
+  display:
+    autoScreenCarouselSecs: 15
+    displaymode: INVERTED
+    screenOnSecs: 60
+  lora:
+    hopLimit: 3
+    ignoreMqtt: true
+    region: EU_868
+    sx126xRxBoostedGain: true
+    txEnabled: true
+    txPower: 27
+    usePreset: true
+  network:
+    enabledProtocols: 1
+    ntpServer: meshtastic.pool.ntp.org
+    wifiEnabled: true
+    wifiSsid: ANet
+    wifiPsk: v0o34ieYK4ELf_y-3Gx8
+    addressMode: DHCP
+  position:
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 30
+    gpsAttemptTime: 900
+    gpsMode: NOT_PRESENT
+    gpsUpdateInterval: 3600
+    positionBroadcastSecs: 3600
+    positionBroadcastSmartEnabled: false
+    positionFlags: 811
+  power:
+    lsSecs: 300
+    minWakeSecs: 10
+    sdsSecs: 4294967295
+    waitBluetoothSecs: 60
+  security:
+    privateKey: base64:QBtbILHHhoqzpi5HsT66/UGhpuT429it3UW0MSVPEVk=
+    publicKey: base64:nysISJsPGcSbHreJanEazPV15tKnp/lj/li2/JVIZCY=
+    serialEnabled: true
+module_config:
+  ambientLighting:
+    blue: 8
+    current: 10
+    green: 108
+    red: 41
+  cannedMessage:
+    enabled: true
+  detectionSensor:
+    detectionTriggerType: LOGIC_HIGH
+    minimumBroadcastSecs: 45
+  mqtt:
+    address: mqtt.meshtastic.org
+    encryptionEnabled: true
+    password: large4cats
+    root: msh/EU_868
+    username: meshdev
+  telemetry:
+    deviceUpdateInterval: 1800
+    environmentUpdateInterval: 1800
+owner: Meshtastic 6c08
+owner_short: 6c08

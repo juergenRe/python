@@ -1,0 +1,75 @@
+Connected to radio
+Sending environment_metrics telemetry request to !c5db8a75 on channelIndex:0 (this could take a while)
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\x04\x10\x10\x18\x10'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1273 TX QUEUE free 16 of 16, res = 0, id = 00000000 
+DEBUG file:mesh_interface.py _sendToRadio line:1249 packet 73b100b9 got acked under us
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x0f\x18\x10 \xb9\x81\xc4\x9d\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: queueStatus {
+  free: 15
+  maxlen: 16
+  mesh_packet_id: 1940979897
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1273 TX QUEUE free 15 of 16, res = 0, id = 73b100b9 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1285 Reply for unexpected packet ID 73b100b9
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12_\ru\x8a\xdb\xc5\x15\x08l)\xdb"\x1c\x08C\x12\x11\r8\x9b6i\x1a\n\r\x9a\x99\xbbA\x1d\xfd\x84rD5\xb9\x00\xb1sH\x005F\xbe\x0e\xf4E\x00\x00\xb8@H\x02x\x02\x82\x01 \x85\xed\xcav\x83\x96\x18\x00R\x93\x93-\x8c\xd21\x9e\x15\x12\xec\xf4\xe3!\xb8\x87\xe0[\x14iq\x82\rU\x88\x01\x01\x98\x01u'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 3319499381
+  to: 3676924936
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\r8\2336i\032\n\r\232\231\273A\035\375\204rD"
+    request_id: 1940979897
+    bitfield: 0
+  }
+  id: 4094606918
+  rx_snr: 5.75
+  hop_limit: 2
+  hop_start: 2
+  public_key: "\205\355\312v\203\226\030\000R\223\223-\214\3221\236\025\022\354\364\343!\270\207\340[\024iq\202\rU"
+  pki_encrypted: true
+  relay_node: 117
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 3319499381, 'to': 3676924936, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r8\x9b6i\x1a\n\r\x9a\x99\xbbA\x1d\xfd\x84rD', 'requestId': 1940979897, 'bitfield': 0, 'telemetry': {'time': 1765186360, 'environmentMetrics': {'temperature': 23.45, 'barometricPressure': 970.07794}, 'raw': time: 1765186360
+environment_metrics {
+  temperature: 23.45
+  barometric_pressure: 970.077942
+}
+}}, 'id': 4094606918, 'rxSnr': 5.75, 'hopLimit': 2, 'hopStart': 2, 'publicKey': 'he3KdoOWGABSk5MtjNIxnhUS7PTjIbiH4FsUaXGCDVU=', 'pkiEncrypted': True, 'relayNode': 117, 'raw': from: 3319499381
+to: 3676924936
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r8\2336i\032\n\r\232\231\273A\035\375\204rD"
+  request_id: 1940979897
+  bitfield: 0
+}
+id: 4094606918
+rx_snr: 5.75
+hop_limit: 2
+hop_start: 2
+public_key: "\205\355\312v\203\226\030\000R\223\223-\214\3221\236\025\022\354\364\343!\270\207\340[\024iq\202\rU"
+pki_encrypted: true
+relay_node: 117
+, 'fromId': '!c5db8a75', 'toId': '!db296c08'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating environmentMetrics metrics for 3319499381 to {'temperature': 23.45, 'barometricPressure': 970.07794}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1617 Got a response for requestId 1940979897
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1634 Calling response handler for requestId 1940979897
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.telemetry: packet={'from': 3319499381, 'to': 3676924936, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r8\x9b6i\x1a\n\r\x9a\x99\xbbA\x1d\xfd\x84rD', 'requestId': 1940979897, 'bitfield': 0, 'telemetry': {'time': 1765186360, 'environmentMetrics': {'temperature': 23.45, 'barometricPressure': 970.07794}, 'raw': time: 1765186360 environment_metrics { temperature: 23.45 barometric_pressure: 970.077942 } }}, 'id': 4094606918, 'rxSnr': 5.75, 'hopLimit': 2, 'hopStart': 2, 'publicKey': 'he3KdoOWGABSk5MtjNIxnhUS7PTjIbiH4FsUaXGCDVU=', 'pkiEncrypted': True, 'relayNode': 117, 'raw': from: 3319499381 to: 3676924936 decoded { portnum: TELEMETRY_APP payload: "\r8\2336i\032\n\r\232\231\273A\035\375\204rD" request_id: 1940979897 bitfield: 0 } id: 4094606918 rx_snr: 5.75 hop_limit: 2 hop_start: 2 public_key: "\205\355\312v\203\226\030\000R\223\223-\214\3221\236\025\022\354\364\343!\270\207\340[\024iq\202\rU" pki_encrypted: true relay_node: 117 , 'fromId': '!c5db8a75', 'toId': '!db296c08'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\r8\x9b6i\x1a\n\r\x9a\x99\xbbA\x1d\xfd\x84rD', 'requestId': 1940979897, 'bitfield': 0, 'telemetry': {'time': 1765186360, 'environmentMetrics': {'temperature': 23.45, 'barometricPressure': 970.07794}, 'raw': time: 1765186360
+environment_metrics {
+  temperature: 23.45
+  barometric_pressure: 970.077942
+}
+}}
+Telemetry received:
+environmentMetrics:
+  temperature: 23.45
+  barometricPressure: 970.07794
+
+Process finished with exit code 0

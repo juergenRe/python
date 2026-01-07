@@ -1,0 +1,144 @@
+[32mINFO  [0m| 09:05:56 230892 [SerialConsole] [32mClient wants config, nonce=206308293
+[0m[34mDEBUG [0m| 09:05:56 230892 [SerialConsole] [34mState: SERIAL
+[0m[34mDEBUG [0m| 09:05:56 230892 [SerialConsole] [34mGot 6 files in manifest
+[0m[32mINFO  [0m| 09:05:56 230892 [SerialConsole] [32mStart API client config millis=230892551
+[0m[34mDEBUG [0m| 09:05:56 230892 [SerialConsole] [34mFromRadio=STATE_SEND_MY_INFO
+[0m[32mINFO  [0m| 09:05:56 230892 [SerialConsole] [32mgetFromRadio=STATE_SEND_UIDATA
+[0m[34mDEBUG [0m| 09:05:56 230892 [SerialConsole] [34mSend My NodeInfo
+[0m[34mDEBUG [0m| 09:05:56 230892 [SerialConsole] [34mSend device metadata
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend channels 8
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: device
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: position
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: power
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: network
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: display
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: lora
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: bluetooth
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: security
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend config: sessionkey
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: mqtt
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: serial
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: ext notification
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: store forward
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: range test
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: telemetry
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: canned message
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: audio
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: remote hardware
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: neighbor info
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: ambient lighting
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: detection sensor
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mSend module config: paxcounter
+[0m[34mDEBUG [0m| 09:05:57 230892 [SerialConsole] [34mnodeinfo: 20/55
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mnodeinfo: 40/55
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mDone sending 55 of 55 nodeinfos millis=230893214
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFile: /prefs/channels.proto (106) bytes
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFile: /prefs/config.proto (244) bytes
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFile: /prefs/device.proto (129) bytes
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFile: /prefs/module.proto (100) bytes
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFile: /prefs/nodes.proto (3987) bytes
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFile: /static/.gitkeep (0) bytes
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_FILEMANIFEST
+[0m[32mINFO  [0m| 09:05:57 230893 [SerialConsole] [32mConfig Send Complete millis=230893339
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mphone downloaded packet (id=0x6230e69b fr=0xdb296c08 to=0xffffffff, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=67 rxtime=1765785830 priority=10)
+[0m[32mINFO  [0m| 09:05:57 230893 [Screen] [32mTurn on screen
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mGot client heartbeat
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_QUEUE_STATUS, numbytes=6
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mPACKET FROM PHONE (id=0x5ea304bb fr=0x00000000 to=0xdb296c08, transport = 0, WantAck=1, HopLim=3 Ch=0x0 Portnum=6 WANTRESP PKI priority=70)
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mEnqueued local (id=0x5ea304bb fr=0x00000000 to=0xdb296c08, transport = 0, WantAck=1, HopLim=3 Ch=0x0 Portnum=6 WANTRESP PKI rxtime=1765785957 priority=70)
+[0m[34mDEBUG [0m| 09:05:57 230893 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
+[0m[32mINFO  [0m| 09:05:57 230893 [Router] [32mPacket History - insert: Reusing slot aged 42354.478s TRACE OLDEST SLOT
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mhandleReceived(REMOTE) (id=0x5ea304bb fr=0x00000000 to=0xdb296c08, transport = 0, WantAck=1, HopLim=3 Ch=0x0 Portnum=6 WANTRESP PKI rxtime=1765785957 priority
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mModule 'Admin' wantsPacket=1
+[0m[32mINFO  [0m| 09:05:57 230893 [Router] [32mReceived Admin from=0x0, id=0x5ea304bb, portnum=6, payloadlen=2
+[0m[32mINFO  [0m| 09:05:57 230893 [Router] [32mHandle admin payload 10
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mClient getting radio canned messages
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34m*** handleGetCannedMessageModuleMessages
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mReply prepared by module 'canned' of variant: 11
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mSet admin key to  96 09 2c a5 57 74 64 c4
+
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mPartially randomized packet id 3107296924
+[0m[32mINFO  [0m| 09:05:57 230893 [Router] [32mAsked module 'Admin' to send a response
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mModule 'routing' wantsPacket=1
+[0m[32mINFO  [0m| 09:05:57 230893 [Router] [32mReceived routing from=0x0, id=0x5ea304bb, portnum=6, payloadlen=2
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mRouting sniffing (id=0x5ea304bb fr=0x00000000 to=0xdb296c08, transport = 0, WantAck=1, HopLim=3 Ch=0x0 Portnum=6 WANTRESP PKI rxtime=1765785957 priority=70)
+[0m[34mDEBUG [0m| 09:05:57 230893 [Router] [34mAnother module replied to this message, no need for 2nd ack
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mModule 'routing' considered
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mSend response (id=0xb935969c fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=5ea304bb rxtime=1765785957 priorit
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mIgnore update from self
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mEnqueued local (id=0xb935969c fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=5ea304bb rxtime=1765785957 priori
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mRx someone rebroadcasting for us (id=0xb935969c fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=5ea304bb rxtime
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mDidn't find pending packet
+[0m[32mINFO  [0m| 09:05:58 230893 [Router] [32mPacket History - insert: Reusing slot aged 42113.046s TRACE OLDEST SLOT
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mhandleReceived(REMOTE) (id=0xb935969c fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=5ea304bb rxtime=176578595
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mModule 'Admin' wantsPacket=1
+[0m[32mINFO  [0m| 09:05:58 230893 [Router] [32mReceived Admin from=0xdb296c08, id=0xb935969c, portnum=6, payloadlen=29
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mAllow admin response message
+[0m[32mINFO  [0m| 09:05:58 230893 [Router] [32mHandle admin payload 11
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mModule API did not handle admin message 11
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mModule 'Admin' considered
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mModule 'routing' wantsPacket=1
+[0m[32mINFO  [0m| 09:05:58 230893 [Router] [32mReceived routing from=0xdb296c08, id=0xb935969c, portnum=6, payloadlen=29
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mRouting sniffing (id=0xb935969c fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=5ea304bb rxtime=1765785958 prio
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mReceived a ACK for 0x5ea304bb, stopping retransmissions
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mDelivering rx packet (id=0xb935969c fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=5ea304bb rxtime=1765785958 
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mIgnore update from self
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mForwarding to phone (id=0xb935969c fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=5ea304bb rxtime=1765785958 p
+[0m[34mDEBUG [0m| 09:05:58 230893 [Router] [34mModule 'routing' considered
+[0m[32mINFO  [0m| 09:05:58 230893 [32mTell client we have new packets 1215
+[0m[34mDEBUG [0m| 09:05:58 230893 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
+[0m[34mDEBUG [0m| 09:05:58 230893 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
+[0m[34mDEBUG [0m| 09:05:58 230893 [SerialConsole] [34mphone downloaded packet (id=0xb935969c fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=5ea304bb rxtime=17657859
+[0m[34mDEBUG [0m| 09:05:59 230894 [SerialConsole] [34mPACKET FROM PHONE (id=0x4b0708bc fr=0x00000000 to=0xdb296c08, transport = 0, WantAck=1, HopLim=3 Ch=0x0 Portnum=6 WANTRESP PKI priority=70)
+[0m[34mDEBUG [0m| 09:05:59 230894 [SerialConsole] [34mEnqueued local (id=0x4b0708bc fr=0x00000000 to=0xdb296c08, transport = 0, WantAck=1, HopLim=3 Ch=0x0 Portnum=6 WANTRESP PKI rxtime=1765785959 priority=70)
+[0m[34mDEBUG [0m| 09:05:59 230894 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mPacket History - insert: Reusing slot aged 42110.509s TRACE OLDEST SLOT
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mhandleReceived(REMOTE) (id=0x4b0708bc fr=0x00000000 to=0xdb296c08, transport = 0, WantAck=1, HopLim=3 Ch=0x0 Portnum=6 WANTRESP PKI rxtime=1765785959 priority
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mModule 'Admin' wantsPacket=1
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mReceived Admin from=0x0, id=0x4b0708bc, portnum=6, payloadlen=13
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mHandle admin payload 14
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mClient getting ringtone
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32m*** handleGetRingtone
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mReply prepared by module 'ExternalNotificationModule' of variant: 15
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mSet admin key to  96 09 2c a5 57 74 64 c4
+
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mPartially randomized packet id 997790365
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mAsked module 'Admin' to send a response
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mModule 'routing' wantsPacket=1
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mReceived routing from=0x0, id=0x4b0708bc, portnum=6, payloadlen=13
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mRouting sniffing (id=0x4b0708bc fr=0x00000000 to=0xdb296c08, transport = 0, WantAck=1, HopLim=3 Ch=0x0 Portnum=6 WANTRESP PKI rxtime=1765785959 priority=70)
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mAnother module replied to this message, no need for 2nd ack
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mModule 'routing' considered
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mSend response (id=0x3b79129d fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=4b0708bc rxtime=1765785959 priorit
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mIgnore update from self
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mEnqueued local (id=0x3b79129d fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=4b0708bc rxtime=1765785959 priori
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mRx someone rebroadcasting for us (id=0x3b79129d fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=4b0708bc rxtime
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mDidn't find pending packet
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mPacket History - insert: Reusing slot aged 42077.604s TRACE OLDEST SLOT
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mhandleReceived(REMOTE) (id=0x3b79129d fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=4b0708bc rxtime=176578595
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mModule 'Admin' wantsPacket=1
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mReceived Admin from=0xdb296c08, id=0x3b79129d, portnum=6, payloadlen=13
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mAllow admin response message
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mHandle admin payload 15
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mModule API did not handle admin message 15
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mModule 'Admin' considered
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mModule 'routing' wantsPacket=1
+[0m[32mINFO  [0m| 09:05:59 230894 [Router] [32mReceived routing from=0xdb296c08, id=0x3b79129d, portnum=6, payloadlen=13
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mRouting sniffing (id=0x3b79129d fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=4b0708bc rxtime=1765785959 prio
+[0m[34mDEBUG [0m| 09:05:59 230894 [Router] [34mReceived a ACK for 0x4b0708bc, stopping retransmissions
+[0m[34mDEBUG [0m| 09:05:59 230895 [Router] [34mDelivering rx packet (id=0x3b79129d fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=4b0708bc rxtime=1765785959 
+[0m[34mDEBUG [0m| 09:05:59 230895 [Router] [34mIgnore update from self
+[0m[34mDEBUG [0m| 09:05:59 230895 [Router] [34mForwarding to phone (id=0x3b79129d fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=4b0708bc rxtime=1765785959 p
+[0m[34mDEBUG [0m| 09:05:59 230895 [Router] [34mModule 'routing' considered
+[0m[32mINFO  [0m| 09:05:59 230895 [32mTell client we have new packets 1218
+[0m[34mDEBUG [0m| 09:05:59 230895 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
+[0m[34mDEBUG [0m| 09:05:59 230895 [SerialConsole] [34mFromRadio=STATE_SEND_PACKETS
+[0m[34mDEBUG [0m| 09:05:59 230895 [SerialConsole] [34mphone downloaded packet (id=0x3b79129d fr=0xdb296c08 to=0xdb296c08, transport = 0, WantAck=0, HopLim=3 Ch=0x0 Portnum=6 PKI requestId=4b0708bc rxtime=17657859
+[0m[34mDEBUG [0m| 09:05:59 230895 [Power] [34mBattery: usbPower=1, isCharging=1, batMv=4392, batPct=100

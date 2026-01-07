@@ -1,0 +1,753 @@
+majodi@Majodis-iMac ~ % meshtastic --dest '!fa75f818' --get lora --debug
+DEBUG file:__main__.py common line:938 Not logging serial output
+DEBUG file:serial_interface.py __init__ line:33 ports:['/dev/cu.usbserial-0001']
+DEBUG file:serial_interface.py __init__ line:43 Connecting to /dev/cu.usbserial-0001
+DEBUG file:stream_interface.py __reader line:129 in __reader()
+DEBUG file:stream_interface.py _sendToRadioImpl line:109 Sending: want_config_id: 1973812601
+DEBUG file:stream_interface.py _sendToRadioImpl line:114 sending header:b'\x94\xc3\x00\x06' b:b'\x18\xf9\xfa\x97\xad\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x1a\x0c\x08\x90\x9e\xd1\xd2\r@bX\xf8\xeb\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: my_info {
+  my_node_num: 3662958352
+  reboot_count: 98
+  min_app_version: 30200
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:772 Received myinfo: my_node_num: 3662958352 reboot_count: 98 min_app_version: 30200
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'j\x1d\n\x0e2.2.22.404d0dd\x10\x16\x18\x01 \x01(\x01@\xab\x06H+'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: metadata {
+  firmware_version: "2.2.22.404d0dd"
+  device_state_version: 22
+  canShutdown: true
+  hasWifi: true
+  hasBluetooth: true
+  position_flags: 811
+  hw_model: HELTEC_V3
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:783 Received device metadata: firmware_version: "2.2.22.404d0dd" device_state_version: 22 canShutdown: true hasWifi: true hasBluetooth: true position_flags: 811 hw_model: HELTEC_V3
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'"Y\x08\x90\x9e\xd1\xd2\r\x12&\n\t!da544f10\x12\tBM Majodi\x1a\x04MAPL"\x064\xb7\xdaTO\x10(+\x1a\x11\r\xaaG\xda\x1e\x15\x92\xa6S\x03\x18\x10%~3\xdfe-~3\xdfe2\x11\x08`\x15\xaeG\x85@\x1d\xf9\xc5\x10A%S\x97[='
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: node_info {
+  num: 3662958352
+  user {
+    id: "!da544f10"
+    long_name: "BM Majodi"
+    short_name: "MAPL"
+    macaddr: "4\267\332TO\020"
+    hw_model: HELTEC_V3
+  }
+  position {
+    latitude_i: 517621674
+    longitude_i: 55813778
+    altitude: 16
+    time: 1709126526
+  }
+  last_heard: 1709126526
+  device_metrics {
+    battery_level: 96
+    voltage: 4.165
+    channel_utilization: 9.048333
+    air_util_tx: 0.05361111
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:793 Received nodeinfo: {'num': 3662958352, 'user': {'id': '!da544f10', 'longName': 'BM Majodi', 'shortName': 'MAPL', 'macaddr': 'NLfaVE8Q', 'hwModel': 'HELTEC_V3'}, 'position': {'latitudeI': 517621674, 'longitudeI': 55813778, 'altitude': 16, 'time': 1709126526, 'latitude': 51.762167399999996, 'longitude': 5.581377799999999}, 'lastHeard': 1709126526, 'deviceMetrics': {'batteryLevel': 96, 'voltage': 4.165, 'channelUtilization': 9.048333, 'airUtilTx': 0.05361111}}
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'"b\x08\x84\xed\xd7\xd3\x0f\x12*\n\t!fa75f684\x12\x0bBM (R) Mike\x1a\x04BMR1"\x06\xf4\x12\xfau\xf6\x84(,8\x03\x1a\x11\r\xcbJ\xda\x1e\x15\xbd\xc7S\x03\x187%H3\xdfe%\x00\x00 @-U3\xdfe2\x11\x08L\x15\x8d\x97~@\x1d~\xb1\xa8@%\xbd-k?'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: node_info {
+  num: 4202034820
+  user {
+    id: "!fa75f684"
+    long_name: "BM (R) Mike"
+    short_name: "BMR1"
+    macaddr: "\364\022\372u\366\204"
+    hw_model: HELTEC_WSL_V3
+    role: ROUTER_CLIENT
+  }
+  position {
+    latitude_i: 517622475
+    longitude_i: 55822269
+    altitude: 55
+    time: 1709126472
+  }
+  snr: 2.5
+  last_heard: 1709126485
+  device_metrics {
+    battery_level: 76
+    voltage: 3.978
+    channel_utilization: 5.2716665
+    air_util_tx: 0.91866666
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:793 Received nodeinfo: {'num': 4202034820, 'user': {'id': '!fa75f684', 'longName': 'BM (R) Mike', 'shortName': 'BMR1', 'macaddr': '9BL6dfaE', 'hwModel': 'HELTEC_WSL_V3', 'role': 'ROUTER_CLIENT'}, 'position': {'latitudeI': 517622475, 'longitudeI': 55822269, 'altitude': 55, 'time': 1709126472, 'latitude': 51.7622475, 'longitude': 5.582226899999999}, 'snr': 2.5, 'lastHeard': 1709126485, 'deviceMetrics': {'batteryLevel': 76, 'voltage': 3.978, 'channelUtilization': 5.2716665, 'airUtilTx': 0.91866666}}
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'"d\x08\x98\xf0\xd7\xd3\x0f\x12,\n\t!fa75f818\x12\rBM (R) Majodi\x1a\x04BMR2"\x06\xf4\x12\xfau\xf8\x18(,8\x03\x1a\x11\r\x9cI\xda\x1e\x15T\xa8S\x03\x18\x08%u2\xdfe%\x00\x00\xe8@-\x952\xdfe2\x11\x08Y\x15d;\x83@\x1d\x99\x99\xa9@%\xa0\xad\x81?'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: node_info {
+  num: 4202035224
+  user {
+    id: "!fa75f818"
+    long_name: "BM (R) Majodi"
+    short_name: "BMR2"
+    macaddr: "\364\022\372u\370\030"
+    hw_model: HELTEC_WSL_V3
+    role: ROUTER_CLIENT
+  }
+  position {
+    latitude_i: 517622172
+    longitude_i: 55814228
+    altitude: 8
+    time: 1709126261
+  }
+  snr: 7.25
+  last_heard: 1709126293
+  device_metrics {
+    battery_level: 89
+    voltage: 4.101
+    channel_utilization: 5.2999997
+    air_util_tx: 1.0131111
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:793 Received nodeinfo: {'num': 4202035224, 'user': {'id': '!fa75f818', 'longName': 'BM (R) Majodi', 'shortName': 'BMR2', 'macaddr': '9BL6dfgY', 'hwModel': 'HELTEC_WSL_V3', 'role': 'ROUTER_CLIENT'}, 'position': {'latitudeI': 517622172, 'longitudeI': 55814228, 'altitude': 8, 'time': 1709126261, 'latitude': 51.762217199999995, 'longitude': 5.5814227999999995}, 'snr': 7.25, 'lastHeard': 1709126293, 'deviceMetrics': {'batteryLevel': 89, 'voltage': 4.101, 'channelUtilization': 5.2999997, 'airUtilTx': 1.0131111}}
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'",\x08\x84\xa5\xd1\xd2\r\x12$\n\t!da545284\x12\x07BM Mike\x1a\x04MIPL"\x064\xb7\xdaTR\x84(+'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: node_info {
+  num: 3662959236
+  user {
+    id: "!da545284"
+    long_name: "BM Mike"
+    short_name: "MIPL"
+    macaddr: "4\267\332TR\204"
+    hw_model: HELTEC_V3
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:791 Node without position
+DEBUG file:mesh_interface.py _handleFromRadio line:793 Received nodeinfo: {'num': 3662959236, 'user': {'id': '!da545284', 'longName': 'BM Mike', 'shortName': 'MIPL', 'macaddr': 'NLfaVFKE', 'hwModel': 'HELTEC_V3'}}
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x07\x12\x03\x12\x01\x01\x18\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: channel {
+  settings {
+    psk: "\001"
+  }
+  role: PRIMARY
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R/\x08\x01\x12)\x12 \xae\x03anr\x8b\x84\xeeHUJ\x96oB\xd5\xe4E\xd1H\xe7\x81\xbe\xd1Qm\x80\xb7(\x02nj\x81\x1a\x05admin\x18\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: channel {
+  index: 1
+  settings {
+    psk: "\256\003anr\213\204\356HUJ\226oB\325\344E\321H\347\201\276\321Qm\200\267(\002nj\201"
+    name: "admin"
+  }
+  role: SECONDARY
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x02\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: channel {
+  index: 2
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x03\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: channel {
+  index: 3
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x04\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: channel {
+  index: 4
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x05\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: channel {
+  index: 5
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x06\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: channel {
+  index: 6
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x07\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: channel {
+  index: 7
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\t\n\x07\x10\x01(\x078\xb0T'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: config {
+  device {
+    serial_enabled: true
+    buzzer_gpio: 7
+    node_info_broadcast_secs: 10800
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x14\x12\x12\x08\x84\x07\x10\x01\x18\x01(x8\xab\x06PdX\x1eh\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: config {
+  position {
+    position_broadcast_secs: 900
+    position_broadcast_smart_enabled: true
+    fixed_position: true
+    gps_update_interval: 120
+    position_flags: 811
+    broadcast_smart_minimum_distance: 100
+    broadcast_smart_minimum_interval_secs: 30
+    gps_mode: NOT_PRESENT
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x0f\x1a\r <0\xff\xff\xff\xff\x0f8\xac\x02@\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: config {
+  power {
+    wait_bluetooth_secs: 60
+    sds_secs: 4294967295
+    ls_secs: 300
+    min_wake_secs: 10
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x12"\x10*\x0e0.pool.ntp.org'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: config {
+  network {
+    ntp_server: "0.pool.ntp.org"
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x05*\x03\x08\xd8\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: config {
+  display {
+    screen_on_secs: 600
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x0e2\x0c\x08\x018\x03@\x03H\x01P\x1bh\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: config {
+  lora {
+    use_preset: true
+    region: EU_868
+    hop_limit: 3
+    tx_enabled: true
+    tx_power: 27
+    sx126x_rx_boosted_gain: true
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x08:\x06\x08\x01\x18\xc0\xc4\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: config {
+  bluetooth {
+    enabled: true
+    fixed_pin: 123456
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J:\n8\x12\x13mqtt.meshtastic.org\x1a\x07meshdev"\nlarge4cats(\x01B\nmsh/EU_868'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  mqtt {
+    address: "mqtt.meshtastic.org"
+    username: "meshdev"
+    password: "large4cats"
+    encryption_enabled: true
+    root: "msh/EU_868"
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  serial {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x10\x1a\x0e\x08\x01\x10\xe0\xd4\x038\x01H\x07X\x01p\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  external_notification {
+    enabled: true
+    output_ms: 60000
+    use_pwm: true
+    output_buzzer: 7
+    alert_message_buzzer: true
+    nag_timeout: 2
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02"\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  store_forward {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02*\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  range_test {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x0b2\t\x08\x84\x07\x10\x84\x078\x84\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  telemetry {
+    device_update_interval: 900
+    environment_update_interval: 900
+    air_quality_interval: 900
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02:\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  canned_message {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02B\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  audio {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02J\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  remote_hardware {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x05R\x03\x10\x84\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  neighbor_info {
+    update_interval: 900
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\nZ\x08\x10\n\x18T O(\x10'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  ambient_lighting {
+    current: 10
+    red: 84
+    green: 79
+    blue: 16
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x06b\x04\x10-8\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  detection_sensor {
+    minimum_broadcast_secs: 45
+    detection_triggered_high: true
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02j\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: moduleConfig {
+  paxcounter {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'8\xf9\xfa\x97\xad\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: config_complete_id: 1973812601
+
+DEBUG file:mesh_interface.py _handleFromRadio line:807 Config complete ID 1973812601
+DEBUG file:node.py requestChannels line:77 requestChannels for nodeNum:3662958352
+DEBUG file:node.py _requestChannel line:742 Requesting channel 0
+DEBUG file:node.py _sendAdmin line:767 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:309 Serializing protobuf as data: get_channel_request: 1
+DEBUG file:mesh_interface.py sendData line:312 len(data): 2
+DEBUG file:mesh_interface.py sendData line:313 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 237
+DEBUG file:mesh_interface.py _sendPacket line:535 Sending packet: to: 3662958352 decoded { portnum: ADMIN_APP payload: "\010\001" want_response: true } id: 2109762799 hop_limit: 3
+DEBUG file:stream_interface.py _sendToRadioImpl line:109 Sending: packet { to: 3662958352 decoded { portnum: ADMIN_APP payload: "\010\001" want_response: true } id: 2109762799 hop_limit: 3 }
+DEBUG file:stream_interface.py _sendToRadioImpl line:114 sending header:b'\x94\xc3\x00\x18' b:b'\n\x16\x15\x10OT\xda"\x08\x08\x06\x12\x02\x08\x01\x18\x015\xefl\xc0}H\x03'
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cef got acked under us
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xa4\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943908
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f24 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f24
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xef\xd9\x81\xee\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 2109762799
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 7dc06cef 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 7dc06cef
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xa5\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943909
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f25 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f25
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12,\r\x10OT\xda\x15\x10OT\xda"\x12\x08\x06\x12\t\x12\x07\x12\x03\x12\x01\x01\x18\x015\xefl\xc0}5%_qJ=~3\xdfeH\x03XF'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: packet {
+  from: 3662958352
+  to: 3662958352
+  decoded {
+    portnum: ADMIN_APP
+    payload: "\022\007\022\003\022\001\001\030\001"
+    request_id: 2109762799
+  }
+  id: 1248943909
+  rx_time: 1709126526
+  hop_limit: 3
+  priority: RELIABLE
+}
+
+DEBUG file:node.py onResponseRequestChannel line:667 onResponseRequestChannel() p:{'from': 3662958352, 'to': 3662958352, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'\x12\x07\x12\x03\x12\x01\x01\x18\x01', 'requestId': 2109762799, 'admin': {'getChannelResponse': {'settings': {'psk': 'AQ=='}, 'role': 'PRIMARY'}, 'raw': get_channel_response {
+  settings {
+    psk: "\001"
+  }
+  role: PRIMARY
+}
+}}, 'id': 1248943909, 'rxTime': 1709126526, 'hopLimit': 3, 'priority': 'RELIABLE', 'raw': from: 3662958352
+to: 3662958352
+decoded {
+  portnum: ADMIN_APP
+  payload: "\022\007\022\003\022\001\001\030\001"
+  request_id: 2109762799
+}
+id: 1248943909
+rx_time: 1709126526
+hop_limit: 3
+priority: RELIABLE
+, 'fromId': '!da544f10', 'toId': '!da544f10'}
+DEBUG file:node.py onResponseRequestChannel line:688 Received channel settings { psk: "\001" } role: PRIMARY
+DEBUG file:node.py _requestChannel line:742 Requesting channel 1
+DEBUG file:node.py _sendAdmin line:767 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:309 Serializing protobuf as data: get_channel_request: 2
+DEBUG file:mesh_interface.py sendData line:312 len(data): 2
+DEBUG file:mesh_interface.py sendData line:313 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 237
+DEBUG file:mesh_interface.py _sendPacket line:535 Sending packet: to: 3662958352 decoded { portnum: ADMIN_APP payload: "\010\002" want_response: true } id: 2109762800 hop_limit: 3
+DEBUG file:stream_interface.py _sendToRadioImpl line:109 Sending: packet { to: 3662958352 decoded { portnum: ADMIN_APP payload: "\010\002" want_response: true } id: 2109762800 hop_limit: 3 }
+DEBUG file:stream_interface.py _sendToRadioImpl line:114 sending header:b'\x94\xc3\x00\x18' b:b'\n\x16\x15\x10OT\xda"\x08\x08\x06\x12\x02\x08\x02\x18\x015\xf0l\xc0}H\x03'
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f24 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cef got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f25 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cf0 got acked under us
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1038 Publishing meshtastic.receive.admin: packet={'from': 3662958352, 'to': 3662958352, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'\x12\x07\x12\x03\x12\x01\x01\x18\x01', 'requestId': 2109762799, 'admin': {'getChannelResponse': {'settings': {'psk': 'AQ=='}, 'role': 'PRIMARY'}, 'raw': get_channel_response { settings { psk: "\001" } role: PRIMARY } }}, 'id': 1248943909, 'rxTime': 1709126526, 'hopLimit': 3, 'priority': 'RELIABLE', 'raw': from: 3662958352 to: 3662958352 decoded { portnum: ADMIN_APP payload: "\022\007\022\003\022\001\001\030\001" request_id: 2109762799 } id: 1248943909 rx_time: 1709126526 hop_limit: 3 priority: RELIABLE , 'fromId': '!da544f10', 'toId': '!da544f10'} 
+DEBUG file:__main__.py onReceive line:32 in onReceive() d:{'portnum': 'ADMIN_APP', 'payload': b'\x12\x07\x12\x03\x12\x01\x01\x18\x01', 'requestId': 2109762799, 'admin': {'getChannelResponse': {'settings': {'psk': 'AQ=='}, 'role': 'PRIMARY'}, 'raw': get_channel_response {
+  settings {
+    psk: "\001"
+  }
+  role: PRIMARY
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xf0\xd9\x81\xee\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 2109762800
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 7dc06cf0 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 7dc06cf0
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xa6\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943910
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f26 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f26
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12T\r\x10OT\xda\x15\x10OT\xda":\x08\x06\x121\x12/\x08\x01\x12)\x12 \xae\x03anr\x8b\x84\xeeHUJ\x96oB\xd5\xe4E\xd1H\xe7\x81\xbe\xd1Qm\x80\xb7(\x02nj\x81\x1a\x05admin\x18\x025\xf0l\xc0}5&_qJ=~3\xdfeH\x03XF'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: packet {
+  from: 3662958352
+  to: 3662958352
+  decoded {
+    portnum: ADMIN_APP
+    payload: "\022/\010\001\022)\022 \256\003anr\213\204\356HUJ\226oB\325\344E\321H\347\201\276\321Qm\200\267(\002nj\201\032\005admin\030\002"
+    request_id: 2109762800
+  }
+  id: 1248943910
+  rx_time: 1709126526
+  hop_limit: 3
+  priority: RELIABLE
+}
+
+DEBUG file:node.py onResponseRequestChannel line:667 onResponseRequestChannel() p:{'from': 3662958352, 'to': 3662958352, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'\x12/\x08\x01\x12)\x12 \xae\x03anr\x8b\x84\xeeHUJ\x96oB\xd5\xe4E\xd1H\xe7\x81\xbe\xd1Qm\x80\xb7(\x02nj\x81\x1a\x05admin\x18\x02', 'requestId': 2109762800, 'admin': {'getChannelResponse': {'index': 1, 'settings': {'psk': 'rgNhbnKLhO5IVUqWb0LV5EXRSOeBvtFRbYC3KAJuaoE=', 'name': 'admin'}, 'role': 'SECONDARY'}, 'raw': get_channel_response {
+  index: 1
+  settings {
+    psk: "\256\003anr\213\204\356HUJ\226oB\325\344E\321H\347\201\276\321Qm\200\267(\002nj\201"
+    name: "admin"
+  }
+  role: SECONDARY
+}
+}}, 'id': 1248943910, 'rxTime': 1709126526, 'hopLimit': 3, 'priority': 'RELIABLE', 'raw': from: 3662958352
+to: 3662958352
+decoded {
+  portnum: ADMIN_APP
+  payload: "\022/\010\001\022)\022 \256\003anr\213\204\356HUJ\226oB\325\344E\321H\347\201\276\321Qm\200\267(\002nj\201\032\005admin\030\002"
+  request_id: 2109762800
+}
+id: 1248943910
+rx_time: 1709126526
+hop_limit: 3
+priority: RELIABLE
+, 'fromId': '!da544f10', 'toId': '!da544f10'}
+DEBUG file:node.py onResponseRequestChannel line:688 Received channel index: 1 settings { psk: "\256\003anr\213\204\356HUJ\226oB\325\344E\321H\347\201\276\321Qm\200\267(\002nj\201" name: "admin" } role: SECONDARY
+DEBUG file:node.py _requestChannel line:742 Requesting channel 2
+DEBUG file:node.py _sendAdmin line:767 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:309 Serializing protobuf as data: get_channel_request: 3
+DEBUG file:mesh_interface.py sendData line:312 len(data): 2
+DEBUG file:mesh_interface.py sendData line:313 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 237
+DEBUG file:mesh_interface.py _sendPacket line:535 Sending packet: to: 3662958352 decoded { portnum: ADMIN_APP payload: "\010\003" want_response: true } id: 2109762801 hop_limit: 3
+DEBUG file:stream_interface.py _sendToRadioImpl line:109 Sending: packet { to: 3662958352 decoded { portnum: ADMIN_APP payload: "\010\003" want_response: true } id: 2109762801 hop_limit: 3 }
+DEBUG file:stream_interface.py _sendToRadioImpl line:114 sending header:b'\x94\xc3\x00\x18' b:b'\n\x16\x15\x10OT\xda"\x08\x08\x06\x12\x02\x08\x03\x18\x015\xf1l\xc0}H\x03'
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cf0 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f26 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cf1 got acked under us
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1038 Publishing meshtastic.receive.admin: packet={'from': 3662958352, 'to': 3662958352, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'\x12/\x08\x01\x12)\x12 \xae\x03anr\x8b\x84\xeeHUJ\x96oB\xd5\xe4E\xd1H\xe7\x81\xbe\xd1Qm\x80\xb7(\x02nj\x81\x1a\x05admin\x18\x02', 'requestId': 2109762800, 'admin': {'getChannelResponse': {'index': 1, 'settings': {'psk': 'rgNhbnKLhO5IVUqWb0LV5EXRSOeBvtFRbYC3KAJuaoE=', 'name': 'admin'}, 'role': 'SECONDARY'}, 'raw': get_channel_response { index: 1 settings { psk: "\256\003anr\213\204\356HUJ\226oB\325\344E\321H\347\201\276\321Qm\200\267(\002nj\201" name: "admin" } role: SECONDARY } }}, 'id': 1248943910, 'rxTime': 1709126526, 'hopLimit': 3, 'priority': 'RELIABLE', 'raw': from: 3662958352 to: 3662958352 decoded { portnum: ADMIN_APP payload: "\022/\010\001\022)\022 \256\003anr\213\204\356HUJ\226oB\325\344E\321H\347\201\276\321Qm\200\267(\002nj\201\032\005admin\030\002" request_id: 2109762800 } id: 1248943910 rx_time: 1709126526 hop_limit: 3 priority: RELIABLE , 'fromId': '!da544f10', 'toId': '!da544f10'} 
+DEBUG file:__main__.py onReceive line:32 in onReceive() d:{'portnum': 'ADMIN_APP', 'payload': b'\x12/\x08\x01\x12)\x12 \xae\x03anr\x8b\x84\xeeHUJ\x96oB\xd5\xe4E\xd1H\xe7\x81\xbe\xd1Qm\x80\xb7(\x02nj\x81\x1a\x05admin\x18\x02', 'requestId': 2109762800, 'admin': {'getChannelResponse': {'index': 1, 'settings': {'psk': 'rgNhbnKLhO5IVUqWb0LV5EXRSOeBvtFRbYC3KAJuaoE=', 'name': 'admin'}, 'role': 'SECONDARY'}, 'raw': get_channel_response {
+  index: 1
+  settings {
+    psk: "\256\003anr\213\204\356HUJ\226oB\325\344E\321H\347\201\276\321Qm\200\267(\002nj\201"
+    name: "admin"
+  }
+  role: SECONDARY
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xf1\xd9\x81\xee\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 2109762801
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 7dc06cf1 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 7dc06cf1
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xa7\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943911
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f27 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f27
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12)\r\x10OT\xda\x15\x10OT\xda"\x0f\x08\x06\x12\x06\x12\x04\x08\x02\x12\x005\xf1l\xc0}5\'_qJ=~3\xdfeH\x03XF'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: packet {
+  from: 3662958352
+  to: 3662958352
+  decoded {
+    portnum: ADMIN_APP
+    payload: "\022\004\010\002\022\000"
+    request_id: 2109762801
+  }
+  id: 1248943911
+  rx_time: 1709126526
+  hop_limit: 3
+  priority: RELIABLE
+}
+
+DEBUG file:node.py onResponseRequestChannel line:667 onResponseRequestChannel() p:{'from': 3662958352, 'to': 3662958352, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'\x12\x04\x08\x02\x12\x00', 'requestId': 2109762801, 'admin': {'getChannelResponse': {'index': 2, 'settings': {}}, 'raw': get_channel_response {
+  index: 2
+  settings {
+  }
+}
+}}, 'id': 1248943911, 'rxTime': 1709126526, 'hopLimit': 3, 'priority': 'RELIABLE', 'raw': from: 3662958352
+to: 3662958352
+decoded {
+  portnum: ADMIN_APP
+  payload: "\022\004\010\002\022\000"
+  request_id: 2109762801
+}
+id: 1248943911
+rx_time: 1709126526
+hop_limit: 3
+priority: RELIABLE
+, 'fromId': '!da544f10', 'toId': '!da544f10'}
+DEBUG file:node.py onResponseRequestChannel line:688 Received channel index: 2 settings { }
+DEBUG file:node.py onResponseRequestChannel line:701 Finished downloading channels
+DEBUG file:mesh_interface.py callback line:627 Sending heartbeat, interval 150.0
+Connected to radio
+DEBUG file:stream_interface.py _sendToRadioImpl line:109 Sending: 
+DEBUG file:stream_interface.py _sendToRadioImpl line:114 sending header:b'\x94\xc3\x00\x00' b:b''
+DEBUG file:mesh_interface.py sendPosition line:373 p.time:1709126526
+DEBUG file:mesh_interface.py sendData line:309 Serializing protobuf as data: time: 1709126526
+DEBUG file:mesh_interface.py sendData line:312 len(data): 5
+DEBUG file:mesh_interface.py sendData line:313 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 237
+DEBUG file:mesh_interface.py _sendPacket line:535 Sending packet: to: 4294967295 decoded { portnum: POSITION_APP payload: "%~3\337e" } id: 2109762802 hop_limit: 3
+DEBUG file:stream_interface.py _sendToRadioImpl line:109 Sending: packet { to: 4294967295 decoded { portnum: POSITION_APP payload: "%~3\337e" } id: 2109762802 hop_limit: 3 }
+DEBUG file:stream_interface.py _sendToRadioImpl line:114 sending header:b'\x94\xc3\x00\x19' b:b'\n\x17\x15\xff\xff\xff\xff"\t\x08\x03\x12\x05%~3\xdfe5\xf2l\xc0}H\x03'
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1038 Publishing meshtastic.receive.admin: packet={'from': 3662958352, 'to': 3662958352, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'\x12\x04\x08\x02\x12\x00', 'requestId': 2109762801, 'admin': {'getChannelResponse': {'index': 2, 'settings': {}}, 'raw': get_channel_response { index: 2 settings { } } }}, 'id': 1248943911, 'rxTime': 1709126526, 'hopLimit': 3, 'priority': 'RELIABLE', 'raw': from: 3662958352 to: 3662958352 decoded { portnum: ADMIN_APP payload: "\022\004\010\002\022\000" request_id: 2109762801 } id: 1248943911 rx_time: 1709126526 hop_limit: 3 priority: RELIABLE , 'fromId': '!da544f10', 'toId': '!da544f10'} 
+DEBUG file:__main__.py onReceive line:32 in onReceive() d:{'portnum': 'ADMIN_APP', 'payload': b'\x12\x04\x08\x02\x12\x00', 'requestId': 2109762801, 'admin': {'getChannelResponse': {'index': 2, 'settings': {}}, 'raw': get_channel_response {
+  index: 2
+  settings {
+  }
+}
+}}
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cf1 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f27 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cf2 got acked under us
+DEBUG file:__main__.py getPref line:72 snake_name:lora camel_name:lora
+DEBUG file:__main__.py getPref line:73 use camel:False
+Requesting current config from remote node (this can take a while).
+DEBUG file:node.py _sendAdmin line:767 adminIndex:1
+DEBUG file:mesh_interface.py sendData line:309 Serializing protobuf as data: get_config_request: LORA_CONFIG
+DEBUG file:mesh_interface.py sendData line:312 len(data): 2
+DEBUG file:mesh_interface.py sendData line:313 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 237
+DEBUG file:mesh_interface.py _sendPacket line:535 Sending packet: to: 4202035224 channel: 1 decoded { portnum: ADMIN_APP payload: "(\005" want_response: true } id: 2109762803 hop_limit: 3
+DEBUG file:stream_interface.py _sendToRadioImpl line:109 Sending: packet { to: 4202035224 channel: 1 decoded { portnum: ADMIN_APP payload: "(\005" want_response: true } id: 2109762803 hop_limit: 3 }
+DEBUG file:stream_interface.py _sendToRadioImpl line:114 sending header:b'\x94\xc3\x00\x1a' b:b'\n\x18\x15\x18\xf8u\xfa\x18\x01"\x08\x08\x06\x12\x02(\x05\x18\x015\xf3l\xc0}H\x03'
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x0f\x18\x10 \xf2\xd9\x81\xee\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 15
+  maxlen: 16
+  mesh_packet_id: 2109762802
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 15 of 16, res = 0, id = 7dc06cf2 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 7dc06cf2
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x0e\x18\x10 \xf3\xd9\x81\xee\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 14
+  maxlen: 16
+  mesh_packet_id: 2109762803
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 14 of 16, res = 0, id = 7dc06cf3 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 7dc06cf3
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cf3 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 7dc06cf2 got acked under us
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x126\r\x10OT\xda\x15\xff\xff\xff\xff"\x1c\x08C\x12\x18\r\x803\xdfe\x12\x11\x08`\x15\xaeG\x85@\x1d\x9a\x99\xa1@%f\x1a\xdc=5(_qJ=\x803\xdfeH\x03X\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: packet {
+  from: 3662958352
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\r\2003\337e\022\021\010`\025\256G\205@\035\232\231\241@%f\032\334="
+  }
+  id: 1248943912
+  rx_time: 1709126528
+  hop_limit: 3
+  priority: MIN
+}
+
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1038 Publishing meshtastic.receive.telemetry: packet={'from': 3662958352, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\x803\xdfe\x12\x11\x08`\x15\xaeG\x85@\x1d\x9a\x99\xa1@%f\x1a\xdc=', 'telemetry': {'time': 1709126528, 'deviceMetrics': {'batteryLevel': 96, 'voltage': 4.165, 'channelUtilization': 5.05, 'airUtilTx': 0.107472226}, 'raw': time: 1709126528 device_metrics { battery_level: 96 voltage: 4.165 channel_utilization: 5.05 air_util_tx: 0.107472226 } }}, 'id': 1248943912, 'rxTime': 1709126528, 'hopLimit': 3, 'priority': 'MIN', 'raw': from: 3662958352 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\r\2003\337e\022\021\010`\025\256G\205@\035\232\231\241@%f\032\334=" } id: 1248943912 rx_time: 1709126528 hop_limit: 3 priority: MIN , 'fromId': '!da544f10', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:32 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\r\x803\xdfe\x12\x11\x08`\x15\xaeG\x85@\x1d\x9a\x99\xa1@%f\x1a\xdc=', 'telemetry': {'time': 1709126528, 'deviceMetrics': {'batteryLevel': 96, 'voltage': 4.165, 'channelUtilization': 5.05, 'airUtilTx': 0.107472226}, 'raw': time: 1709126528
+device_metrics {
+  battery_level: 96
+  voltage: 4.165
+  channel_utilization: 5.05
+  air_util_tx: 0.107472226
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xa9\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943913
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f29 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f29
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xaa\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943914
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f2a 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f2a
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xaf\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943919
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f2f 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f2f
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xb1\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943921
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f31 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f31
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xb5\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943925
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f35 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f35
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xb6\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943926
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f36 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f36
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xb7\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943927
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f37 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f37
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xbc\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943932
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f3c 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f3c
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xbf\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943935
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f3f 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f3f
+DEBUG file:mesh_interface.py _handleFromRadio line:764 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xc7\xbe\xc5\xd3\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:768 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 1248943943
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:740 TX QUEUE free 16 of 16, res = 0, id = 4a715f47 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:752 Reply for unexpected packet ID 4a715f47
+Aborting due to: Timed out waiting for an acknowledgment
+DEBUG file:serial_interface.py close line:71 Closing Serial stream
+DEBUG file:stream_interface.py close line:119 Closing stream
+DEBUG file:stream_interface.py _sendToRadioImpl line:109 Sending: disconnect: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:114 sending header:b'\x94\xc3\x00\x02' b:b' \x01'
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f29 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f2a got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f2f got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f31 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f35 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f36 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f37 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f3c got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f3f got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:721 packet 4a715f47 got acked under us
+DEBUG file:stream_interface.py __reader line:202 reader is exiting
+DEBUG file:stream_interface.py _disconnected line:80 Closing our port
+majodi@Majodis-iMac ~ % 

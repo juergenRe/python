@@ -1,0 +1,822 @@
+C:\Users\Juergen\Documents\Projects\Meshtastic\Python-CLI\.venv\Scripts\python.exe -X pycache_prefix=C:\Users\Juergen\AppData\Local\JetBrains\PyCharmCE2025.2\cpython-cache "C:/Program Files/JetBrains/PyCharm Community Edition 2021.3.1/plugins/python-ce/helpers/pydev/pydevd.py" --multiprocess --qt-support=auto --client 127.0.0.1 --port 50907 --file C:\Users\Juergen\Documents\Projects\Meshtastic\Python-CLI\meshtastic\__main__.py -s COM9 --request-telemetry environment --dest !c5db8a75 --debug 
+Connected to: <socket.socket fd=952, family=2, type=1, proto=0, laddr=('127.0.0.1', 50908), raddr=('127.0.0.1', 50907)>.
+Connected to pydev debugger (build 252.28238.29)
+DEBUG file:__main__.py common line:1352 Not logging serial output
+DEBUG file:serial_interface.py __init__ line:55 Connecting to COM9
+DEBUG file:stream_interface.py __reader line:160 in __reader()
+DEBUG file:stream_interface.py _sendToRadioImpl line:123 Sending: want_config_id: 2791633638
+DEBUG file:stream_interface.py _sendToRadioImpl line:128 sending header:b'\x94\xc3\x00\x06' b:b'\x18\xe6\xe5\x93\xb3\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x1a*\x08\x88\xd8\xa5\xd9\r@\xf4\x05X\xf8\xeb\x01b\x10\xb8\to\x8e\x97\xc0\x03\xbf\x9e\xb5\x03\xb1\x00U7Wj\theltec-v3'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: my_info {
+  my_node_num: 3676924936
+  reboot_count: 756
+  min_app_version: 30200
+  device_id: "\270\to\216\227\300\003\277\236\265\003\261\000U7W"
+  pio_env: "heltec-v3"
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1312 Received myinfo: my_node_num: 3676924936 reboot_count: 756 min_app_version: 30200 device_id: "\270\to\216\227\300\003\277\236\265\003\261\000U7W" pio_env: "heltec-v3"
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x8a\x01\x05\x10\x99\x01\x18\x1e'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: deviceuiConfig {
+  screen_brightness: 153
+  screen_timeout: 30
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1457 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'"Z\x08\x88\xd8\xa5\xd9\r\x12N\n\t!db296c08\x12\x0fMeshtastic 6c08\x1a\x046c08"\x06\x10Q\xdb)l\x08(+B \x9f+\x08H\x9b\x0f\x19\xc4\x9b\x1e\xb7\x89jq\x1a\xcc\xf5u\xe6\xd2\xa7\xa7\xf9c\xfeX\xb6\xfc\x95Hd&\x1a\x00P\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: node_info {
+  num: 3676924936
+  user {
+    id: "!db296c08"
+    long_name: "Meshtastic 6c08"
+    short_name: "6c08"
+    macaddr: "\020Q\333)l\010"
+    hw_model: HELTEC_V3
+    public_key: "\237+\010H\233\017\031\304\233\036\267\211jq\032\314\365u\346\322\247\247\371c\376X\266\374\225Hd&"
+  }
+  position {
+  }
+  is_favorite: true
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1319 Received nodeinfo: {'num': 3676924936, 'user': {'id': '!db296c08', 'longName': 'Meshtastic 6c08', 'shortName': '6c08', 'macaddr': 'EFHbKWwI', 'hwModel': 'HELTEC_V3', 'publicKey': 'nysISJsPGcSbHreJanEazPV15tKnp/lj/li2/JVIZCY='}, 'position': {}, 'isFavorite': True}
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'j"\n\x0e2.6.11.60ec05e\x10\x18\x18\x01 \x01(\x01@\xab\x06H+X\x01`\x80\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: metadata {
+  firmware_version: "2.6.11.60ec05e"
+  device_state_version: 24
+  canShutdown: true
+  hasWifi: true
+  hasBluetooth: true
+  position_flags: 811
+  hw_model: HELTEC_V3
+  hasPKC: true
+  excluded_modules: 1280
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1316 Received device metadata: firmware_version: "2.6.11.60ec05e" device_state_version: 24 canShutdown: true hasWifi: true hasBluetooth: true position_flags: 811 hw_model: HELTEC_V3 hasPKC: true excluded_modules: 1280
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x0b\x12\x07\x12\x01\x01:\x02\x08\r\x18\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: channel {
+  settings {
+    psk: "\001"
+    module_settings {
+      position_precision: 13
+    }
+  }
+  role: PRIMARY
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R5\x08\x01\x12/\x12 \xdf\xa5\x16\x9509\x865\xc8\x1d\x8c)K\x8a2\x11?4a@\xe1\xe5p\xa1\x05\xbf\x0c\x89\xc2E\x90\xd3\x1a\x03TMD(\x010\x01:\x02\x08\r\x18\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: channel {
+  index: 1
+  settings {
+    psk: "\337\245\026\22509\2065\310\035\214)K\2122\021?4a@\341\345p\241\005\277\014\211\302E\220\323"
+    name: "TMD"
+    uplink_enabled: true
+    downlink_enabled: true
+    module_settings {
+      position_precision: 13
+    }
+  }
+  role: SECONDARY
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x02\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: channel {
+  index: 2
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x03\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: channel {
+  index: 3
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x04\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: channel {
+  index: 4
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x05\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: channel {
+  index: 5
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x06\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: channel {
+  index: 6
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x07\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: channel {
+  index: 7
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*&\n$\x10\x010\x028\xb0TZ\x19GMT-1GMT,M3.5.0,M10.4.0/3`\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  device {
+    serial_enabled: true
+    rebroadcast_mode: LOCAL_ONLY
+    node_info_broadcast_secs: 10800
+    tzdef: "GMT-1GMT,M3.5.0,M10.4.0/3"
+    led_heartbeat_disabled: true
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x14\x12\x12\x08\x90\x1c(\x90\x1c0\x84\x078\xab\x06PdX\x1eh\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  position {
+    position_broadcast_secs: 3600
+    gps_update_interval: 3600
+    gps_attempt_time: 900
+    position_flags: 811
+    broadcast_smart_minimum_distance: 100
+    broadcast_smart_minimum_interval_secs: 30
+    gps_mode: NOT_PRESENT
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x0f\x1a\r <0\xff\xff\xff\xff\x0f8\xac\x02@\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  power {
+    wait_bluetooth_secs: 60
+    sds_secs: 4294967295
+    ls_secs: 300
+    min_wake_secs: 10
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*;"9\x08\x01\x1a\x04ANet"\x14v0o34ieYK4ELf_y-3Gx8*\x17meshtastic.pool.ntp.orgP\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  network {
+    wifi_enabled: true
+    wifi_ssid: "ANet"
+    wifi_psk: "v0o34ieYK4ELf_y-3Gx8"
+    ntp_server: "meshtastic.pool.ntp.org"
+    enabled_protocols: 1
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x08*\x06\x08<\x18\x0f@\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  display {
+    screen_on_secs: 60
+    auto_screen_carousel_secs: 15
+    displaymode: INVERTED
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x112\x0f\x08\x018\x03@\x03H\x01P\x1bh\x01\xc0\x06\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  lora {
+    use_preset: true
+    region: EU_868
+    hop_limit: 3
+    tx_enabled: true
+    tx_power: 27
+    sx126x_rx_boosted_gain: true
+    ignore_mqtt: true
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x08:\x06\x10\x01\x18\xc0\xc4\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  bluetooth {
+    mode: FIXED_PIN
+    fixed_pin: 123456
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*HBF\n \x9f+\x08H\x9b\x0f\x19\xc4\x9b\x1e\xb7\x89jq\x1a\xcc\xf5u\xe6\xd2\xa7\xa7\xf9c\xfeX\xb6\xfc\x95Hd&\x12 @\x1b[ \xb1\xc7\x86\x8a\xb3\xa6.G\xb1>\xba\xfdA\xa1\xa6\xe4\xf8\xdb\xd8\xad\xddE\xb41%O\x11Y(\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  security {
+    public_key: "\237+\010H\233\017\031\304\233\036\267\211jq\032\314\365u\346\322\247\247\371c\376X\266\374\225Hd&"
+    private_key: "@\033[ \261\307\206\212\263\246.G\261>\272\375A\241\246\344\370\333\330\255\335E\2641%O\021Y"
+    serial_enabled: true
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x02J\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  sessionkey {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x02R\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config {
+  device_ui {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J:\n8\x12\x13mqtt.meshtastic.org\x1a\x07meshdev"\nlarge4cats(\x01B\nmsh/EU_868'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  mqtt {
+    address: "mqtt.meshtastic.org"
+    username: "meshdev"
+    password: "large4cats"
+    encryption_enabled: true
+    root: "msh/EU_868"
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  serial {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02\x1a\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  external_notification {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02"\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  store_forward {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02*\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  range_test {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x082\x06\x08\x88\x0e\x10\x88\x0e'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  telemetry {
+    device_update_interval: 1800
+    environment_update_interval: 1800
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02:\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  canned_message {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02B\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  audio {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02J\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  remote_hardware {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02R\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  neighbor_info {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\nZ\x08\x10\n\x18) l(\x08'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  ambient_lighting {
+    current: 10
+    red: 41
+    green: 108
+    blue: 8
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x06b\x04\x10-8\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  detection_sensor {
+    minimum_broadcast_secs: 45
+    detection_trigger_type: LOGIC_HIGH
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02j\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: moduleConfig {
+  paxcounter {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'"a\x08\x85\xd7\xab\xd3\x01\x12R\n\t!1a6aeb85\x12\x0fMeshtastic eb85\x1a\x04eb85"\x06\xd1\x05\x1aj\xeb\x85(\t8\x0bB \xf0b\xca\xeb+\xa6\x90\x10\xbc#\x0f\x8eJI\x1e\xf2}2\xf3\x05\x10\xec\xa9\x1d\xfav\xddOd\xfcnLH\x01%\x00\x00\xc8@H\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: node_info {
+  num: 443214725
+  user {
+    id: "!1a6aeb85"
+    long_name: "Meshtastic eb85"
+    short_name: "eb85"
+    macaddr: "\321\005\032j\353\205"
+    hw_model: RAK4631
+    role: ROUTER_LATE
+    public_key: "\360b\312\353+\246\220\020\274#\017\216JI\036\362}2\363\005\020\354\251\035\372v\335Od\374nL"
+    is_unmessagable: true
+  }
+  snr: 6.25
+  hops_away: 0
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1319 Received nodeinfo: {'num': 443214725, 'user': {'id': '!1a6aeb85', 'longName': 'Meshtastic eb85', 'shortName': 'eb85', 'macaddr': '0QUaauuF', 'hwModel': 'RAK4631', 'role': 'ROUTER_LATE', 'publicKey': '8GLK6yumkBC8Iw+OSkke8n0y8wUQ7Kkd+nbdT2T8bkw=', 'isUnmessagable': True}, 'snr': 6.25, 'hopsAway': 0}
+DEBUG file:mesh_interface.py _handleFromRadio line:1327 Node without position
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x19\n\x15/prefs/channels.proto\x10j'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: fileInfo {
+  file_name: "/prefs/channels.proto"
+  size_bytes: 106
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1457 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x18\n\x13/prefs/config.proto\x10\xef\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: fileInfo {
+  file_name: "/prefs/config.proto"
+  size_bytes: 239
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1457 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x17\n\x13/prefs/device.proto\x10~'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: fileInfo {
+  file_name: "/prefs/device.proto"
+  size_bytes: 126
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1457 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x17\n\x13/prefs/module.proto\x10d'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: fileInfo {
+  file_name: "/prefs/module.proto"
+  size_bytes: 100
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1457 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x17\n\x12/prefs/nodes.proto\x10\xdd\x03'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: fileInfo {
+  file_name: "/prefs/nodes.proto"
+  size_bytes: 477
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1457 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'8\xe6\xe5\x93\xb3\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: config_complete_id: 2791633638
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1342 Config complete ID 2791633638
+DEBUG file:mesh_interface.py callback line:1151 Sending heartbeat, interval 300 seconds
+DEBUG file:stream_interface.py _sendToRadioImpl line:123 Sending: heartbeat { }
+DEBUG file:stream_interface.py _sendToRadioImpl line:128 sending header:b'\x94\xc3\x00\x02' b:b':\x00'
+Connected to radio
+Sending environment_metrics telemetry request to !c5db8a75 on channelIndex:0 (this could take a while)
+DEBUG file:__main__.py checkChannel line:107 check channel: settings {
+  psk: "\001"
+  module_settings {
+    position_precision: 13
+  }
+}
+role: PRIMARY
+
+DEBUG file:mesh_interface.py sendData line:544 Serializing protobuf as data: environment_metrics { }
+DEBUG file:mesh_interface.py sendData line:547 len(data): 2
+DEBUG file:mesh_interface.py sendData line:548 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py sendData line:571 Setting a response handler for requestId 2829810380
+DEBUG file:mesh_interface.py _sendPacket line:1010 Sending packet: to: 3319499381 decoded { portnum: TELEMETRY_APP payload: "\032\000" want_response: true } id: 2829810380 hop_limit: 3 priority: RELIABLE
+DEBUG file:stream_interface.py _sendToRadioImpl line:123 Sending: packet { to: 3319499381 decoded { portnum: TELEMETRY_APP payload: "\032\000" want_response: true } id: 2829810380 hop_limit: 3 priority: RELIABLE }
+DEBUG file:stream_interface.py _sendToRadioImpl line:128 sending header:b'\x94\xc3\x00\x1a' b:b'\n\x18\x15u\x8a\xdb\xc5"\x08\x08C\x12\x02\x1a\x00\x18\x015\xccz\xab\xa8H\x03XF'
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\x04\x10\x10\x18\x10'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1273 TX QUEUE free 16 of 16, res = 0, id = 00000000 
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x0f\x18\x10 \xe8\xbe\xfb\x82\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: queueStatus {
+  free: 15
+  maxlen: 16
+  mesh_packet_id: 274653032
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1273 TX QUEUE free 15 of 16, res = 0, id = 105edf68 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1285 Reply for unexpected packet ID 105edf68
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12\x81\x01\r\x85\xebj\x1a\x15\xff\xff\xff\xff"X\x08\x04\x12R\n\t!1a6aeb85\x12\x0fMeshtastic eb85\x1a\x04eb85"\x06\xd1\x05\x1aj\xeb\x85(\t8\x0bB \xf0b\xca\xeb+\xa6\x90\x10\xbc#\x0f\x8eJI\x1e\xf2}2\xf3\x05\x10\xec\xa9\x1d\xfav\xddOd\xfcnLH\x01H\x015\x1c\xc7\xb5\xc9E\x00\x00\xc8@H\x03`\xe9\xff\xff\xff\xff\xff\xff\xff\xff\x01x\x03\x98\x01\x85\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 443214725
+  to: 4294967295
+  decoded {
+    portnum: NODEINFO_APP
+    payload: "\n\t!1a6aeb85\022\017Meshtastic eb85\032\004eb85"\006\321\005\032j\353\205(\t8\013B \360b\312\353+\246\220\020\274#\017\216JI\036\362}2\363\005\020\354\251\035\372v\335Od\374nLH\001"
+    bitfield: 1
+  }
+  id: 3384133404
+  rx_snr: 6.25
+  hop_limit: 3
+  rx_rssi: -23
+  hop_start: 3
+  relay_node: 133
+}
+
+DEBUG file:__init__.py _onNodeInfoReceive line:188 in _onNodeInfoReceive() asDict:{'from': 443214725, 'to': 4294967295, 'decoded': {'portnum': 'NODEINFO_APP', 'payload': b'\n\t!1a6aeb85\x12\x0fMeshtastic eb85\x1a\x04eb85"\x06\xd1\x05\x1aj\xeb\x85(\t8\x0bB \xf0b\xca\xeb+\xa6\x90\x10\xbc#\x0f\x8eJI\x1e\xf2}2\xf3\x05\x10\xec\xa9\x1d\xfav\xddOd\xfcnLH\x01', 'bitfield': 1, 'user': {'id': '!1a6aeb85', 'longName': 'Meshtastic eb85', 'shortName': 'eb85', 'macaddr': '0QUaauuF', 'hwModel': 'RAK4631', 'role': 'ROUTER_LATE', 'publicKey': '8GLK6yumkBC8Iw+OSkke8n0y8wUQ7Kkd+nbdT2T8bkw=', 'isUnmessagable': True, 'raw': id: "!1a6aeb85"
+long_name: "Meshtastic eb85"
+short_name: "eb85"
+macaddr: "\321\005\032j\353\205"
+hw_model: RAK4631
+role: ROUTER_LATE
+public_key: "\360b\312\353+\246\220\020\274#\017\216JI\036\362}2\363\005\020\354\251\035\372v\335Od\374nL"
+is_unmessagable: true
+}}, 'id': 3384133404, 'rxSnr': 6.25, 'hopLimit': 3, 'rxRssi': -23, 'hopStart': 3, 'relayNode': 133, 'raw': from: 443214725
+to: 4294967295
+decoded {
+  portnum: NODEINFO_APP
+  payload: "\n\t!1a6aeb85\022\017Meshtastic eb85\032\004eb85"\006\321\005\032j\353\205(\t8\013B \360b\312\353+\246\220\020\274#\017\216JI\036\362}2\363\005\020\354\251\035\372v\335Od\374nLH\001"
+  bitfield: 1
+}
+id: 3384133404
+rx_snr: 6.25
+hop_limit: 3
+rx_rssi: -23
+hop_start: 3
+relay_node: 133
+, 'fromId': '!1a6aeb85', 'toId': '^all'}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.user: packet={'from': 443214725, 'to': 4294967295, 'decoded': {'portnum': 'NODEINFO_APP', 'payload': b'\n\t!1a6aeb85\x12\x0fMeshtastic eb85\x1a\x04eb85"\x06\xd1\x05\x1aj\xeb\x85(\t8\x0bB \xf0b\xca\xeb+\xa6\x90\x10\xbc#\x0f\x8eJI\x1e\xf2}2\xf3\x05\x10\xec\xa9\x1d\xfav\xddOd\xfcnLH\x01', 'bitfield': 1, 'user': {'id': '!1a6aeb85', 'longName': 'Meshtastic eb85', 'shortName': 'eb85', 'macaddr': '0QUaauuF', 'hwModel': 'RAK4631', 'role': 'ROUTER_LATE', 'publicKey': '8GLK6yumkBC8Iw+OSkke8n0y8wUQ7Kkd+nbdT2T8bkw=', 'isUnmessagable': True, 'raw': id: "!1a6aeb85" long_name: "Meshtastic eb85" short_name: "eb85" macaddr: "\321\005\032j\353\205" hw_model: RAK4631 role: ROUTER_LATE public_key: "\360b\312\353+\246\220\020\274#\017\216JI\036\362}2\363\005\020\354\251\035\372v\335Od\374nL" is_unmessagable: true }}, 'id': 3384133404, 'rxSnr': 6.25, 'hopLimit': 3, 'rxRssi': -23, 'hopStart': 3, 'relayNode': 133, 'raw': from: 443214725 to: 4294967295 decoded { portnum: NODEINFO_APP payload: "\n\t!1a6aeb85\022\017Meshtastic eb85\032\004eb85"\006\321\005\032j\353\205(\t8\013B \360b\312\353+\246\220\020\274#\017\216JI\036\362}2\363\005\020\354\251\035\372v\335Od\374nLH\001" bitfield: 1 } id: 3384133404 rx_snr: 6.25 hop_limit: 3 rx_rssi: -23 hop_start: 3 relay_node: 133 , 'fromId': '!1a6aeb85', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'NODEINFO_APP', 'payload': b'\n\t!1a6aeb85\x12\x0fMeshtastic eb85\x1a\x04eb85"\x06\xd1\x05\x1aj\xeb\x85(\t8\x0bB \xf0b\xca\xeb+\xa6\x90\x10\xbc#\x0f\x8eJI\x1e\xf2}2\xf3\x05\x10\xec\xa9\x1d\xfav\xddOd\xfcnLH\x01', 'bitfield': 1, 'user': {'id': '!1a6aeb85', 'longName': 'Meshtastic eb85', 'shortName': 'eb85', 'macaddr': '0QUaauuF', 'hwModel': 'RAK4631', 'role': 'ROUTER_LATE', 'publicKey': '8GLK6yumkBC8Iw+OSkke8n0y8wUQ7Kkd+nbdT2T8bkw=', 'isUnmessagable': True, 'raw': id: "!1a6aeb85"
+long_name: "Meshtastic eb85"
+short_name: "eb85"
+macaddr: "\321\005\032j\353\205"
+hw_model: RAK4631
+role: ROUTER_LATE
+public_key: "\360b\312\353+\246\220\020\274#\017\216JI\036\362}2\363\005\020\354\251\035\372v\335Od\374nL"
+is_unmessagable: true
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x0f\x18\x10 \xcc\xf5\xad\xc5\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: queueStatus {
+  free: 15
+  maxlen: 16
+  mesh_packet_id: 2829810380
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1273 TX QUEUE free 15 of 16, res = 0, id = a8ab7acc 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1285 Reply for unexpected packet ID a8ab7acc
+DEBUG file:mesh_interface.py _sendToRadio line:1249 packet a8ab7acc got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:1249 packet 105edf68 got acked under us
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12E\ru\x8a\xdb\xc5\x15\x08l)\xdb*(\\\x98\x00\r\x9a\x94@\x9dSgR\xf5^D\xb6\xc3\x0f\xcbw\x0f\x8d\xacc\x03)\xa0\x9a\xab\xa6\xd1p\t\xb7W\xff\x115\xe7\xc5S5Gv\n\x04E\x00\x00\xc0@H\x02x\x02\x98\x01u'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 3319499381
+  to: 3676924936
+  encrypted: "\\230\000\r\232\224@\235SgR\365^D\266\303\017\313w\017\215\254c\003)\240\232\253\246\321p\t\267W\377\0215\347\305S"
+  id: 67794503
+  rx_snr: 6
+  hop_limit: 2
+  hop_start: 2
+  relay_node: 117
+}
+
+DEBUG file:mesh_interface.py _nodeNumToId line:1491 Node 3319499381 not found for fromId
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive: packet={'from': 3319499381, 'to': 3676924936, 'encrypted': 'XJgADZqUQJ1TZ1L1XkS2ww/Ldw+NrGMDKaCaq6bRcAm3V/8RNefFUw==', 'id': 67794503, 'rxSnr': 6.0, 'hopLimit': 2, 'hopStart': 2, 'relayNode': 117, 'raw': from: 3319499381 to: 3676924936 encrypted: "\\230\000\r\232\224@\235SgR\365^D\266\303\017\313w\017\215\254c\003)\240\232\253\246\321p\t\267W\377\0215\347\305S" id: 67794503 rx_snr: 6 hop_limit: 2 hop_start: 2 relay_node: 117 , 'fromId': None, 'toId': '!db296c08'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:None
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x0f\x18\x10 \xe9\xfe\x8c\xb7\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: queueStatus {
+  free: 15
+  maxlen: 16
+  mesh_packet_id: 652427113
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1273 TX QUEUE free 15 of 16, res = 0, id = 26e33f69 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1285 Reply for unexpected packet ID 26e33f69
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12:\r\x08l)\xdb\x15\xff\xff\xff\xff" \x08C\x12\x1a\r<\x00\x00\x00\x12\x13\x08e\x15\xaa\xf1\x8a@\x1d\xd4\x06,A%\xdcE\x89=(=H\x005i?\xe3&H\x03X\nx\x03\x98\x01\x08'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 3676924936
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\r<\000\000\000\022\023\010e\025\252\361\212@\035\324\006,A%\334E\211=(="
+    bitfield: 0
+  }
+  id: 652427113
+  hop_limit: 3
+  priority: BACKGROUND
+  hop_start: 3
+  relay_node: 8
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r<\x00\x00\x00\x12\x13\x08e\x15\xaa\xf1\x8a@\x1d\xd4\x06,A%\xdcE\x89=(=', 'bitfield': 0, 'telemetry': {'time': 60, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.342, 'channelUtilization': 10.751667, 'airUtilTx': 0.06702778, 'uptimeSeconds': 61}, 'raw': time: 60
+device_metrics {
+  battery_level: 101
+  voltage: 4.342
+  channel_utilization: 10.751667
+  air_util_tx: 0.0670277774
+  uptime_seconds: 61
+}
+}}, 'id': 652427113, 'hopLimit': 3, 'priority': 'BACKGROUND', 'hopStart': 3, 'relayNode': 8, 'raw': from: 3676924936
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r<\000\000\000\022\023\010e\025\252\361\212@\035\324\006,A%\334E\211=(="
+  bitfield: 0
+}
+id: 652427113
+hop_limit: 3
+priority: BACKGROUND
+hop_start: 3
+relay_node: 8
+, 'fromId': '!db296c08', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating deviceMetrics metrics for 3676924936 to {'batteryLevel': 101, 'voltage': 4.342, 'channelUtilization': 10.751667, 'airUtilTx': 0.06702778, 'uptimeSeconds': 61}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.telemetry: packet={'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r<\x00\x00\x00\x12\x13\x08e\x15\xaa\xf1\x8a@\x1d\xd4\x06,A%\xdcE\x89=(=', 'bitfield': 0, 'telemetry': {'time': 60, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.342, 'channelUtilization': 10.751667, 'airUtilTx': 0.06702778, 'uptimeSeconds': 61}, 'raw': time: 60 device_metrics { battery_level: 101 voltage: 4.342 channel_utilization: 10.751667 air_util_tx: 0.0670277774 uptime_seconds: 61 } }}, 'id': 652427113, 'hopLimit': 3, 'priority': 'BACKGROUND', 'hopStart': 3, 'relayNode': 8, 'raw': from: 3676924936 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\r<\000\000\000\022\023\010e\025\252\361\212@\035\324\006,A%\334E\211=(=" bitfield: 0 } id: 652427113 hop_limit: 3 priority: BACKGROUND hop_start: 3 relay_node: 8 , 'fromId': '!db296c08', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\r<\x00\x00\x00\x12\x13\x08e\x15\xaa\xf1\x8a@\x1d\xd4\x06,A%\xdcE\x89=(=', 'bitfield': 0, 'telemetry': {'time': 60, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.342, 'channelUtilization': 10.751667, 'airUtilTx': 0.06702778, 'uptimeSeconds': 61}, 'raw': time: 60
+device_metrics {
+  battery_level: 101
+  voltage: 4.342
+  channel_utilization: 10.751667
+  air_util_tx: 0.0670277774
+  uptime_seconds: 61
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x123\r\x08l)\xdb\x15\xff\xff\xff\xff"\x1e\x08C\x12\x1a\rx\x00\x00\x00\x12\x13\x08e\x15\x02+\x8b@\x1d\x82NC@%\xeb\xe4\xaa=(y5j\xdb\xf1bH\x03X\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 3676924936
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\rx\000\000\000\022\023\010e\025\002+\213@\035\202NC@%\353\344\252=(y"
+  }
+  id: 1660017514
+  hop_limit: 3
+  priority: BACKGROUND
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\rx\x00\x00\x00\x12\x13\x08e\x15\x02+\x8b@\x1d\x82NC@%\xeb\xe4\xaa=(y', 'telemetry': {'time': 120, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.349, 'channelUtilization': 3.0516667, 'airUtilTx': 0.08344444, 'uptimeSeconds': 121}, 'raw': time: 120
+device_metrics {
+  battery_level: 101
+  voltage: 4.349
+  channel_utilization: 3.05166674
+  air_util_tx: 0.0834444389
+  uptime_seconds: 121
+}
+}}, 'id': 1660017514, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\rx\000\000\000\022\023\010e\025\002+\213@\035\202NC@%\353\344\252=(y"
+}
+id: 1660017514
+hop_limit: 3
+priority: BACKGROUND
+, 'fromId': '!db296c08', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating deviceMetrics metrics for 3676924936 to {'batteryLevel': 101, 'voltage': 4.349, 'channelUtilization': 3.0516667, 'airUtilTx': 0.08344444, 'uptimeSeconds': 121}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.telemetry: packet={'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\rx\x00\x00\x00\x12\x13\x08e\x15\x02+\x8b@\x1d\x82NC@%\xeb\xe4\xaa=(y', 'telemetry': {'time': 120, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.349, 'channelUtilization': 3.0516667, 'airUtilTx': 0.08344444, 'uptimeSeconds': 121}, 'raw': time: 120 device_metrics { battery_level: 101 voltage: 4.349 channel_utilization: 3.05166674 air_util_tx: 0.0834444389 uptime_seconds: 121 } }}, 'id': 1660017514, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\rx\000\000\000\022\023\010e\025\002+\213@\035\202NC@%\353\344\252=(y" } id: 1660017514 hop_limit: 3 priority: BACKGROUND , 'fromId': '!db296c08', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\rx\x00\x00\x00\x12\x13\x08e\x15\x02+\x8b@\x1d\x82NC@%\xeb\xe4\xaa=(y', 'telemetry': {'time': 120, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.349, 'channelUtilization': 3.0516667, 'airUtilTx': 0.08344444, 'uptimeSeconds': 121}, 'raw': time: 120
+device_metrics {
+  battery_level: 101
+  voltage: 4.349
+  channel_utilization: 3.05166674
+  air_util_tx: 0.0834444389
+  uptime_seconds: 121
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12@\r\x08l)\xdb\x15\xff\xff\xff\xff"+\x08C\x12\'\rx\x00\x00\x002 \x08y\x15\x82NC@\x1d\xeb\xe4\xaa= \x04(\x078\x02@\x02H\x05P\x01`\xf0\xc5\x11h\x80\xf5\x065k;?\x06H\x03X\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 3676924936
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\rx\000\000\0002 \010y\025\202NC@\035\353\344\252= \004(\0078\002@\002H\005P\001`\360\305\021h\200\365\006"
+  }
+  id: 104807275
+  hop_limit: 3
+  priority: BACKGROUND
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\rx\x00\x00\x002 \x08y\x15\x82NC@\x1d\xeb\xe4\xaa= \x04(\x078\x02@\x02H\x05P\x01`\xf0\xc5\x11h\x80\xf5\x06', 'telemetry': {'time': 120, 'localStats': {'uptimeSeconds': 121, 'channelUtilization': 3.0516667, 'airUtilTx': 0.08344444, 'numPacketsTx': 4, 'numPacketsRx': 7, 'numOnlineNodes': 2, 'numTotalNodes': 2, 'numRxDupe': 5, 'numTxRelay': 1, 'heapTotalBytes': 287472, 'heapFreeBytes': 113280}, 'raw': time: 120
+local_stats {
+  uptime_seconds: 121
+  channel_utilization: 3.05166674
+  air_util_tx: 0.0834444389
+  num_packets_tx: 4
+  num_packets_rx: 7
+  num_online_nodes: 2
+  num_total_nodes: 2
+  num_rx_dupe: 5
+  num_tx_relay: 1
+  heap_total_bytes: 287472
+  heap_free_bytes: 113280
+}
+}}, 'id': 104807275, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\rx\000\000\0002 \010y\025\202NC@\035\353\344\252= \004(\0078\002@\002H\005P\001`\360\305\021h\200\365\006"
+}
+id: 104807275
+hop_limit: 3
+priority: BACKGROUND
+, 'fromId': '!db296c08', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating localStats metrics for 3676924936 to {'uptimeSeconds': 121, 'channelUtilization': 3.0516667, 'airUtilTx': 0.08344444, 'numPacketsTx': 4, 'numPacketsRx': 7, 'numOnlineNodes': 2, 'numTotalNodes': 2, 'numRxDupe': 5, 'numTxRelay': 1, 'heapTotalBytes': 287472, 'heapFreeBytes': 113280}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.telemetry: packet={'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\rx\x00\x00\x002 \x08y\x15\x82NC@\x1d\xeb\xe4\xaa= \x04(\x078\x02@\x02H\x05P\x01`\xf0\xc5\x11h\x80\xf5\x06', 'telemetry': {'time': 120, 'localStats': {'uptimeSeconds': 121, 'channelUtilization': 3.0516667, 'airUtilTx': 0.08344444, 'numPacketsTx': 4, 'numPacketsRx': 7, 'numOnlineNodes': 2, 'numTotalNodes': 2, 'numRxDupe': 5, 'numTxRelay': 1, 'heapTotalBytes': 287472, 'heapFreeBytes': 113280}, 'raw': time: 120 local_stats { uptime_seconds: 121 channel_utilization: 3.05166674 air_util_tx: 0.0834444389 num_packets_tx: 4 num_packets_rx: 7 num_online_nodes: 2 num_total_nodes: 2 num_rx_dupe: 5 num_tx_relay: 1 heap_total_bytes: 287472 heap_free_bytes: 113280 } }}, 'id': 104807275, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\rx\000\000\0002 \010y\025\202NC@\035\353\344\252= \004(\0078\002@\002H\005P\001`\360\305\021h\200\365\006" } id: 104807275 hop_limit: 3 priority: BACKGROUND , 'fromId': '!db296c08', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\rx\x00\x00\x002 \x08y\x15\x82NC@\x1d\xeb\xe4\xaa= \x04(\x078\x02@\x02H\x05P\x01`\xf0\xc5\x11h\x80\xf5\x06', 'telemetry': {'time': 120, 'localStats': {'uptimeSeconds': 121, 'channelUtilization': 3.0516667, 'airUtilTx': 0.08344444, 'numPacketsTx': 4, 'numPacketsRx': 7, 'numOnlineNodes': 2, 'numTotalNodes': 2, 'numRxDupe': 5, 'numTxRelay': 1, 'heapTotalBytes': 287472, 'heapFreeBytes': 113280}, 'raw': time: 120
+local_stats {
+  uptime_seconds: 121
+  channel_utilization: 3.05166674
+  air_util_tx: 0.0834444389
+  num_packets_tx: 4
+  num_packets_rx: 7
+  num_online_nodes: 2
+  num_total_nodes: 2
+  num_rx_dupe: 5
+  num_tx_relay: 1
+  heap_total_bytes: 287472
+  heap_free_bytes: 113280
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x124\r\x08l)\xdb\x15\xff\xff\xff\xff"\x1f\x08C\x12\x1b\r\xb4\x00\x00\x00\x12\x14\x08e\x15\x19\x04\x8a@\x1d\x00\x00\x00\x00%\xeb\xe4\xaa=(\xb5\x015l[\xd4\xeaH\x03X\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 3676924936
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\r\264\000\000\000\022\024\010e\025\031\004\212@\035\000\000\000\000%\353\344\252=(\265\001"
+  }
+  id: 3939785580
+  hop_limit: 3
+  priority: BACKGROUND
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\xb4\x00\x00\x00\x12\x14\x08e\x15\x19\x04\x8a@\x1d\x00\x00\x00\x00%\xeb\xe4\xaa=(\xb5\x01', 'telemetry': {'time': 180, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.313, 'channelUtilization': 0.0, 'airUtilTx': 0.08344444, 'uptimeSeconds': 181}, 'raw': time: 180
+device_metrics {
+  battery_level: 101
+  voltage: 4.313
+  channel_utilization: 0
+  air_util_tx: 0.0834444389
+  uptime_seconds: 181
+}
+}}, 'id': 3939785580, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\264\000\000\000\022\024\010e\025\031\004\212@\035\000\000\000\000%\353\344\252=(\265\001"
+}
+id: 3939785580
+hop_limit: 3
+priority: BACKGROUND
+, 'fromId': '!db296c08', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating deviceMetrics metrics for 3676924936 to {'batteryLevel': 101, 'voltage': 4.313, 'channelUtilization': 0.0, 'airUtilTx': 0.08344444, 'uptimeSeconds': 181}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.telemetry: packet={'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\xb4\x00\x00\x00\x12\x14\x08e\x15\x19\x04\x8a@\x1d\x00\x00\x00\x00%\xeb\xe4\xaa=(\xb5\x01', 'telemetry': {'time': 180, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.313, 'channelUtilization': 0.0, 'airUtilTx': 0.08344444, 'uptimeSeconds': 181}, 'raw': time: 180 device_metrics { battery_level: 101 voltage: 4.313 channel_utilization: 0 air_util_tx: 0.0834444389 uptime_seconds: 181 } }}, 'id': 3939785580, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\r\264\000\000\000\022\024\010e\025\031\004\212@\035\000\000\000\000%\353\344\252=(\265\001" } id: 3939785580 hop_limit: 3 priority: BACKGROUND , 'fromId': '!db296c08', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\r\xb4\x00\x00\x00\x12\x14\x08e\x15\x19\x04\x8a@\x1d\x00\x00\x00\x00%\xeb\xe4\xaa=(\xb5\x01', 'telemetry': {'time': 180, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.313, 'channelUtilization': 0.0, 'airUtilTx': 0.08344444, 'uptimeSeconds': 181}, 'raw': time: 180
+device_metrics {
+  battery_level: 101
+  voltage: 4.313
+  channel_utilization: 0
+  air_util_tx: 0.0834444389
+  uptime_seconds: 181
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x124\r\x08l)\xdb\x15\xff\xff\xff\xff"\x1f\x08C\x12\x1b\r\xf0\x00\x00\x00\x12\x14\x08e\x15\xe9&\x89@\x1d\x00\x00\x00\x00%\xeb\xe4\xaa=(\xf1\x015m\xe7i\x82H\x03X\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 3676924936
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\r\360\000\000\000\022\024\010e\025\351&\211@\035\000\000\000\000%\353\344\252=(\361\001"
+  }
+  id: 2187978605
+  hop_limit: 3
+  priority: BACKGROUND
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\xf0\x00\x00\x00\x12\x14\x08e\x15\xe9&\x89@\x1d\x00\x00\x00\x00%\xeb\xe4\xaa=(\xf1\x01', 'telemetry': {'time': 240, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.286, 'channelUtilization': 0.0, 'airUtilTx': 0.08344444, 'uptimeSeconds': 241}, 'raw': time: 240
+device_metrics {
+  battery_level: 101
+  voltage: 4.286
+  channel_utilization: 0
+  air_util_tx: 0.0834444389
+  uptime_seconds: 241
+}
+}}, 'id': 2187978605, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r\360\000\000\000\022\024\010e\025\351&\211@\035\000\000\000\000%\353\344\252=(\361\001"
+}
+id: 2187978605
+hop_limit: 3
+priority: BACKGROUND
+, 'fromId': '!db296c08', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating deviceMetrics metrics for 3676924936 to {'batteryLevel': 101, 'voltage': 4.286, 'channelUtilization': 0.0, 'airUtilTx': 0.08344444, 'uptimeSeconds': 241}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.telemetry: packet={'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r\xf0\x00\x00\x00\x12\x14\x08e\x15\xe9&\x89@\x1d\x00\x00\x00\x00%\xeb\xe4\xaa=(\xf1\x01', 'telemetry': {'time': 240, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.286, 'channelUtilization': 0.0, 'airUtilTx': 0.08344444, 'uptimeSeconds': 241}, 'raw': time: 240 device_metrics { battery_level: 101 voltage: 4.286 channel_utilization: 0 air_util_tx: 0.0834444389 uptime_seconds: 241 } }}, 'id': 2187978605, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\r\360\000\000\000\022\024\010e\025\351&\211@\035\000\000\000\000%\353\344\252=(\361\001" } id: 2187978605 hop_limit: 3 priority: BACKGROUND , 'fromId': '!db296c08', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\r\xf0\x00\x00\x00\x12\x14\x08e\x15\xe9&\x89@\x1d\x00\x00\x00\x00%\xeb\xe4\xaa=(\xf1\x01', 'telemetry': {'time': 240, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.286, 'channelUtilization': 0.0, 'airUtilTx': 0.08344444, 'uptimeSeconds': 241}, 'raw': time: 240
+device_metrics {
+  battery_level: 101
+  voltage: 4.286
+  channel_utilization: 0
+  air_util_tx: 0.0834444389
+  uptime_seconds: 241
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12K\r\x85\xebj\x1a\x15\xff\xff\xff\xff""\x08C\x12\x1c\rE\x9d6i\x12\x15\x08\\\x15\x17\xd9\x82@\x1d\x00\x00\x00\x00%_\x99\xf6>(\xe9\x8b4H\x015\x1d\xa3QDE\x00\x00\xd0@H\x03`\xe9\xff\xff\xff\xff\xff\xff\xff\xff\x01x\x03\x98\x01\x85\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 443214725
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\rE\2356i\022\025\010\\025\027\331\202@\035\000\000\000\000%_\231\366>(\351\2134"
+    bitfield: 1
+  }
+  id: 1146200861
+  rx_snr: 6.5
+  hop_limit: 3
+  rx_rssi: -23
+  hop_start: 3
+  relay_node: 133
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 443214725, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\rE\x9d6i\x12\x15\x08\\\x15\x17\xd9\x82@\x1d\x00\x00\x00\x00%_\x99\xf6>(\xe9\x8b4', 'bitfield': 1, 'telemetry': {'time': 1765186885, 'deviceMetrics': {'batteryLevel': 92, 'voltage': 4.089, 'channelUtilization': 0.0, 'airUtilTx': 0.48163888, 'uptimeSeconds': 853481}, 'raw': time: 1765186885
+device_metrics {
+  battery_level: 92
+  voltage: 4.089
+  channel_utilization: 0
+  air_util_tx: 0.481638879
+  uptime_seconds: 853481
+}
+}}, 'id': 1146200861, 'rxSnr': 6.5, 'hopLimit': 3, 'rxRssi': -23, 'hopStart': 3, 'relayNode': 133, 'raw': from: 443214725
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\rE\2356i\022\025\010\\025\027\331\202@\035\000\000\000\000%_\231\366>(\351\2134"
+  bitfield: 1
+}
+id: 1146200861
+rx_snr: 6.5
+hop_limit: 3
+rx_rssi: -23
+hop_start: 3
+relay_node: 133
+, 'fromId': '!1a6aeb85', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating deviceMetrics metrics for 443214725 to {'batteryLevel': 92, 'voltage': 4.089, 'channelUtilization': 0.0, 'airUtilTx': 0.48163888, 'uptimeSeconds': 853481}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.telemetry: packet={'from': 443214725, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\rE\x9d6i\x12\x15\x08\\\x15\x17\xd9\x82@\x1d\x00\x00\x00\x00%_\x99\xf6>(\xe9\x8b4', 'bitfield': 1, 'telemetry': {'time': 1765186885, 'deviceMetrics': {'batteryLevel': 92, 'voltage': 4.089, 'channelUtilization': 0.0, 'airUtilTx': 0.48163888, 'uptimeSeconds': 853481}, 'raw': time: 1765186885 device_metrics { battery_level: 92 voltage: 4.089 channel_utilization: 0 air_util_tx: 0.481638879 uptime_seconds: 853481 } }}, 'id': 1146200861, 'rxSnr': 6.5, 'hopLimit': 3, 'rxRssi': -23, 'hopStart': 3, 'relayNode': 133, 'raw': from: 443214725 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\rE\2356i\022\025\010\\025\027\331\202@\035\000\000\000\000%_\231\366>(\351\2134" bitfield: 1 } id: 1146200861 rx_snr: 6.5 hop_limit: 3 rx_rssi: -23 hop_start: 3 relay_node: 133 , 'fromId': '!1a6aeb85', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\rE\x9d6i\x12\x15\x08\\\x15\x17\xd9\x82@\x1d\x00\x00\x00\x00%_\x99\xf6>(\xe9\x8b4', 'bitfield': 1, 'telemetry': {'time': 1765186885, 'deviceMetrics': {'batteryLevel': 92, 'voltage': 4.089, 'channelUtilization': 0.0, 'airUtilTx': 0.48163888, 'uptimeSeconds': 853481}, 'raw': time: 1765186885
+device_metrics {
+  battery_level: 92
+  voltage: 4.089
+  channel_utilization: 0
+  air_util_tx: 0.481638879
+  uptime_seconds: 853481
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1296 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x124\r\x08l)\xdb\x15\xff\xff\xff\xff"\x1f\x08C\x12\x1b\r,\x01\x00\x00\x12\x14\x08e\x157\x89\x89@\x1d\xe8\xb4\x01@%\xeb\xe4\xaa=(\xad\x025n7=\xc6H\x03X\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1308 Received from radio: packet {
+  from: 3676924936
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\r,\001\000\000\022\024\010e\0257\211\211@\035\350\264\001@%\353\344\252=(\255\002"
+  }
+  id: 3325900654
+  hop_limit: 3
+  priority: BACKGROUND
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r,\x01\x00\x00\x12\x14\x08e\x157\x89\x89@\x1d\xe8\xb4\x01@%\xeb\xe4\xaa=(\xad\x02', 'telemetry': {'time': 300, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.298, 'channelUtilization': 2.0266666, 'airUtilTx': 0.08344444, 'uptimeSeconds': 301}, 'raw': time: 300
+device_metrics {
+  battery_level: 101
+  voltage: 4.298
+  channel_utilization: 2.02666664
+  air_util_tx: 0.0834444389
+  uptime_seconds: 301
+}
+}}, 'id': 3325900654, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\r,\001\000\000\022\024\010e\0257\211\211@\035\350\264\001@%\353\344\252=(\255\002"
+}
+id: 3325900654
+hop_limit: 3
+priority: BACKGROUND
+, 'fromId': '!db296c08', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating deviceMetrics metrics for 3676924936 to {'batteryLevel': 101, 'voltage': 4.298, 'channelUtilization': 2.0266666, 'airUtilTx': 0.08344444, 'uptimeSeconds': 301}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1639 Publishing meshtastic.receive.telemetry: packet={'from': 3676924936, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\r,\x01\x00\x00\x12\x14\x08e\x157\x89\x89@\x1d\xe8\xb4\x01@%\xeb\xe4\xaa=(\xad\x02', 'telemetry': {'time': 300, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.298, 'channelUtilization': 2.0266666, 'airUtilTx': 0.08344444, 'uptimeSeconds': 301}, 'raw': time: 300 device_metrics { battery_level: 101 voltage: 4.298 channel_utilization: 2.02666664 air_util_tx: 0.0834444389 uptime_seconds: 301 } }}, 'id': 3325900654, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 3676924936 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\r,\001\000\000\022\024\010e\0257\211\211@\035\350\264\001@%\353\344\252=(\255\002" } id: 3325900654 hop_limit: 3 priority: BACKGROUND , 'fromId': '!db296c08', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\r,\x01\x00\x00\x12\x14\x08e\x157\x89\x89@\x1d\xe8\xb4\x01@%\xeb\xe4\xaa=(\xad\x02', 'telemetry': {'time': 300, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.298, 'channelUtilization': 2.0266666, 'airUtilTx': 0.08344444, 'uptimeSeconds': 301}, 'raw': time: 300
+device_metrics {
+  battery_level: 101
+  voltage: 4.298
+  channel_utilization: 2.02666664
+  air_util_tx: 0.0834444389
+  uptime_seconds: 301
+}
+}}
+DEBUG file:mesh_interface.py callback line:1151 Sending heartbeat, interval 300 seconds
+DEBUG file:stream_interface.py _sendToRadioImpl line:123 Sending: heartbeat { }
+DEBUG file:stream_interface.py _sendToRadioImpl line:128 sending header:b'\x94\xc3\x00\x02' b:b':\x00'
+DEBUG file:mesh_interface.py _sendToRadio line:1249 packet 26e33f69 got acked under us
+Aborting due to: Timed out waiting for telemetry
+DEBUG file:serial_interface.py close line:102 Closing Serial stream
+DEBUG file:stream_interface.py close line:133 Closing stream
+DEBUG file:stream_interface.py _sendToRadioImpl line:123 Sending: disconnect: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:128 sending header:b'\x94\xc3\x00\x02' b:b' \x01'
+DEBUG file:stream_interface.py __reader line:231 reader is exiting
+DEBUG file:stream_interface.py _disconnected line:94 Closing our port
+
+Process finished with exit code 1

@@ -1,0 +1,107 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface MeshIfcDef <<implicit>> {
+    __ functions __
+    -handleFromRadio()
+    -sendToRadioImpl()
+    close()
+    connect()
+    == creation parameters ==
+    clientAddress: str
+    connectNow: bool
+    timeout: int = 300
+    noNodes: bool
+    debugOut: TextIOWrapper
+    noProto: bool
+}
+
+interface RadioPacket {
+    toRadio: pb
+    fromRadio: pb
+}
+
+MeshIfcDef --> RadioPacket: uses
+
+class MeshInterface {
+    nodes: Dict
+    localNode: Node
+    nodesByNum: Dict
+    {abstract} -sendToRadioImpl()
+    -sendToRadio()
+    -handleFromRadio()
+    heartbeatTimer
+}
+
+MeshInterface <|-- MeshIfcDef
+
+abstract class StreamInterface {
+    -rxThread
+    stream
+    connect()
+    close()
+    -readBytes()
+    -writeBytes()
+    -reader()
+    -sendToRadioImpl()
+}
+
+class TCPInterface {
+    hostname
+    portnumber
+    socket
+    close()
+    -writeBytes()
+    -readBytes()
+}
+
+class SerialInterface{
+    devPath: str
+}
+
+class BLEInterface {
+    -receiveThread
+    client: BLEClient
+    -startConfig()
+    close()
+}
+
+class BLEClient <<async>> {
+    connect()
+    disconnect()
+    close()
+    discover()
+}
+
+note right of SerialInterface::devPath
+    ser. port number
+end note
+
+note right of StreamInterface::stream
+    wrong place, put it in SerialInterface
+    also put there readBytes() and writeBytes()
+end note
+
+note left of MeshInterface
+    This class takes too much responsibilities, it need
+    to be split up. Interface should be responsible to
+    transfer the data, but not process them.
+end note
+StreamInterface <|-- MeshInterface
+SerialInterface <|-- StreamInterface
+TCPInterface <|-- StreamInterface
+BLEInterface <|-- MeshInterface
+
+class Tunnel
+class Node {
+    iface
+    nodeNum
+    localConfig: pb
+    moduleConfig: pb
+    channels: list
+}
+
+MeshInterface "1" *- "many" Node
+BLEInterface "1" o- "1" BLEClient
+
+@enduml

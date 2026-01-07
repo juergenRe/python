@@ -1,0 +1,53 @@
+Connected to radio
+Setting device owner to Meshtastic 6c08
+Setting device owner short to 6c08
+Setting channel url to https://meshtastic.org/e/#CgcSAQE6AggNCi8SIN-lFpUwOYY1yB2MKUuKMhE_NGFA4eVwoQW_DInCRZDTGgNUTUQoATABOgIIDRIPCAE4A0ADSAFQG2gBwAYB
+Set bluetooth.enabled to True
+Set bluetooth.fixed_pin to 123456
+Set bluetooth.mode to FIXED_PIN
+Set device.led_heartbeat_disabled to True
+Set device.node_info_broadcast_secs to 10800
+Set device.rebroadcast_mode to LOCAL_ONLY
+Set device.serial_enabled to True
+Set device.tzdef to GMT-1GMT,M3.5.0,M10.4.0/3
+Set display.auto_screen_carousel_secs to 15
+Set display.displaymode to INVERTED
+Set display.screen_on_secs to 60
+Set lora.hop_limit to 3
+Set lora.ignore_mqtt to True
+Set lora.region to EU_868
+Set lora.sx126x_rx_boosted_gain to True
+Set lora.tx_enabled to True
+Set lora.tx_power to 27
+Set lora.use_preset to True
+Set network.enabled_protocols to 1
+Set network.ntp_server to meshtastic.pool.ntp.org
+Set position.broadcast_smart_minimum_distance to 100
+Set position.broadcast_smart_minimum_interval_secs to 30
+Set position.gps_attempt_time to 900
+Set position.gps_mode to NOT_PRESENT
+Set position.gps_update_interval to 3600
+Set position.position_broadcast_secs to 3600
+Set position.position_broadcast_smart_enabled to False
+Set position.position_flags to 811
+Set power.ls_secs to 300
+Set power.min_wake_secs to 10
+Set power.sds_secs to 4294967295
+Set power.wait_bluetooth_secs to 60
+Set security.private_key to base64:QBtbILHHhoqzpi5HsT66/UGhpuT429it3UW0MSVPEVk=
+Set security.public_key to base64:nysISJsPGcSbHreJanEazPV15tKnp/lj/li2/JVIZCY=
+Set security.serial_enabled to True
+Set ambient_lighting.blue to 8
+Set ambient_lighting.current to 10
+Set ambient_lighting.green to 108
+Set ambient_lighting.red to 41
+Set detection_sensor.detection_trigger_type to LOGIC_HIGH
+Set detection_sensor.minimum_broadcast_secs to 45
+Set mqtt.address to mqtt.meshtastic.org
+Set mqtt.encryption_enabled to True
+Set mqtt.password to large4cats
+Set mqtt.root to msh/EU_868
+Set mqtt.username to meshdev
+Set telemetry.device_update_interval to 1800
+Set telemetry.environment_update_interval to 1800
+Writing modified configuration to device

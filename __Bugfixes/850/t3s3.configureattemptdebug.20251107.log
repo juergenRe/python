@@ -1,0 +1,1028 @@
+DEBUG file:__main__.py common line:1346 Not logging serial output
+DEBUG file:serial_interface.py __init__ line:46 Connecting to /dev/ttyACM0
+DEBUG file:stream_interface.py __reader line:152 in __reader()
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: want_config_id: 1499200289
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00\x06' b:b'\x18\xa1\xf6\xef\xca\x05'
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x1a/\x08\xdc\xf1\xe7\x96\x06@\x08X\xf8\xeb\x01b\x10\x0f32E\xf6*\xe3\x1e\xf4+DE\xa7\xfe\x83ij\rtlora-t3s3-v1x\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: my_info {
+  my_node_num: 1658452188
+  reboot_count: 8
+  min_app_version: 30200
+  device_id: "\01732E\366*\343\036\364+DE\247\376\203i"
+  pio_env: "tlora-t3s3-v1"
+  nodedb_count: 1
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1309 Received myinfo: my_node_num: 1658452188 reboot_count: 8 min_app_version: 30200 device_id: "\01732E\366*\343\036\364+DE\247\376\203i" pio_env: "tlora-t3s3-v1" nodedb_count: 1
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x8a\x01\x05\x10\x99\x01\x18\x1e'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: deviceuiConfig {
+  screen_brightness: 153
+  screen_timeout: 30
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1454 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'"r\x08\xdc\xf1\xe7\x96\x06\x12P\n\t!62d9f8dc\x12\x0fMeshtastic f8dc\x1a\x04f8dc"\x06\xb8\xf8b\xd9\xf8\xdc(\x10B c\xa8\xc7T\xc9r8\x84-\xc7\x14\xfba\xcd\xd0\xfcUq\x91f\xbf\x8d\x1cjk\x0c\xb6\x94\x8c\xd20IH\x00\x1a\x002\x14\x08e\x15\xa2E\x8e@\x1d\xf6(:A%\x1bU\x82=(\xa5\x01P\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: node_info {
+  num: 1658452188
+  user {
+    id: "!62d9f8dc"
+    long_name: "Meshtastic f8dc"
+    short_name: "f8dc"
+    macaddr: "\270\370b\331\370\334"
+    hw_model: TLORA_T3_S3
+    public_key: "c\250\307T\311r8\204-\307\024\373a\315\320\374Uq\221f\277\215\034jk\014\266\224\214\3220I"
+    is_unmessagable: false
+  }
+  position {
+  }
+  device_metrics {
+    battery_level: 101
+    voltage: 4.446
+    channel_utilization: 11.635
+    air_util_tx: 0.0636388883
+    uptime_seconds: 165
+  }
+  is_favorite: true
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1316 Received nodeinfo: {'num': 1658452188, 'user': {'id': '!62d9f8dc', 'longName': 'Meshtastic f8dc', 'shortName': 'f8dc', 'macaddr': 'uPhi2fjc', 'hwModel': 'TLORA_T3_S3', 'publicKey': 'Y6jHVMlyOIQtxxT7Yc3Q/FVxkWa/jRxqawy2lIzSMEk=', 'isUnmessagable': False}, 'position': {}, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.446, 'channelUtilization': 11.635, 'airUtilTx': 0.06363889, 'uptimeSeconds': 165}, 'isFavorite': True}
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'j"\n\x0e2.7.13.597fa0b\x10\x18\x18\x01 \x01(\x01@\xab\x06H\x10X\x01`\x80\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: metadata {
+  firmware_version: "2.7.13.597fa0b"
+  device_state_version: 24
+  canShutdown: true
+  hasWifi: true
+  hasBluetooth: true
+  position_flags: 811
+  hw_model: TLORA_T3_S3
+  hasPKC: true
+  excluded_modules: 1280
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1313 Received device metadata: firmware_version: "2.7.13.597fa0b" device_state_version: 24 canShutdown: true hasWifi: true hasBluetooth: true position_flags: 811 hw_model: TLORA_T3_S3 hasPKC: true excluded_modules: 1280
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x0b\x12\x07\x12\x01\x01:\x02\x08\r\x18\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: channel {
+  settings {
+    psk: "\001"
+    module_settings {
+      position_precision: 13
+    }
+  }
+  role: PRIMARY
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x01\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: channel {
+  index: 1
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x02\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: channel {
+  index: 2
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x03\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: channel {
+  index: 3
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x04\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: channel {
+  index: 4
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x05\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: channel {
+  index: 5
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x06\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: channel {
+  index: 6
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'R\x04\x08\x07\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: channel {
+  index: 7
+  settings {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x05\n\x038\xb0T'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  device {
+    node_info_broadcast_secs: 10800
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x12\x12\x10\x08\x84\x07\x10\x01(x8\xab\x06PdX\x1eh\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  position {
+    position_broadcast_secs: 900
+    position_broadcast_smart_enabled: true
+    gps_update_interval: 120
+    position_flags: 811
+    broadcast_smart_minimum_distance: 100
+    broadcast_smart_minimum_interval_secs: 30
+    gps_mode: NOT_PRESENT
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x0f\x1a\r <0\xff\xff\xff\xff\x0f8\xac\x02@\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  power {
+    wait_bluetooth_secs: 60
+    sds_secs: 4294967295
+    ls_secs: 300
+    min_wake_secs: 10
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x1d"\x1b*\x17meshtastic.pool.ntp.orgP\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  network {
+    ntp_server: "meshtastic.pool.ntp.org"
+    enabled_protocols: 1
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x05*\x03\x08\xd8\x04'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  display {
+    screen_on_secs: 600
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x172\x15\x08\x01\x10\x06\x18\xfa\x01 \x0b(\x058\x01@\x03H\x01P\x1eh\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  lora {
+    use_preset: true
+    modem_preset: SHORT_FAST
+    bandwidth: 250
+    spread_factor: 11
+    coding_rate: 5
+    region: US
+    hop_limit: 3
+    tx_enabled: true
+    tx_power: 30
+    sx126x_rx_boosted_gain: true
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x08:\x06\x08\x01\x18\xc0\xc4\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  bluetooth {
+    enabled: true
+    fixed_pin: 123456
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*HBF\n c\xa8\xc7T\xc9r8\x84-\xc7\x14\xfba\xcd\xd0\xfcUq\x91f\xbf\x8d\x1cjk\x0c\xb6\x94\x8c\xd20I\x12 `\x8e?j}\x9a\xce\x19e\x99\x1c\xd8\xf7\x17\xab\xb0\x94\xbb\xa1\x1f_3J\xb81j\xc2\xdc\xdf\n\xad}(\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  security {
+    public_key: "c\250\307T\311r8\204-\307\024\373a\315\320\374Uq\221f\277\215\034jk\014\266\224\214\3220I"
+    private_key: "`\216?j}\232\316\031e\231\034\330\367\027\253\260\224\273\241\037_3J\2701j\302\334\337\n\255}"
+    serial_enabled: true
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x02J\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  sessionkey {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'*\x02R\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config {
+  device_ui {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J6\n4\x12\x13mqtt.meshtastic.org\x1a\x07meshdev"\nlarge4cats(\x01B\x06msh/US'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  mqtt {
+    address: "mqtt.meshtastic.org"
+    username: "meshdev"
+    password: "large4cats"
+    encryption_enabled: true
+    root: "msh/US"
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02\x12\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  serial {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02\x1a\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  external_notification {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02"\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  store_forward {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02*\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  range_test {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x082\x06\x08\xff\xff\xff\xff\x07'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  telemetry {
+    device_update_interval: 2147483647
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x04:\x02H\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  canned_message {
+    enabled: true
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02B\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  audio {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02J\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  remote_hardware {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02R\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  neighbor_info {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\rZ\x0b\x10\n\x18\xd9\x01 \xf8\x01(\xdc\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  ambient_lighting {
+    current: 10
+    red: 217
+    green: 248
+    blue: 220
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x06b\x04\x10-8\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  detection_sensor {
+    minimum_broadcast_secs: 45
+    detection_trigger_type: LOGIC_HIGH
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'J\x02j\x00'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: moduleConfig {
+  paxcounter {
+  }
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x19\n\x15/prefs/channels.proto\x109'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: fileInfo {
+  file_name: "/prefs/channels.proto"
+  size_bytes: 57
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1454 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x18\n\x13/prefs/config.proto\x10\xb1\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: fileInfo {
+  file_name: "/prefs/config.proto"
+  size_bytes: 177
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1454 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x18\n\x13/prefs/device.proto\x10\x85\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: fileInfo {
+  file_name: "/prefs/device.proto"
+  size_bytes: 133
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1454 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x17\n\x13/prefs/module.proto\x10e'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: fileInfo {
+  file_name: "/prefs/module.proto"
+  size_bytes: 101
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1454 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x17\n\x12/prefs/nodes.proto\x10\xdf\x02'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: fileInfo {
+  file_name: "/prefs/nodes.proto"
+  size_bytes: 351
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1454 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'z\x12\n\x10/static/.gitkeep'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: fileInfo {
+  file_name: "/static/.gitkeep"
+}
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1454 Unexpected FromRadio payload
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'8\xa1\xf6\xef\xca\x05'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: config_complete_id: 1499200289
+
+DEBUG file:mesh_interface.py _handleFromRadio line:1339 Config complete ID 1499200289
+DEBUG file:mesh_interface.py callback line:1148 Sending heartbeat, interval 300 seconds
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: heartbeat { }
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: get_config_request: SESSIONKEY_CONFIG
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00\x02' b:b':\x00'
+DEBUG file:mesh_interface.py sendData line:546 len(data): 2
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 190929654 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 190929654 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00\x1f' b:b'\n\x1d\x15\xdc\xf8\xd9b"\x08\x08\x06\x12\x02(\x08\x18\x015\xf6Za\x0bH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 0b615af6 got acked under us
+INFO file:node.py beginSettingsTransaction line:620 Telling open a transaction to edit settings
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: begin_edit_settings: true
+DEBUG file:mesh_interface.py sendData line:546 len(data): 3
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\200\004\001" want_response: true } id: 41520887 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\200\004\001" want_response: true } id: 41520887 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00 ' b:b'\n\x1e\x15\xdc\xf8\xd9b"\t\x08\x06\x12\x03\x80\x04\x01\x18\x015\xf7\x8ey\x02H\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x0f\x18\x10 \xcc\x93\xb5\xd6\x05'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: queueStatus {
+  free: 15
+  maxlen: 16
+  mesh_packet_id: 1523403212
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1270 TX QUEUE free 15 of 16, res = 0, id = 5acd49cc 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1282 Reply for unexpected packet ID 5acd49cc
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 02798ef7 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 5acd49cc got acked under us
+DEBUG file:node.py setOwner line:314 in setOwner nodeNum:1658452188
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: get_config_request: SESSIONKEY_CONFIG
+DEBUG file:mesh_interface.py sendData line:546 len(data): 2
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 644346616 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 644346616 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00\x1f' b:b'\n\x1d\x15\xdc\xf8\xd9b"\x08\x08\x06\x12\x02(\x08\x18\x015\xf8\xf2g&H\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 2667f2f8 got acked under us
+DEBUG file:node.py setOwner line:339 p.set_owner.long_name:Meshtastic f8dc:
+DEBUG file:node.py setOwner line:340 p.set_owner.short_name::
+DEBUG file:node.py setOwner line:341 p.set_owner.is_licensed:False
+DEBUG file:node.py setOwner line:342 p.set_owner.is_unmessagable:False:
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_owner { long_name: "Meshtastic f8dc" }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 20
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\202\002\021\022\017Meshtastic f8dc" want_response: true } id: 3936147193 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\202\002\021\022\017Meshtastic f8dc" want_response: true } id: 3936147193 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x001' b:b'\n/\x15\xdc\xf8\xd9b"\x1a\x08\x06\x12\x14\x82\x02\x11\x12\x0fMeshtastic f8dc\x18\x015\xf9\xd6\x9c\xeaH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet ea9cd6f9 got acked under us
+DEBUG file:node.py setOwner line:314 in setOwner nodeNum:1658452188
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: get_config_request: SESSIONKEY_CONFIG
+DEBUG file:mesh_interface.py sendData line:546 len(data): 2
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 2860579578 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 2860579578 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00\x1f' b:b'\n\x1d\x15\xdc\xf8\xd9b"\x08\x08\x06\x12\x02(\x08\x18\x015\xfa\xfa\x80\xaaH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet aa80fafa got acked under us
+DEBUG file:node.py setOwner line:339 p.set_owner.long_name::
+DEBUG file:node.py setOwner line:340 p.set_owner.short_name:f8dc:
+DEBUG file:node.py setOwner line:341 p.set_owner.is_licensed:False
+DEBUG file:node.py setOwner line:342 p.set_owner.is_unmessagable:False:
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_owner { short_name: "f8dc" }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 9
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\202\002\006\032\004f8dc" want_response: true } id: 2200170235 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\202\002\006\032\004f8dc" want_response: true } id: 2200170235 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00&' b:b'\n$\x15\xdc\xf8\xd9b"\x0f\x08\x06\x12\t\x82\x02\x06\x1a\x04f8dc\x18\x015\xfb\xee#\x83H\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 8323eefb got acked under us
+DEBUG file:node.py setURL line:425 Channel i:0 ch:settings {
+  psk: "\336\255\276\357"
+  name: "sprawl"
+  uplink_enabled: true
+  module_settings {
+    position_precision: 32
+  }
+}
+role: PRIMARY
+
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: get_config_request: SESSIONKEY_CONFIG
+DEBUG file:mesh_interface.py sendData line:546 len(data): 2
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 2599410428 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 2599410428 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00\x1f' b:b'\n\x1d\x15\xdc\xf8\xd9b"\x08\x08\x06\x12\x02(\x08\x18\x015\xfc\xda\xef\x9aH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 9aefdafc got acked under us
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_channel { settings { psk: "\336\255\276\357" name: "sprawl" uplink_enabled: true module_settings { position_precision: 32 } } role: PRIMARY }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 27
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\212\002\030\022\024\022\004\336\255\276\357\032\006sprawl(\001:\002\010 \030\001" want_response: true } id: 2548099837 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\212\002\030\022\024\022\004\336\255\276\357\032\006sprawl(\001:\002\010 \030\001" want_response: true } id: 2548099837 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x008' b:b'\n6\x15\xdc\xf8\xd9b"!\x08\x06\x12\x1b\x8a\x02\x18\x12\x14\x12\x04\xde\xad\xbe\xef\x1a\x06sprawl(\x01:\x02\x08 \x18\x01\x18\x015\xfd\xea\xe0\x97H\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 97e0eafd got acked under us
+DEBUG file:node.py writeChannel line:251 Wrote channel 0
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: get_config_request: SESSIONKEY_CONFIG
+DEBUG file:mesh_interface.py sendData line:546 len(data): 2
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 1676646142 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "(\010" want_response: true } id: 1676646142 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00\x1f' b:b'\n\x1d\x15\xdc\xf8\xd9b"\x08\x08\x06\x12\x02(\x08\x18\x015\xfe\x96\xefcH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 63ef96fe got acked under us
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { lora { use_preset: true region: US hop_limit: 3 tx_enabled: true tx_power: 30 sx126x_rx_boosted_gain: true } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 17
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\0162\014\010\0018\001@\003H\001P\036h\001" want_response: true } id: 4214255359 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\0162\014\010\0018\001@\003H\001P\036h\001" want_response: true } id: 4214255359 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00.' b:b'\n,\x15\xdc\xf8\xd9b"\x17\x08\x06\x12\x11\x92\x02\x0e2\x0c\x08\x018\x01@\x03H\x01P\x1eh\x01\x18\x015\xffn0\xfbH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet fb306eff got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:enabled
+DEBUG file:__main__.py setPref line:205 camel_name:enabled
+DEBUG file:__main__.py setPref line:229 valStr:True val:True
+DEBUG file:__main__.py setPref line:204 snake_name:fixed_pin
+DEBUG file:__main__.py setPref line:205 camel_name:fixedPin
+DEBUG file:__main__.py setPref line:229 valStr:123456 val:123456
+DEBUG file:node.py writeConfig line:238 Wrote: bluetooth
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { bluetooth { enabled: true fixed_pin: 123456 } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 11
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\010:\006\010\001\030\300\304\007" want_response: true } id: 1136164608 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\010:\006\010\001\030\300\304\007" want_response: true } id: 1136164608 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00(' b:b'\n&\x15\xdc\xf8\xd9b"\x11\x08\x06\x12\x0b\x92\x02\x08:\x06\x08\x01\x18\xc0\xc4\x07\x18\x015\x00\x7f\xb8CH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 43b87f00 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:role
+DEBUG file:__main__.py setPref line:205 camel_name:role
+DEBUG file:__main__.py setPref line:229 valStr:CLIENT_BASE val:CLIENT_BASE
+DEBUG file:__main__.py setPref line:204 snake_name:rebroadcast_mode
+DEBUG file:__main__.py setPref line:205 camel_name:rebroadcastMode
+DEBUG file:__main__.py setPref line:229 valStr:LOCAL_ONLY val:LOCAL_ONLY
+DEBUG file:__main__.py setPref line:204 snake_name:node_info_broadcast_secs
+DEBUG file:__main__.py setPref line:205 camel_name:nodeInfoBroadcastSecs
+DEBUG file:__main__.py setPref line:229 valStr:10800 val:10800
+DEBUG file:__main__.py setPref line:204 snake_name:buzzer_mode
+DEBUG file:__main__.py setPref line:205 camel_name:buzzerMode
+DEBUG file:__main__.py setPref line:229 valStr:DISABLED val:DISABLED
+DEBUG file:__main__.py setPref line:204 snake_name:led_heartbeat_disabled
+DEBUG file:__main__.py setPref line:205 camel_name:ledHeartbeatDisabled
+DEBUG file:__main__.py setPref line:229 valStr:False val:False
+DEBUG file:node.py writeConfig line:238 Wrote: device
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { device { role: CLIENT_BASE rebroadcast_mode: LOCAL_ONLY node_info_broadcast_secs: 10800 buzzer_mode: DISABLED } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 14
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\013\n\t\010\0140\0028\260Th\001" want_response: true } id: 2621117185 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\013\n\t\010\0140\0028\260Th\001" want_response: true } id: 2621117185 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00+' b:b'\n)\x15\xdc\xf8\xd9b"\x14\x08\x06\x12\x0e\x92\x02\x0b\n\t\x08\x0c0\x028\xb0Th\x01\x18\x015\x01\x13;\x9cH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 9c3b1301 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:screen_on_secs
+DEBUG file:__main__.py setPref line:205 camel_name:screenOnSecs
+DEBUG file:__main__.py setPref line:229 valStr:600 val:600
+DEBUG file:__main__.py setPref line:204 snake_name:use12h_clock
+DEBUG file:__main__.py setPref line:205 camel_name:use12hClock
+DEBUG file:node.py writeConfig line:238 Wrote: display
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { display { screen_on_secs: 600 } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 8
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\005*\003\010\330\004" want_response: true } id: 3296717570 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\005*\003\010\330\004" want_response: true } id: 3296717570 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00%' b:b'\n#\x15\xdc\xf8\xd9b"\x0e\x08\x06\x12\x08\x92\x02\x05*\x03\x08\xd8\x04\x18\x015\x02\xeb\x7f\xc4H\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet c47feb02 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:hop_limit
+DEBUG file:__main__.py setPref line:205 camel_name:hopLimit
+DEBUG file:__main__.py setPref line:229 valStr:3 val:3
+DEBUG file:__main__.py setPref line:204 snake_name:region
+DEBUG file:__main__.py setPref line:205 camel_name:region
+DEBUG file:__main__.py setPref line:229 valStr:US val:US
+DEBUG file:__main__.py setPref line:204 snake_name:sx126x_rx_boosted_gain
+DEBUG file:__main__.py setPref line:205 camel_name:sx126xRxBoostedGain
+DEBUG file:__main__.py setPref line:229 valStr:True val:True
+DEBUG file:__main__.py setPref line:204 snake_name:tx_enabled
+DEBUG file:__main__.py setPref line:205 camel_name:txEnabled
+DEBUG file:__main__.py setPref line:229 valStr:True val:True
+DEBUG file:__main__.py setPref line:204 snake_name:tx_power
+DEBUG file:__main__.py setPref line:205 camel_name:txPower
+DEBUG file:__main__.py setPref line:229 valStr:30 val:30
+DEBUG file:__main__.py setPref line:204 snake_name:use_preset
+DEBUG file:__main__.py setPref line:205 camel_name:usePreset
+DEBUG file:__main__.py setPref line:229 valStr:True val:True
+DEBUG file:__main__.py setPref line:204 snake_name:modem_preset
+DEBUG file:__main__.py setPref line:205 camel_name:modemPreset
+DEBUG file:__main__.py setPref line:229 valStr:SHORT_FAST val:SHORT_FAST
+DEBUG file:node.py writeConfig line:238 Wrote: lora
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { lora { use_preset: true modem_preset: SHORT_FAST bandwidth: 250 spread_factor: 11 coding_rate: 5 region: US hop_limit: 3 tx_enabled: true tx_power: 30 sx126x_rx_boosted_gain: true } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 26
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\0272\025\010\001\020\006\030\372\001 \013(\0058\001@\003H\001P\036h\001" want_response: true } id: 474209027 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\0272\025\010\001\020\006\030\372\001 \013(\0058\001@\003H\001P\036h\001" want_response: true } id: 474209027 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x007' b:b'\n5\x15\xdc\xf8\xd9b" \x08\x06\x12\x1a\x92\x02\x172\x15\x08\x01\x10\x06\x18\xfa\x01 \x0b(\x058\x01@\x03H\x01P\x1eh\x01\x18\x015\x03\xdbC\x1cH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 1c43db03 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:encryption_enabled
+DEBUG file:__main__.py setPref line:205 camel_name:encryptionEnabled
+DEBUG file:node.py writeConfig line:238 Wrote: mqtt
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_module_config { mqtt { address: "mqtt.meshtastic.org" username: "meshdev" password: "large4cats" encryption_enabled: true root: "msh/US" } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 57
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\232\0026\n4\022\023mqtt.meshtastic.org\032\007meshdev\"\nlarge4cats(\001B\006msh/US" want_response: true } id: 1228399364 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\232\0026\n4\022\023mqtt.meshtastic.org\032\007meshdev\"\nlarge4cats(\001B\006msh/US" want_response: true } id: 1228399364 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00V' b:b'\nT\x15\xdc\xf8\xd9b"?\x08\x06\x129\x9a\x026\n4\x12\x13mqtt.meshtastic.org\x1a\x07meshdev"\nlarge4cats(\x01B\x06msh/US\x18\x015\x04\xe37IH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 4937e304 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:enabled_protocols
+DEBUG file:__main__.py setPref line:205 camel_name:enabledProtocols
+DEBUG file:__main__.py setPref line:229 valStr:1 val:1
+DEBUG file:__main__.py setPref line:204 snake_name:ntp_server
+DEBUG file:__main__.py setPref line:205 camel_name:ntpServer
+DEBUG file:__main__.py setPref line:229 valStr:meshtastic.pool.ntp.org val:meshtastic.pool.ntp.org
+DEBUG file:node.py writeConfig line:238 Wrote: network
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { network { ntp_server: "meshtastic.pool.ntp.org" enabled_protocols: 1 } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 32
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\035\"\033*\027meshtastic.pool.ntp.orgP\001" want_response: true } id: 3485225733 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\035\"\033*\027meshtastic.pool.ntp.orgP\001" want_response: true } id: 3485225733 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00=' b:b'\n;\x15\xdc\xf8\xd9b"&\x08\x06\x12 \x92\x02\x1d"\x1b*\x17meshtastic.pool.ntp.orgP\x01\x18\x015\x05S\xbc\xcfH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet cfbc5305 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:broadcast_smart_minimum_distance
+DEBUG file:__main__.py setPref line:205 camel_name:broadcastSmartMinimumDistance
+DEBUG file:__main__.py setPref line:229 valStr:100 val:100
+DEBUG file:__main__.py setPref line:204 snake_name:broadcast_smart_minimum_interval_secs
+DEBUG file:__main__.py setPref line:205 camel_name:broadcastSmartMinimumIntervalSecs
+DEBUG file:__main__.py setPref line:229 valStr:30 val:30
+DEBUG file:__main__.py setPref line:204 snake_name:gps_mode
+DEBUG file:__main__.py setPref line:205 camel_name:gpsMode
+DEBUG file:__main__.py setPref line:229 valStr:NOT_PRESENT val:NOT_PRESENT
+DEBUG file:__main__.py setPref line:204 snake_name:gps_update_interval
+DEBUG file:__main__.py setPref line:205 camel_name:gpsUpdateInterval
+DEBUG file:__main__.py setPref line:229 valStr:120 val:120
+DEBUG file:__main__.py setPref line:204 snake_name:position_broadcast_secs
+DEBUG file:__main__.py setPref line:205 camel_name:positionBroadcastSecs
+DEBUG file:__main__.py setPref line:229 valStr:900 val:900
+DEBUG file:__main__.py setPref line:204 snake_name:position_broadcast_smart_enabled
+DEBUG file:__main__.py setPref line:205 camel_name:positionBroadcastSmartEnabled
+DEBUG file:__main__.py setPref line:229 valStr:True val:True
+DEBUG file:__main__.py setPref line:204 snake_name:position_flags
+DEBUG file:__main__.py setPref line:205 camel_name:positionFlags
+DEBUG file:__main__.py setPref line:229 valStr:811 val:811
+DEBUG file:node.py writeConfig line:238 Wrote: position
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { position { position_broadcast_secs: 900 position_broadcast_smart_enabled: true gps_update_interval: 120 position_flags: 811 broadcast_smart_minimum_distance: 100 broadcast_smart_minimum_interval_secs: 30 gps_mode: NOT_PRESENT } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 21
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\022\022\020\010\204\007\020\001(x8\253\006PdX\036h\002" want_response: true } id: 4091670278 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\022\022\020\010\204\007\020\001(x8\253\006PdX\036h\002" want_response: true } id: 4091670278 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x002' b:b'\n0\x15\xdc\xf8\xd9b"\x1b\x08\x06\x12\x15\x92\x02\x12\x12\x10\x08\x84\x07\x10\x01(x8\xab\x06PdX\x1eh\x02\x18\x015\x06\xef\xe1\xf3H\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet f3e1ef06 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:ls_secs
+DEBUG file:__main__.py setPref line:205 camel_name:lsSecs
+DEBUG file:__main__.py setPref line:229 valStr:300 val:300
+DEBUG file:__main__.py setPref line:204 snake_name:min_wake_secs
+DEBUG file:__main__.py setPref line:205 camel_name:minWakeSecs
+DEBUG file:__main__.py setPref line:229 valStr:10 val:10
+DEBUG file:__main__.py setPref line:204 snake_name:sds_secs
+DEBUG file:__main__.py setPref line:205 camel_name:sdsSecs
+DEBUG file:__main__.py setPref line:229 valStr:4294967295 val:4294967295
+DEBUG file:__main__.py setPref line:204 snake_name:wait_bluetooth_secs
+DEBUG file:__main__.py setPref line:205 camel_name:waitBluetoothSecs
+DEBUG file:__main__.py setPref line:229 valStr:60 val:60
+DEBUG file:__main__.py setPref line:204 snake_name:is_power_saving
+DEBUG file:__main__.py setPref line:205 camel_name:isPowerSaving
+DEBUG file:__main__.py setPref line:229 valStr:False val:False
+DEBUG file:node.py writeConfig line:238 Wrote: power
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { power { wait_bluetooth_secs: 60 sds_secs: 4294967295 ls_secs: 300 min_wake_secs: 10 } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 18
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\017\032\r <0\377\377\377\377\0178\254\002@\n" want_response: true } id: 1301996295 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:mesh_interface.py _sendToRadio line:1225 Waiting for free space in TX Queue
+DEBUG file:mesh_interface.py _sendToRadio line:1225 Waiting for free space in TX Queue
+DEBUG file:mesh_interface.py _sendToRadio line:1225 Waiting for free space in TX Queue
+DEBUG file:mesh_interface.py _sendToRadio line:1225 Waiting for free space in TX Queue
+DEBUG file:mesh_interface.py _sendToRadio line:1225 Waiting for free space in TX Queue
+DEBUG file:mesh_interface.py _sendToRadio line:1225 Waiting for free space in TX Queue
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\x04\x10\x10\x18\x10'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1270 TX QUEUE free 16 of 16, res = 0, id = 00000000 
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xfa\xf5\x83\xd4\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 2860579578
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1270 TX QUEUE free 16 of 16, res = 0, id = aa80fafa 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1282 Reply for unexpected packet ID aa80fafa
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \xfb\xdd\x8f\x99\x08'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 2200170235
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1270 TX QUEUE free 16 of 16, res = 0, id = 8323eefb 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1282 Reply for unexpected packet ID 8323eefb
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x123\r\xdc\xf8\xd9b\x15\xff\xff\xff\xff"\x1e\x08C\x12\x1a\re\x04\x00\x00\x12\x13\x08e\x15\x8d\x97\x8e@\x1d\x81N\x1b>%\x13\xa9%;(C5\xcd\x15\xb3iH\x03X\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: packet {
+  from: 1658452188
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\re\004\000\000\022\023\010e\025\215\227\216@\035\201N\033>%\023\251%;(C"
+  }
+  id: 1773344205
+  hop_limit: 3
+  priority: BACKGROUND
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 1658452188, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\re\x04\x00\x00\x12\x13\x08e\x15\x8d\x97\x8e@\x1d\x81N\x1b>%\x13\xa9%;(C', 'telemetry': {'time': 1125, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.456, 'channelUtilization': 0.15166666, 'airUtilTx': 0.0025277778, 'uptimeSeconds': 67}, 'raw': time: 1125
+device_metrics {
+  battery_level: 101
+  voltage: 4.456
+  channel_utilization: 0.151666656
+  air_util_tx: 0.0025277778
+  uptime_seconds: 67
+}
+}}, 'id': 1773344205, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 1658452188
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\re\004\000\000\022\023\010e\025\215\227\216@\035\201N\033>%\023\251%;(C"
+}
+id: 1773344205
+hop_limit: 3
+priority: BACKGROUND
+, 'fromId': '!62d9f8dc', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating deviceMetrics metrics for 1658452188 to {'batteryLevel': 101, 'voltage': 4.456, 'channelUtilization': 0.15166666, 'airUtilTx': 0.0025277778, 'uptimeSeconds': 67}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1636 Publishing meshtastic.receive.telemetry: packet={'from': 1658452188, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\re\x04\x00\x00\x12\x13\x08e\x15\x8d\x97\x8e@\x1d\x81N\x1b>%\x13\xa9%;(C', 'telemetry': {'time': 1125, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.456, 'channelUtilization': 0.15166666, 'airUtilTx': 0.0025277778, 'uptimeSeconds': 67}, 'raw': time: 1125 device_metrics { battery_level: 101 voltage: 4.456 channel_utilization: 0.151666656 air_util_tx: 0.0025277778 uptime_seconds: 67 } }}, 'id': 1773344205, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 1658452188 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\re\004\000\000\022\023\010e\025\215\227\216@\035\201N\033>%\023\251%;(C" } id: 1773344205 hop_limit: 3 priority: BACKGROUND , 'fromId': '!62d9f8dc', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\re\x04\x00\x00\x12\x13\x08e\x15\x8d\x97\x8e@\x1d\x81N\x1b>%\x13\xa9%;(C', 'telemetry': {'time': 1125, 'deviceMetrics': {'batteryLevel': 101, 'voltage': 4.456, 'channelUtilization': 0.15166666, 'airUtilTx': 0.0025277778, 'uptimeSeconds': 67}, 'raw': time: 1125
+device_metrics {
+  battery_level: 101
+  voltage: 4.456
+  channel_utilization: 0.151666656
+  air_util_tx: 0.0025277778
+  uptime_seconds: 67
+}
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12:\r\xdc\xf8\xd9b\x15\xff\xff\xff\xff"%\x08C\x12!\re\x04\x00\x002\x1a\x08C\x15\x81N\x1b>\x1d\x13\xa9%; \x018\x01@\x01`\xc8\xe7\x0eh\xb4\xef\x065\xce=\x11 H\x03X\n'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: packet {
+  from: 1658452188
+  to: 4294967295
+  decoded {
+    portnum: TELEMETRY_APP
+    payload: "\re\004\000\0002\032\010C\025\201N\033>\035\023\251%; \0018\001@\001`\310\347\016h\264\357\006"
+  }
+  id: 538000846
+  hop_limit: 3
+  priority: BACKGROUND
+}
+
+DEBUG file:__init__.py _onTelemetryReceive line:202 in _onTelemetryReceive() asDict:{'from': 1658452188, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\re\x04\x00\x002\x1a\x08C\x15\x81N\x1b>\x1d\x13\xa9%; \x018\x01@\x01`\xc8\xe7\x0eh\xb4\xef\x06', 'telemetry': {'time': 1125, 'localStats': {'uptimeSeconds': 67, 'channelUtilization': 0.15166666, 'airUtilTx': 0.0025277778, 'numPacketsTx': 1, 'numOnlineNodes': 1, 'numTotalNodes': 1, 'heapTotalBytes': 242632, 'heapFreeBytes': 112564}, 'raw': time: 1125
+local_stats {
+  uptime_seconds: 67
+  channel_utilization: 0.151666656
+  air_util_tx: 0.0025277778
+  num_packets_tx: 1
+  num_online_nodes: 1
+  num_total_nodes: 1
+  heap_total_bytes: 242632
+  heap_free_bytes: 112564
+}
+}}, 'id': 538000846, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 1658452188
+to: 4294967295
+decoded {
+  portnum: TELEMETRY_APP
+  payload: "\re\004\000\0002\032\010C\025\201N\033>\035\023\251%; \0018\001@\001`\310\347\016h\264\357\006"
+}
+id: 538000846
+hop_limit: 3
+priority: BACKGROUND
+, 'fromId': '!62d9f8dc', 'toId': '^all'}
+DEBUG file:__init__.py _onTelemetryReceive line:226 updating localStats metrics for 1658452188 to {'uptimeSeconds': 67, 'channelUtilization': 0.15166666, 'airUtilTx': 0.0025277778, 'numPacketsTx': 1, 'numOnlineNodes': 1, 'numTotalNodes': 1, 'heapTotalBytes': 242632, 'heapFreeBytes': 112564}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1636 Publishing meshtastic.receive.telemetry: packet={'from': 1658452188, 'to': 4294967295, 'decoded': {'portnum': 'TELEMETRY_APP', 'payload': b'\re\x04\x00\x002\x1a\x08C\x15\x81N\x1b>\x1d\x13\xa9%; \x018\x01@\x01`\xc8\xe7\x0eh\xb4\xef\x06', 'telemetry': {'time': 1125, 'localStats': {'uptimeSeconds': 67, 'channelUtilization': 0.15166666, 'airUtilTx': 0.0025277778, 'numPacketsTx': 1, 'numOnlineNodes': 1, 'numTotalNodes': 1, 'heapTotalBytes': 242632, 'heapFreeBytes': 112564}, 'raw': time: 1125 local_stats { uptime_seconds: 67 channel_utilization: 0.151666656 air_util_tx: 0.0025277778 num_packets_tx: 1 num_online_nodes: 1 num_total_nodes: 1 heap_total_bytes: 242632 heap_free_bytes: 112564 } }}, 'id': 538000846, 'hopLimit': 3, 'priority': 'BACKGROUND', 'raw': from: 1658452188 to: 4294967295 decoded { portnum: TELEMETRY_APP payload: "\re\004\000\0002\032\010C\025\201N\033>\035\023\251%; \0018\001@\001`\310\347\016h\264\357\006" } id: 538000846 hop_limit: 3 priority: BACKGROUND , 'fromId': '!62d9f8dc', 'toId': '^all'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'TELEMETRY_APP', 'payload': b'\re\x04\x00\x002\x1a\x08C\x15\x81N\x1b>\x1d\x13\xa9%; \x018\x01@\x01`\xc8\xe7\x0eh\xb4\xef\x06', 'telemetry': {'time': 1125, 'localStats': {'uptimeSeconds': 67, 'channelUtilization': 0.15166666, 'airUtilTx': 0.0025277778, 'numPacketsTx': 1, 'numOnlineNodes': 1, 'numTotalNodes': 1, 'heapTotalBytes': 242632, 'heapFreeBytes': 112564}, 'raw': time: 1125
+local_stats {
+  uptime_seconds: 67
+  channel_utilization: 0.151666656
+  air_util_tx: 0.0025277778
+  num_packets_tx: 1
+  num_online_nodes: 1
+  num_total_nodes: 1
+  heap_total_bytes: 242632
+  heap_free_bytes: 112564
+}
+}}
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002\017\032\r <0\377\377\377\377\0178\254\002@\n" want_response: true } id: 1301996295 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00/' b:b'\n-\x15\xdc\xf8\xd9b"\x18\x08\x06\x12\x12\x92\x02\x0f\x1a\r <0\xff\xff\xff\xff\x0f8\xac\x02@\n\x18\x015\x07\xe3\x9aMH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 4d9ae307 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet aa80fafa got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 8323eefb got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:private_key
+DEBUG file:__main__.py setPref line:205 camel_name:privateKey
+DEBUG file:__main__.py setPref line:229 valStr:base64:YI4/an2azhllmRzY9xersJS7oR9fM0q4MWrC3N8KrX0= val:b'`\x8e?j}\x9a\xce\x19e\x99\x1c\xd8\xf7\x17\xab\xb0\x94\xbb\xa1\x1f_3J\xb81j\xc2\xdc\xdf\n\xad}'
+DEBUG file:__main__.py setPref line:204 snake_name:public_key
+DEBUG file:__main__.py setPref line:205 camel_name:publicKey
+DEBUG file:__main__.py setPref line:229 valStr:base64:Y6jHVMlyOIQtxxT7Yc3Q/FVxkWa/jRxqawy2lIzSMEk= val:b'c\xa8\xc7T\xc9r8\x84-\xc7\x14\xfba\xcd\xd0\xfcUq\x91f\xbf\x8d\x1cjk\x0c\xb6\x94\x8c\xd20I'
+DEBUG file:__main__.py setPref line:204 snake_name:serial_enabled
+DEBUG file:__main__.py setPref line:205 camel_name:serialEnabled
+DEBUG file:__main__.py setPref line:229 valStr:True val:True
+DEBUG file:node.py writeConfig line:238 Wrote: security
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_config { security { public_key: "c\250\307T\311r8\204-\307\024\373a\315\320\374Uq\221f\277\215\034jk\014\266\224\214\3220I" private_key: "`\216?j}\232\316\031e\231\034\330\367\027\253\260\224\273\241\037_3J\2701j\302\334\337\n\255}" serial_enabled: true } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 75
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002HBF\n c\250\307T\311r8\204-\307\024\373a\315\320\374Uq\221f\277\215\034jk\014\266\224\214\3220I\022 `\216?j}\232\316\031e\231\034\330\367\027\253\260\224\273\241\037_3J\2701j\302\334\337\n\255}(\001" want_response: true } id: 3427604232 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\222\002HBF\n c\250\307T\311r8\204-\307\024\373a\315\320\374Uq\221f\277\215\034jk\014\266\224\214\3220I\022 `\216?j}\232\316\031e\231\034\330\367\027\253\260\224\273\241\037_3J\2701j\302\334\337\n\255}(\001" want_response: true } id: 3427604232 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00h' b:b'\nf\x15\xdc\xf8\xd9b"Q\x08\x06\x12K\x92\x02HBF\n c\xa8\xc7T\xc9r8\x84-\xc7\x14\xfba\xcd\xd0\xfcUq\x91f\xbf\x8d\x1cjk\x0c\xb6\x94\x8c\xd20I\x12 `\x8e?j}\x9a\xce\x19e\x99\x1c\xd8\xf7\x17\xab\xb0\x94\xbb\xa1\x1f_3J\xb81j\xc2\xdc\xdf\n\xad}(\x01\x18\x015\x08\x17M\xccH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet cc4d1708 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:blue
+DEBUG file:__main__.py setPref line:205 camel_name:blue
+DEBUG file:__main__.py setPref line:229 valStr:220 val:220
+DEBUG file:__main__.py setPref line:204 snake_name:current
+DEBUG file:__main__.py setPref line:205 camel_name:current
+DEBUG file:__main__.py setPref line:229 valStr:10 val:10
+DEBUG file:__main__.py setPref line:204 snake_name:green
+DEBUG file:__main__.py setPref line:205 camel_name:green
+DEBUG file:__main__.py setPref line:229 valStr:248 val:248
+DEBUG file:__main__.py setPref line:204 snake_name:red
+DEBUG file:__main__.py setPref line:205 camel_name:red
+DEBUG file:__main__.py setPref line:229 valStr:217 val:217
+DEBUG file:node.py writeConfig line:238 Wrote: ambient_lighting
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_module_config { ambient_lighting { current: 10 red: 217 green: 248 blue: 220 } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 16
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\232\002\rZ\013\020\n\030\331\001 \370\001(\334\001" want_response: true } id: 4280169225 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\232\002\rZ\013\020\n\030\331\001 \370\001(\334\001" want_response: true } id: 4280169225 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00-' b:b'\n+\x15\xdc\xf8\xd9b"\x16\x08\x06\x12\x10\x9a\x02\rZ\x0b\x10\n\x18\xd9\x01 \xf8\x01(\xdc\x01\x18\x015\t3\x1e\xffH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet ff1e3309 got acked under us
+DEBUG file:__main__.py setPref line:204 snake_name:detection_trigger_type
+DEBUG file:__main__.py setPref line:205 camel_name:detectionTriggerType
+DEBUG file:__main__.py setPref line:229 valStr:LOGIC_HIGH val:LOGIC_HIGH
+DEBUG file:__main__.py setPref line:204 snake_name:minimum_broadcast_secs
+DEBUG file:__main__.py setPref line:205 camel_name:minimumBroadcastSecs
+DEBUG file:__main__.py setPref line:229 valStr:45 val:45
+DEBUG file:node.py writeConfig line:238 Wrote: detection_sensor
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_module_config { detection_sensor { minimum_broadcast_secs: 45 detection_trigger_type: LOGIC_HIGH } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 9
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\232\002\006b\004\020-8\001" want_response: true } id: 2680984330 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\232\002\006b\004\020-8\001" want_response: true } id: 2680984330 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00&' b:b'\n$\x15\xdc\xf8\xd9b"\x0f\x08\x06\x12\t\x9a\x02\x06b\x04\x10-8\x01\x18\x015\n\x93\xcc\x9fH\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 9fcc930a got acked under us
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \x89\xe6\xf8\xf8\x0f'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 4280169225
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1270 TX QUEUE free 16 of 16, res = 0, id = ff1e3309 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1282 Reply for unexpected packet ID ff1e3309
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'Z\n\x10\x10\x18\x10 \x8a\xa6\xb2\xfe\t'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: queueStatus {
+  free: 16
+  maxlen: 16
+  mesh_packet_id: 2680984330
+}
+
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1270 TX QUEUE free 16 of 16, res = 0, id = 9fcc930a 
+DEBUG file:mesh_interface.py _handleQueueStatusFromRadio line:1282 Reply for unexpected packet ID 9fcc930a
+DEBUG file:__main__.py setPref line:204 snake_name:address
+DEBUG file:__main__.py setPref line:205 camel_name:address
+DEBUG file:__main__.py setPref line:229 valStr:mqtt.meshtastic.org val:mqtt.meshtastic.org
+DEBUG file:__main__.py setPref line:204 snake_name:encryption_enabled
+DEBUG file:__main__.py setPref line:205 camel_name:encryptionEnabled
+DEBUG file:__main__.py setPref line:229 valStr:True val:True
+DEBUG file:__main__.py setPref line:204 snake_name:password
+DEBUG file:__main__.py setPref line:205 camel_name:password
+DEBUG file:__main__.py setPref line:229 valStr:large4cats val:large4cats
+DEBUG file:__main__.py setPref line:204 snake_name:root
+DEBUG file:__main__.py setPref line:205 camel_name:root
+DEBUG file:__main__.py setPref line:229 valStr:msh val:msh
+DEBUG file:__main__.py setPref line:204 snake_name:username
+DEBUG file:__main__.py setPref line:205 camel_name:username
+DEBUG file:__main__.py setPref line:229 valStr:meshdev val:meshdev
+DEBUG file:node.py writeConfig line:238 Wrote: mqtt
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: set_module_config { mqtt { address: "mqtt.meshtastic.org" username: "meshdev" password: "large4cats" encryption_enabled: true root: "msh" } }
+DEBUG file:mesh_interface.py sendData line:546 len(data): 54
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\232\0023\n1\022\023mqtt.meshtastic.org\032\007meshdev\"\nlarge4cats(\001B\003msh" want_response: true } id: 1615213323 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\232\0023\n1\022\023mqtt.meshtastic.org\032\007meshdev\"\nlarge4cats(\001B\003msh" want_response: true } id: 1615213323 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00S' b:b'\nQ\x15\xdc\xf8\xd9b"<\x08\x06\x126\x9a\x023\n1\x12\x13mqtt.meshtastic.org\x1a\x07meshdev"\nlarge4cats(\x01B\x03msh\x18\x015\x0b3F`H\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x120\r\xdc\xf8\xd9b\x15\xdc\xf8\xd9b"\x18\x08\x06\x12\x0f2\x02J\x00\xaa\x06\x08-\xcfF)\x04\xb4x\xd85\xf8\xf2g&5\xcf\x89b%H\x03XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: packet {
+  from: 1658452188
+  to: 1658452188
+  decoded {
+    portnum: ADMIN_APP
+    payload: "2\002J\000\252\006\010-\317F)\004\264x\330"
+    request_id: 644346616
+  }
+  id: 627214799
+  hop_limit: 3
+  priority: RELIABLE
+  pki_encrypted: true
+}
+
+DEBUG file:__init__.py _onAdminReceive line:238 in _onAdminReceive() asDict:{'from': 1658452188, 'to': 1658452188, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'2\x02J\x00\xaa\x06\x08-\xcfF)\x04\xb4x\xd8', 'requestId': 644346616, 'admin': {'getConfigResponse': {'sessionkey': {}}, 'sessionPasskey': 'Lc9GKQS0eNg=', 'raw': get_config_response {
+  sessionkey {
+  }
+}
+session_passkey: "-\317F)\004\264x\330"
+}}, 'id': 627214799, 'hopLimit': 3, 'priority': 'RELIABLE', 'pkiEncrypted': True, 'raw': from: 1658452188
+to: 1658452188
+decoded {
+  portnum: ADMIN_APP
+  payload: "2\002J\000\252\006\010-\317F)\004\264x\330"
+  request_id: 644346616
+}
+id: 627214799
+hop_limit: 3
+priority: RELIABLE
+pki_encrypted: true
+, 'fromId': '!62d9f8dc', 'toId': '!62d9f8dc'}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1614 Got a response for requestId 644346616
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1636 Publishing meshtastic.receive.admin: packet={'from': 1658452188, 'to': 1658452188, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'2\x02J\x00\xaa\x06\x08-\xcfF)\x04\xb4x\xd8', 'requestId': 644346616, 'admin': {'getConfigResponse': {'sessionkey': {}}, 'sessionPasskey': 'Lc9GKQS0eNg=', 'raw': get_config_response { sessionkey { } } session_passkey: "-\317F)\004\264x\330" }}, 'id': 627214799, 'hopLimit': 3, 'priority': 'RELIABLE', 'pkiEncrypted': True, 'raw': from: 1658452188 to: 1658452188 decoded { portnum: ADMIN_APP payload: "2\002J\000\252\006\010-\317F)\004\264x\330" request_id: 644346616 } id: 627214799 hop_limit: 3 priority: RELIABLE pki_encrypted: true , 'fromId': '!62d9f8dc', 'toId': '!62d9f8dc'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'ADMIN_APP', 'payload': b'2\x02J\x00\xaa\x06\x08-\xcfF)\x04\xb4x\xd8', 'requestId': 644346616, 'admin': {'getConfigResponse': {'sessionkey': {}}, 'sessionPasskey': 'Lc9GKQS0eNg=', 'raw': get_config_response {
+  sessionkey {
+  }
+}
+session_passkey: "-\317F)\004\264x\330"
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12#\r\xdc\xf8\xd9b\x15\xdc\xf8\xd9b"\x0b\x08\x05\x12\x02\x18\x005\xf9\xd6\x9c\xea5\xd05\xd8=H\x03Xx\x88\x01\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: packet {
+  from: 1658452188
+  to: 1658452188
+  decoded {
+    portnum: ROUTING_APP
+    payload: "\030\000"
+    request_id: 3936147193
+  }
+  id: 1037579728
+  hop_limit: 3
+  priority: ACK
+  pki_encrypted: true
+}
+
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1614 Got a response for requestId 3936147193
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1636 Publishing meshtastic.receive.routing: packet={'from': 1658452188, 'to': 1658452188, 'decoded': {'portnum': 'ROUTING_APP', 'payload': b'\x18\x00', 'requestId': 3936147193, 'routing': {'errorReason': 'NONE', 'raw': error_reason: NONE }}, 'id': 1037579728, 'hopLimit': 3, 'priority': 'ACK', 'pkiEncrypted': True, 'raw': from: 1658452188 to: 1658452188 decoded { portnum: ROUTING_APP payload: "\030\000" request_id: 3936147193 } id: 1037579728 hop_limit: 3 priority: ACK pki_encrypted: true , 'fromId': '!62d9f8dc', 'toId': '!62d9f8dc'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'ROUTING_APP', 'payload': b'\x18\x00', 'requestId': 3936147193, 'routing': {'errorReason': 'NONE', 'raw': error_reason: NONE
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x120\r\xdc\xf8\xd9b\x15\xdc\xf8\xd9b"\x18\x08\x06\x12\x0f2\x02J\x00\xaa\x06\x08-\xcfF)\x04\xb4x\xd85\xfa\xfa\x80\xaa5\xd1\xe9IJH\x03XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: packet {
+  from: 1658452188
+  to: 1658452188
+  decoded {
+    portnum: ADMIN_APP
+    payload: "2\002J\000\252\006\010-\317F)\004\264x\330"
+    request_id: 2860579578
+  }
+  id: 1246357969
+  hop_limit: 3
+  priority: RELIABLE
+  pki_encrypted: true
+}
+
+DEBUG file:__init__.py _onAdminReceive line:238 in _onAdminReceive() asDict:{'from': 1658452188, 'to': 1658452188, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'2\x02J\x00\xaa\x06\x08-\xcfF)\x04\xb4x\xd8', 'requestId': 2860579578, 'admin': {'getConfigResponse': {'sessionkey': {}}, 'sessionPasskey': 'Lc9GKQS0eNg=', 'raw': get_config_response {
+  sessionkey {
+  }
+}
+session_passkey: "-\317F)\004\264x\330"
+}}, 'id': 1246357969, 'hopLimit': 3, 'priority': 'RELIABLE', 'pkiEncrypted': True, 'raw': from: 1658452188
+to: 1658452188
+decoded {
+  portnum: ADMIN_APP
+  payload: "2\002J\000\252\006\010-\317F)\004\264x\330"
+  request_id: 2860579578
+}
+id: 1246357969
+hop_limit: 3
+priority: RELIABLE
+pki_encrypted: true
+, 'fromId': '!62d9f8dc', 'toId': '!62d9f8dc'}
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1614 Got a response for requestId 2860579578
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1636 Publishing meshtastic.receive.admin: packet={'from': 1658452188, 'to': 1658452188, 'decoded': {'portnum': 'ADMIN_APP', 'payload': b'2\x02J\x00\xaa\x06\x08-\xcfF)\x04\xb4x\xd8', 'requestId': 2860579578, 'admin': {'getConfigResponse': {'sessionkey': {}}, 'sessionPasskey': 'Lc9GKQS0eNg=', 'raw': get_config_response { sessionkey { } } session_passkey: "-\317F)\004\264x\330" }}, 'id': 1246357969, 'hopLimit': 3, 'priority': 'RELIABLE', 'pkiEncrypted': True, 'raw': from: 1658452188 to: 1658452188 decoded { portnum: ADMIN_APP payload: "2\002J\000\252\006\010-\317F)\004\264x\330" request_id: 2860579578 } id: 1246357969 hop_limit: 3 priority: RELIABLE pki_encrypted: true , 'fromId': '!62d9f8dc', 'toId': '!62d9f8dc'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'ADMIN_APP', 'payload': b'2\x02J\x00\xaa\x06\x08-\xcfF)\x04\xb4x\xd8', 'requestId': 2860579578, 'admin': {'getConfigResponse': {'sessionkey': {}}, 'sessionPasskey': 'Lc9GKQS0eNg=', 'raw': get_config_response {
+  sessionkey {
+  }
+}
+session_passkey: "-\317F)\004\264x\330"
+}}
+DEBUG file:mesh_interface.py _handleFromRadio line:1293 in mesh_interface.py _handleFromRadio() fromRadioBytes: b'\x12#\r\xdc\xf8\xd9b\x15\xdc\xf8\xd9b"\x0b\x08\x05\x12\x02\x18\x005\xfb\xee#\x835\xd2\x81\x14mH\x03Xx\x88\x01\x01'
+DEBUG file:mesh_interface.py _handleFromRadio line:1305 Received from radio: packet {
+  from: 1658452188
+  to: 1658452188
+  decoded {
+    portnum: ROUTING_APP
+    payload: "\030\000"
+    request_id: 2200170235
+  }
+  id: 1830060498
+  hop_limit: 3
+  priority: ACK
+  pki_encrypted: true
+}
+
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1614 Got a response for requestId 2200170235
+DEBUG file:mesh_interface.py _handlePacketFromRadio line:1636 Publishing meshtastic.receive.routing: packet={'from': 1658452188, 'to': 1658452188, 'decoded': {'portnum': 'ROUTING_APP', 'payload': b'\x18\x00', 'requestId': 2200170235, 'routing': {'errorReason': 'NONE', 'raw': error_reason: NONE }}, 'id': 1830060498, 'hopLimit': 3, 'priority': 'ACK', 'pkiEncrypted': True, 'raw': from: 1658452188 to: 1658452188 decoded { portnum: ROUTING_APP payload: "\030\000" request_id: 2200170235 } id: 1830060498 hop_limit: 3 priority: ACK pki_encrypted: true , 'fromId': '!62d9f8dc', 'toId': '!62d9f8dc'} 
+DEBUG file:__main__.py onReceive line:73 in onReceive() d:{'portnum': 'ROUTING_APP', 'payload': b'\x18\x00', 'requestId': 2200170235, 'routing': {'errorReason': 'NONE', 'raw': error_reason: NONE
+}}
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet ff1e3309 got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 9fcc930a got acked under us
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 6046330b got acked under us
+INFO file:node.py commitSettingsTransaction line:634 Telling node to commit open transaction for editing settings
+DEBUG file:node.py _sendAdmin line:1015 adminIndex:0
+DEBUG file:mesh_interface.py sendData line:543 Serializing protobuf as data: commit_edit_settings: true session_passkey: "-\317F)\004\264x\330"
+DEBUG file:mesh_interface.py sendData line:546 len(data): 14
+DEBUG file:mesh_interface.py sendData line:547 mesh_pb2.Constants.DATA_PAYLOAD_LEN: 233
+DEBUG file:mesh_interface.py _sendPacket line:1007 Sending packet: to: 1658452188 decoded { portnum: ADMIN_APP payload: "\210\004\001\252\006\010-\317F)\004\264x\330" want_response: true } id: 2157660940 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: packet { to: 1658452188 decoded { portnum: ADMIN_APP payload: "\210\004\001\252\006\010-\317F)\004\264x\330" want_response: true } id: 2157660940 hop_limit: 3 want_ack: true priority: RELIABLE pki_encrypted: true }
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00+' b:b'\n)\x15\xdc\xf8\xd9b"\x14\x08\x06\x12\x0e\x88\x04\x01\xaa\x06\x08-\xcfF)\x04\xb4x\xd8\x18\x015\x0cK\x9b\x80H\x03P\x01XF\x88\x01\x01'
+DEBUG file:mesh_interface.py _sendToRadio line:1246 packet 809b4b0c got acked under us
+DEBUG file:serial_interface.py close line:93 Closing Serial stream
+DEBUG file:stream_interface.py close line:125 Closing stream
+DEBUG file:stream_interface.py _sendToRadioImpl line:115 Sending: disconnect: true
+DEBUG file:stream_interface.py _sendToRadioImpl line:120 sending header:b'\x94\xc3\x00\x02' b:b' \x01'
+DEBUG file:stream_interface.py __reader line:223 reader is exiting
+DEBUG file:stream_interface.py _disconnected line:86 Closing our port
+Connected to radio
+Setting device owner to Meshtastic f8dc
+Setting device owner short to f8dc
+Setting channel url to https://meshtastic.org/e/#ChQSBN6tvu8aBnNwcmF3bCgBOgIIIBIMCAE4AUADSAFQHmgB
+Set bluetooth.enabled to True
+Set bluetooth.fixed_pin to 123456
+Set device.role to CLIENT_BASE
+Set device.rebroadcast_mode to LOCAL_ONLY
+Set device.node_info_broadcast_secs to 10800
+Set device.buzzer_mode to DISABLED
+Set device.led_heartbeat_disabled to False
+Set display.screen_on_secs to 600
+Set lora.hop_limit to 3
+Set lora.region to US
+Set lora.sx126x_rx_boosted_gain to True
+Set lora.tx_enabled to True
+Set lora.tx_power to 30
+Set lora.use_preset to True
+Set lora.modem_preset to SHORT_FAST
+Set network.enabled_protocols to 1
+Set network.ntp_server to meshtastic.pool.ntp.org
+Set position.broadcast_smart_minimum_distance to 100
+Set position.broadcast_smart_minimum_interval_secs to 30
+Set position.gps_mode to NOT_PRESENT
+Set position.gps_update_interval to 120
+Set position.position_broadcast_secs to 900
+Set position.position_broadcast_smart_enabled to True
+Set position.position_flags to 811
+Set power.ls_secs to 300
+Set power.min_wake_secs to 10
+Set power.sds_secs to 4294967295
+Set power.wait_bluetooth_secs to 60
+Set power.is_power_saving to False
+Set security.private_key to base64:YI4/an2azhllmRzY9xersJS7oR9fM0q4MWrC3N8KrX0=
+Set security.public_key to base64:Y6jHVMlyOIQtxxT7Yc3Q/FVxkWa/jRxqawy2lIzSMEk=
+Set security.serial_enabled to True
+Set ambient_lighting.blue to 220
+Set ambient_lighting.current to 10
+Set ambient_lighting.green to 248
+Set ambient_lighting.red to 217
+Set detection_sensor.detection_trigger_type to LOGIC_HIGH
+Set detection_sensor.minimum_broadcast_secs to 45
+Set mqtt.address to mqtt.meshtastic.org
+Set mqtt.encryption_enabled to True
+Set mqtt.password to large4cats
+Set mqtt.root to msh
+Set mqtt.username to meshdev
+Writing modified configuration to device

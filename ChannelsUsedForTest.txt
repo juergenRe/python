@@ -1,0 +1,34 @@
+# Standard, Default
+Channels:
+  Index 0: PRIMARY psk=default { "psk": "AQ==", "moduleSettings": { "positionPrecision": 13, "isClientMuted": false }, "channelNum": 0, "name": "", "id": 0, "uplinkEnabled": false, "downlinkEnabled": false }
+
+Primary channel URL: https://meshtastic.org/e/#CgcSAQE6AggNEg8IATgDQANIAVAbaAHABgE
+
+# Test 
+Channels:
+  Index 0: PRIMARY psk=unencrypted { "moduleSettings": { "positionPrecision": 13, "isClientMuted": false }, "channelNum": 0, "psk": "", "name": "", "id": 0, "uplinkEnabled": false, "downlinkEnabled": false }
+
+Primary channel URL: https://meshtastic.org/e/#CgQ6AggNEg8IATgDQANIAVAbaAHABgE
+
+# Smoke Test 1
+Channels:
+  Index 0: PRIMARY psk=unencrypted { "moduleSettings": { "positionPrecision": 0, "isClientMuted": false }, "channelNum": 0, "psk": "", "name": "", "id": 0, "uplinkEnabled": false, "downlinkEnabled": false }
+
+Primary channel URL: https://meshtastic.org/e/#CgI6ABIPCAE4A0ADSAFQG2gBwAYB
+
+# Test 2
+Channels:
+  Index 0: PRIMARY psk=default { "psk": "AQ==", "moduleSettings": { "positionPrecision": 13, "isClientMuted": false }, "channelNum": 0, "name": "", "id": 0, "uplinkEnabled": false, "downlinkEnabled": false }
+  Index 1: SECONDARY psk=secret { "psk": "4qNfd/lRefPzORxeLozF8iyc2h/mxQBbgVBCL8hewt0=", "name": "Test", "uplinkEnabled": true, "downlinkEnabled": true, "moduleSettings": { "positionPrecision": 17, "isClientMuted": false }, "channelNum": 0, "id": 0 }
+
+Primary channel URL: https://meshtastic.org/e/#CgcSAQE6AggNEg8IATgDQANIAVAbaAHABgE
+Complete URL (includes all channels): https://meshtastic.org/e/#CgcSAQE6AggNCjASIOKjX3f5UXnz8zkcXi6MxfIsnNof5sUAW4FQQi_IXsLdGgRUZXN0KAEwAToCCBESDwgBOANAA0gBUBtoAcAGAQ
+
+# Test 3
+Channels:
+  Index 0: PRIMARY psk=default { "psk": "AQ==", "moduleSettings": { "positionPrecision": 13, "isClientMuted": false }, "channelNum": 0, "name": "", "id": 0, "uplinkEnabled": false, "downlinkEnabled": false }
+  Index 1: SECONDARY psk=secret { "psk": "4qNfd/lRefPzORxeLozF8iyc2h/mxQBbgVBCL8hewt0=", "name": "test1", "uplinkEnabled": true, "downlinkEnabled": true, "moduleSettings": { "positionPrecision": 17, "isClientMuted": false }, "channelNum": 0, "id": 0 }
+  Index 2: SECONDARY psk=secret { "psk": "bI8jYZvDe/quX0dDxIvcu9HHtJyi8h1TqlqGz+Xn0Kg=", "name": "test2", "uplinkEnabled": true, "downlinkEnabled": true, "channelNum": 0, "id": 0 }
+
+Primary channel URL: https://meshtastic.org/e/#CgcSAQE6AggNEg8IATgDQANIAVAbaAHABgE
+Complete URL (includes all channels): https://meshtastic.org/e/#CgcSAQE6AggNCjESIOKjX3f5UXnz8zkcXi6MxfIsnNof5sUAW4FQQi_IXsLdGgV0ZXN0MSgBMAE6AggRCi0SIGyPI2Gbw3v6rl9HQ8SL3LvRx7ScovIdU6pahs_l59CoGgV0ZXN0MigBMAESDwgBOANAA0gBUBtoAcAGAQ

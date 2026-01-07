@@ -1,0 +1,312 @@
+Connected to radio
+
+Owner: Meshtastic 6c08 (6c08)
+My info: { "myNodeNum": 3676924936, "rebootCount": 711, "minAppVersion": 30200, "deviceId": "uAlvjpfAA7+etQOxAFU3Vw==", "pioEnv": "heltec-v3", "firmwareEdition": "VANILLA", "nodedbCount": 0 }
+Metadata: { "firmwareVersion": "2.6.11.60ec05e", "deviceStateVersion": 24, "canShutdown": true, "hasWifi": true, "hasBluetooth": true, "positionFlags": 811, "hwModel": "HELTEC_V3", "hasPKC": true, "excludedModules": 1280, "hasEthernet": false, "role": "CLIENT", "hasRemoteHardware": false }
+
+Nodes in mesh: {
+  "!db296c08": {
+    "num": 3676924936,
+    "user": {
+      "id": "!db296c08",
+      "longName": "Meshtastic 6c08",
+      "shortName": "6c08",
+      "macaddr": "10:51:db:29:6c:08",
+      "hwModel": "HELTEC_V3",
+      "publicKey": "nysISJsPGcSbHreJanEazPV15tKnp/lj/li2/JVIZCY="
+    },
+    "position": {},
+    "deviceMetrics": {
+      "batteryLevel": 101,
+      "voltage": 4.344,
+      "channelUtilization": 4.88,
+      "airUtilTx": 0.027111111,
+      "uptimeSeconds": 61
+    },
+    "isFavorite": true
+  },
+  "!1a6aeb85": {
+    "num": 443214725,
+    "user": {
+      "id": "!1a6aeb85",
+      "longName": "Meshtastic eb85",
+      "shortName": "eb85",
+      "macaddr": "d1:05:1a:6a:eb:85",
+      "hwModel": "RAK4631",
+      "role": "ROUTER_LATE",
+      "publicKey": "8GLK6yumkBC8Iw+OSkke8n0y8wUQ7Kkd+nbdT2T8bkw=",
+      "isUnmessagable": true
+    },
+    "snr": 6.0,
+    "deviceMetrics": {
+      "batteryLevel": 99,
+      "voltage": 4.181,
+      "channelUtilization": 0.0,
+      "airUtilTx": 0.20916668,
+      "uptimeSeconds": 1888368
+    },
+    "hopsAway": 0
+  },
+  "!c5db8a75": {
+    "num": 3319499381,
+    "user": {
+      "id": "!c5db8a75",
+      "longName": "Meshtastic 8a75",
+      "shortName": "8a75",
+      "macaddr": "c6:b6:c5:db:8a:75",
+      "hwModel": "RAK4631",
+      "publicKey": "he3KdoOWGABSk5MtjNIxnhUS7PTjIbiH4FsUaXGCDVU="
+    },
+    "snr": 6.75,
+    "deviceMetrics": {
+      "batteryLevel": 101,
+      "voltage": 4.223,
+      "channelUtilization": 0.0,
+      "airUtilTx": 0.41886112,
+      "uptimeSeconds": 3306
+    },
+    "hopsAway": 1
+  }
+}
+
+Preferences: {
+  "device": {
+    "serialEnabled": true,
+    "rebroadcastMode": "LOCAL_ONLY",
+    "nodeInfoBroadcastSecs": 10800,
+    "tzdef": "GMT-1GMT,M3.5.0,M10.4.0/3",
+    "ledHeartbeatDisabled": true,
+    "role": "CLIENT",
+    "buttonGpio": 0,
+    "buzzerGpio": 0,
+    "doubleTapAsButtonPress": false,
+    "isManaged": false,
+    "disableTripleClick": false,
+    "buzzerMode": "ALL_ENABLED"
+  },
+  "position": {
+    "positionBroadcastSecs": 3600,
+    "gpsUpdateInterval": 3600,
+    "gpsAttemptTime": 900,
+    "positionFlags": 811,
+    "broadcastSmartMinimumDistance": 100,
+    "broadcastSmartMinimumIntervalSecs": 30,
+    "gpsMode": "NOT_PRESENT",
+    "positionBroadcastSmartEnabled": false,
+    "fixedPosition": false,
+    "gpsEnabled": false,
+    "rxGpio": 0,
+    "txGpio": 0,
+    "gpsEnGpio": 0
+  },
+  "power": {
+    "waitBluetoothSecs": 60,
+    "sdsSecs": 4294967295,
+    "lsSecs": 300,
+    "minWakeSecs": 10,
+    "isPowerSaving": false,
+    "onBatteryShutdownAfterSecs": 0,
+    "adcMultiplierOverride": 0.0,
+    "deviceBatteryInaAddress": 0,
+    "powermonEnables": "0"
+  },
+  "network": {
+    "ntpServer": "meshtastic.pool.ntp.org",
+    "enabledProtocols": 1,
+    "wifiEnabled": false,
+    "wifiSsid": "",
+    "wifiPsk": "",
+    "ethEnabled": false,
+    "addressMode": "DHCP",
+    "rsyslogServer": "",
+    "ipv6Enabled": false
+  },
+  "display": {
+    "screenOnSecs": 60,
+    "autoScreenCarouselSecs": 15,
+    "displaymode": "INVERTED",
+    "gpsFormat": "UNUSED",
+    "compassNorthTop": false,
+    "flipScreen": false,
+    "units": "METRIC",
+    "oled": "OLED_AUTO",
+    "headingBold": false,
+    "wakeOnTapOrMotion": false,
+    "compassOrientation": "DEGREES_0",
+    "use12hClock": false,
+    "useLongNodeName": false
+  },
+  "lora": {
+    "usePreset": true,
+    "region": "EU_868",
+    "hopLimit": 3,
+    "txEnabled": true,
+    "txPower": 27,
+    "sx126xRxBoostedGain": true,
+    "ignoreMqtt": true,
+    "modemPreset": "LONG_FAST",
+    "bandwidth": 0,
+    "spreadFactor": 0,
+    "codingRate": 0,
+    "frequencyOffset": 0.0,
+    "channelNum": 0,
+    "overrideDutyCycle": false,
+    "overrideFrequency": 0.0,
+    "paFanDisabled": false,
+    "ignoreIncoming": [],
+    "configOkToMqtt": false
+  },
+  "bluetooth": {
+    "enabled": true,
+    "mode": "FIXED_PIN",
+    "fixedPin": 123456
+  },
+  "security": {
+    "publicKey": "nysISJsPGcSbHreJanEazPV15tKnp/lj/li2/JVIZCY=",
+    "privateKey": "QBtbILHHhoqzpi5HsT66/UGhpuT429it3UW0MSVPEVk=",
+    "serialEnabled": true,
+    "adminKey": [],
+    "isManaged": false,
+    "debugLogApiEnabled": false,
+    "adminChannelEnabled": false
+  },
+  "version": 0
+}
+
+Module preferences: {
+  "mqtt": {
+    "address": "mqtt.meshtastic.org",
+    "username": "meshdev",
+    "password": "large4cats",
+    "encryptionEnabled": true,
+    "root": "msh/EU_868",
+    "enabled": false,
+    "jsonEnabled": false,
+    "tlsEnabled": false,
+    "proxyToClientEnabled": false,
+    "mapReportingEnabled": false
+  },
+  "serial": {
+    "enabled": false,
+    "echo": false,
+    "rxd": 0,
+    "txd": 0,
+    "baud": "BAUD_DEFAULT",
+    "timeout": 0,
+    "mode": "DEFAULT",
+    "overrideConsoleSerialPort": false
+  },
+  "externalNotification": {
+    "enabled": false,
+    "outputMs": 0,
+    "output": 0,
+    "outputVibra": 0,
+    "outputBuzzer": 0,
+    "active": false,
+    "alertMessage": false,
+    "alertMessageVibra": false,
+    "alertMessageBuzzer": false,
+    "alertBell": false,
+    "alertBellVibra": false,
+    "alertBellBuzzer": false,
+    "usePwm": false,
+    "nagTimeout": 0,
+    "useI2sAsBuzzer": false
+  },
+  "storeForward": {
+    "enabled": false,
+    "heartbeat": false,
+    "records": 0,
+    "historyReturnMax": 0,
+    "historyReturnWindow": 0,
+    "isServer": false
+  },
+  "rangeTest": {
+    "enabled": false,
+    "sender": 0,
+    "save": false,
+    "clearOnReboot": false
+  },
+  "telemetry": {
+    "deviceUpdateInterval": 1800,
+    "environmentUpdateInterval": 1800,
+    "environmentMeasurementEnabled": false,
+    "environmentScreenEnabled": false,
+    "environmentDisplayFahrenheit": false,
+    "airQualityEnabled": false,
+    "airQualityInterval": 0,
+    "powerMeasurementEnabled": false,
+    "powerUpdateInterval": 0,
+    "powerScreenEnabled": false,
+    "healthMeasurementEnabled": false,
+    "healthUpdateInterval": 0,
+    "healthScreenEnabled": false,
+    "deviceTelemetryEnabled": false
+  },
+  "cannedMessage": {
+    "rotary1Enabled": false,
+    "inputbrokerPinA": 0,
+    "inputbrokerPinB": 0,
+    "inputbrokerPinPress": 0,
+    "inputbrokerEventCw": "NONE",
+    "inputbrokerEventCcw": "NONE",
+    "inputbrokerEventPress": "NONE",
+    "updown1Enabled": false,
+    "enabled": false,
+    "allowInputSource": "",
+    "sendBell": false
+  },
+  "audio": {
+    "codec2Enabled": false,
+    "pttPin": 0,
+    "bitrate": "CODEC2_DEFAULT",
+    "i2sWs": 0,
+    "i2sSd": 0,
+    "i2sDin": 0,
+    "i2sSck": 0
+  },
+  "remoteHardware": {
+    "enabled": false,
+    "allowUndefinedPinAccess": false,
+    "availablePins": []
+  },
+  "neighborInfo": {
+    "enabled": false,
+    "updateInterval": 0,
+    "transmitOverLora": false
+  },
+  "ambientLighting": {
+    "current": 10,
+    "red": 41,
+    "green": 108,
+    "blue": 8,
+    "ledState": false
+  },
+  "detectionSensor": {
+    "minimumBroadcastSecs": 45,
+    "detectionTriggerType": "LOGIC_HIGH",
+    "enabled": false,
+    "stateBroadcastSecs": 0,
+    "sendBell": false,
+    "name": "",
+    "monitorPin": 0,
+    "usePullup": false
+  },
+  "paxcounter": {
+    "enabled": false,
+    "paxcounterUpdateInterval": 0,
+    "wifiThreshold": 0,
+    "bleThreshold": 0
+  },
+  "version": 0
+}
+
+Channels:
+  Index 0: PRIMARY psk=default { "psk": "AQ==", "moduleSettings": { "positionPrecision": 13, "isMuted": false }, "channelNum": 0, "name": "", "id": 0, "uplinkEnabled": false, "downlinkEnabled": false }
+  Index 1: SECONDARY psk=secret { "psk": "36UWlTA5hjXIHYwpS4oyET80YUDh5XChBb8MicJFkNM=", "name": "TMD", "uplinkEnabled": true, "downlinkEnabled": true, "moduleSettings": { "positionPrecision": 13, "isMuted": false }, "channelNum": 0, "id": 0 }
+
+Primary channel URL: https://meshtastic.org/e/#CgcSAQE6AggNEg8IATgDQANIAVAbaAHABgE
+Complete URL (includes all channels): https://meshtastic.org/e/#CgcSAQE6AggNCi8SIN-lFpUwOYY1yB2MKUuKMhE_NGFA4eVwoQW_DInCRZDTGgNUTUQoATABOgIIDRIPCAE4A0ADSAFQG2gBwAYB
+
+*** A newer version v2.7.5 is available! Consider running "pip install --upgrade meshtastic" ***
+

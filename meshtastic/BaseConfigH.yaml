@@ -1,0 +1,61 @@
+# start of Meshtastic configure yaml
+channel_url: https://meshtastic.org/e/#CgcSAQE6AggNEhIIATgDQANIAVAbaAHABgHIBgE
+config:
+  bluetooth:
+    enabled: true
+    fixedPin: 123456
+    mode: FIXED_PIN
+  device:
+    nodeInfoBroadcastSecs: 43200
+  display:
+    displaymode: INVERTED
+    screenOnSecs: 30
+  lora:
+    configOkToMqtt: true
+    hopLimit: 3
+    ignoreMqtt: true
+    region: EU_868
+    sx126xRxBoostedGain: true
+    txEnabled: true
+    txPower: 27
+    usePreset: true
+  mqtt:
+    encryptionEnabled: false
+  network:
+    enabledProtocols: 1
+    ntpServer: meshtastic.pool.ntp.org
+  position:
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 30
+    gpsMode: NOT_PRESENT
+    gpsUpdateInterval: 43200
+    positionBroadcastSecs: 43200
+    positionBroadcastSmartEnabled: false
+    positionFlags: 811
+  power:
+    lsSecs: 300
+    minWakeSecs: 10
+    sdsSecs: 4294967295
+    waitBluetoothSecs: 60
+  security:
+    privateKey: base64:QBtbILHHhoqzpi5HsT66/UGhpuT429it3UW0MSVPEVk=
+    publicKey: base64:nysISJsPGcSbHreJanEazPV15tKnp/lj/li2/JVIZCY=
+    serialEnabled: true
+module_config:
+  ambientLighting:
+    blue: 8
+    current: 10
+    green: 108
+    red: 41
+  detectionSensor:
+    detectionTriggerType: LOGIC_HIGH
+    minimumBroadcastSecs: 45
+  mqtt:
+    address: mqtt.meshtastic.org
+    encryptionEnabled: true
+    password: large4cats
+    root: msh/EU_868
+    username: meshdev
+owner: Meshtastic 6c08
+owner_short: 6c08
+
