@@ -57,12 +57,11 @@ class TCPInterface(StreamInterface):
         logger.debug("Closing TCP stream")
         super().close()
         # Sometimes the socket read might be blocked in the reader thread.
-        # Therefore we force the shutdown by closing the socket here
+        # Therefore, we force the shutdown by closing the socket here
         if self.socket is not None:
             with contextlib.suppress(Exception):  # Ignore errors in shutdown, because we might have a race with the server
                 self._socket_shutdown()
             self.socket.close()
-
         self.socket = None
 
     def _writeBytes(self, b: bytes) -> None:

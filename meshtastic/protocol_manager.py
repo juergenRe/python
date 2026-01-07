@@ -4,11 +4,13 @@ from typing import Any, Callable
 from pathlib import Path
 from importlib import import_module
 
+from meshtastic import topic_map
 from meshtastic.protobuf import mesh_pb2
 from meshtastic.mesh_interface import MeshInterface
 from meshtastic.protocol_base import IProtocolHandler
 from meshtastic.protocol_base import (
     UNKNOWN_HANDLER,
+    DEFAULT_HANDLER,
     START_CONFIG_HANDLER,
     LOGGING_HANDLER,
     CHANNEL_HANDLER,
@@ -19,21 +21,36 @@ from meshtastic.protocol_base import (
 
 logger = logging.getLogger(__name__)
 
-# some fields will use the same handler to process data. This dict lists them.
+# some fields will use the same handler to process data and/or use a specific topic.
+# This dict lists them: <field>: (handler_type, topic_name)
 # if no entry for a specific field, then use the field name as handler type (1:1 relation)
 FIELD2HANDLERTYPE = {
-    'my_info': START_CONFIG_HANDLER,
-    'metadata': START_CONFIG_HANDLER,
-    'node_info': START_CONFIG_HANDLER,
-    'config': CONFIG_HANDLER,
+    'my_info': DEFAULT_HANDLER,
+    'metadata': DEFAULT_HANDLER,
+    'node_info': DEFAULT_HANDLER,
+    'config': DEFAULT_HANDLER,
     'config_complete_id': START_CONFIG_HANDLER,
-    'moduleConfig': CONFIG_HANDLER,
+    'moduleConfig': DEFAULT_HANDLER,
     'channel': CHANNEL_HANDLER,
     'log_record': LOGGING_HANDLER
 }
 
+# makes the relation between a field from a message to the topic to be published. Needed
+# by the default handler.
+FIELD2TOPIC = {
+    'my_info': topic_map.SUBS_MY_INFO_PUB,
+    'metadata': topic_map.SUBS_METADATA_PUB,
+    'node_info': topic_map.SUBS_NODEINFO_PUB,
+    'config': topic_map.SUBS_CONFIG_PUB,
+    'config_complete_id': topic_map.SUBS_STARTCOMM_FINISH,
+    'moduleConfig': topic_map.SUBS_CONFIG_PUB,
+    'channel': topic_map.SUBS_CHANNEL_PUB,
+    'log_record': 'None'
+}
+
 KNOWN_HANDLERS = [
     'meshtastic.protocol_base.NotImplementedHandler',
+    'meshtastic.protocol_base.DefaultHandler',
     'meshtastic.protocol_start_config.StartConfigHandler',
     'meshtastic.protocol_logging.LoggingHandler',
     'meshtastic.protocol_channel_data.ChannelHandler',
@@ -60,6 +77,7 @@ class ProtocolHandlerManager:
     def instantiateHandlers(self, **kwargs):
         """Create all needed handler objects and keep them in a list
         Register all handlers according their type with the mesh interface"""
+        kwargs['field2Topic'] = FIELD2TOPIC
         self.handlers = self._createActualHandlers(**kwargs)
         handlerTypes = { hdlr.handlerType: hdlr for hdlr in self.handlers}
 

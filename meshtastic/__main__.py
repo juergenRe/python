@@ -1352,6 +1352,10 @@ def common():
         mesh = MeshModel()
         CommandExecutor(pm, mesh, args.timeout).execute(cmdList)
 
+    # shutdown client correctly
+    if client.isConnected:
+        client.close()
+
     # We assume client is fully connected now
     # onConnected(client)
 

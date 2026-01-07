@@ -84,8 +84,31 @@ class MeshInterfaceStatus:
     """keeps track of the current status data"""
     isConnected: bool = False
     tsConnected: datetime = datetime(1,1, 1)
+    tsUnconnected: datetime = datetime(1,1, 1)
     rebooted: bool = True
     tsRebooted: datetime = datetime(1, 1, 1)
+
+    def __repr__(self):
+        sConn = 'Conn' if self.isConnected else '/Conn'
+        sReboot = 'Reboot' if self.rebooted else '/Reboot'
+        tsconn = '---' if self.tsConnected.year == 1 else self.tsConnected.isoformat(' ')
+        tsunconn = '---' if self.tsUnconnected.year == 1 else self.tsUnconnected.isoformat(' ')
+        tsboot = '---' if self.tsRebooted.year == 1 else self.tsRebooted.isoformat(' ')
+        return f"{self.__class__.__name__}({sConn}@{tsconn}/{tsunconn}, {sReboot}@{tsboot}"
+
+    def updateConnected(self, value: bool) -> None:
+        """put new value of connection Status"""
+        self.isConnected = value
+        if value:
+            self.tsConnected = datetime.now()
+        else:
+            self.tsUnconnected = datetime.now()
+
+    def updateRebooted(self, value: bool) -> None:
+        """put new value of rebooted Status"""
+        self.rebooted = value
+        if self.rebooted:       # only take timestamp when the reboot took place
+            self.tsRebooted = datetime.now()
 
 
 SEND_EVENT = 0
@@ -114,6 +137,15 @@ class QueueStatus:
             return True
         return xon          # don't change value
 
+    def update(self, d: dict) -> None:
+        if 'free' in d:
+            self.freeSpace = d['free']
+        if 'maxlen' in d:
+            self.maxSpace = d['maxlen']
+        if 'error' in d:
+            self.error = d['error']
+        if 'lastId' in d:
+            self.lastId = d['lastId']
 
 class MeshInterface:  # pylint: disable=R0902
     """Interface class for meshtastic devices
@@ -177,7 +209,9 @@ class MeshInterface:  # pylint: disable=R0902
         self.interface = InterfaceFactory().createInterface(**ifceType, **kwargs)
 
         pub.subscribe(self.onStatusRequest, topic_map.SUBS_MI_STATUS_REQ)
-        logger.debug(f'Subscribing to topics: {topic_map.SUBS_MI_STATUS_REQ}')
+        pub.subscribe(self.onConnected, topic_map.SUBS_MI_CONNECTED)
+        pub.subscribe(self.onDisconnect, topic_map.SUBS_MI_DISCONNECT)
+        logger.debug(f'Subscribing to topics: {(topic_map.SUBS_MI_STATUS_REQ, topic_map.SUBS_MI_CONNECTED, topic_map.SUBS_MI_DISCONNECT)}')
 
     def _createThread(self) -> threading.Thread:
         """Create and start the processing thread"""
@@ -213,6 +247,10 @@ class MeshInterface:  # pylint: disable=R0902
             time.sleep(0.1)
         logger.debug("Stop processing")
 
+    @property
+    def isConnected(self) -> bool:
+        return self.status.isConnected
+
     def onStatusRequest(self) -> None:
         """returns actual interface status"""
         statusDict = asdict(self.status)
@@ -221,6 +259,25 @@ class MeshInterface:  # pylint: disable=R0902
         # )
         pub.sendMessage(topic_map.SUBS_MI_STATUS_PUB, data=statusDict)
         logger.debug(f"got sub status request: return status {self.status} ")
+
+    def onConnected(self) -> None:
+        """Callback when the connection has established:
+        - Start heartbeat
+        - update status
+        """
+        self.status.updateConnected(True)
+        pub.sendMessage(topic_map.SUBS_MI_STATUS_PUB, data=asdict(self.status))
+        pub.sendMessage(topic_map.TOPIC_CONNECTED)
+        self._startHeartbeat()
+        logger.debug(f"Connected and heartbeat started {self.status}")
+
+    def onDisconnect(self):
+        """Callback for a disconnection request"""
+        self.close()
+        self.status.updateConnected(False)
+        pub.sendMessage(topic_map.SUBS_MI_STATUS_PUB, data=asdict(self.status))
+        pub.sendMessage(topic_map.TOPIC_DISCONNECTED)
+        logger.debug(f"Disconnected, interface closed and heartbeat stopped {self.status}")
 
     def startConnection(self, cmdTxt: str, timeout: int = 300) -> int:
         """Establish connection to radio and get initial configuration"""
@@ -239,9 +296,7 @@ class MeshInterface:  # pylint: disable=R0902
         """Shutdown this interface"""
         if self.heartbeatTimer:
             self.heartbeatTimer.cancel()
-
         self._sendDisconnect()
-
         if self.interface:
             self.interface.close()
 
@@ -291,19 +346,11 @@ class MeshInterface:  # pylint: disable=R0902
 
         callback()  # run our periodic callback now, it will make another timer if necessary
 
-    def _connected(self):
-        """Called by this class to tell clients we are now fully connected to a node"""
-        # (because I'm lazy) _connected might be called when remote Node
-        # objects complete their config reads, don't generate redundant isConnected
-        # for the local interface
-        if not self.isConnected.is_set():
-            self.isConnected.set()
-            self._startHeartbeat()
-            publishingThread.queueWork(
-                lambda: pub.sendMessage(
-                    "meshtastic.connection.established", interface=self
-                )
-            )
+    def _sendDisconnect(self):
+        """Tell device we are done using it"""
+        m = mesh_pb2.ToRadio()
+        m.disconnect = True
+        self._sendToRadio(m)
 
     def _sendToRadio(self, toRadio: mesh_pb2.ToRadio) -> None:
         """Send a ToRadio protobuf to the device using opened interface"""
@@ -325,12 +372,16 @@ class MeshInterface:  # pylint: disable=R0902
         pass
 
     def _handleReboot(self):
-        pass
-    
-    def _handleQueueStatus(self, packet: mesh_pb2.FromRadio) -> None:
-        d = MessageToDict(packet.QueueStatus)
-        self.qs = QueueStatus(**d)
-        logger.debug(f"Queue Status: {self.qs}")
+        """handles the reboot information message"""
+        self.status.updateRebooted(True)
+        pub.sendMessage(topic_map.SUBS_MI_STATUS_PUB, data=asdict(self.status))
+        logger.debug(f"Reboot message: {self.status}")
+
+    def _handleQueueStatus(self, field: str, packet: mesh_pb2.FromRadio) -> None:
+        """Handle the QueueStatus message"""
+        d = MessageToDict(packet.queueStatus)
+        self.qs.update(d)
+        logger.debug(f"{self.qs}")
 
         if 'res' in d:
             return

@@ -28,7 +28,8 @@ class ChannelHandler(ProtocolHandlerBase):
                 chanNo = 0
             else:
                 chanNo = chanDef['index']
-            pub.sendMessage(topic_map.SUBS_CHANNEL_PUB, chanNo, chanRole, chanDef['settings'])
+            data = {chanNo: {'role': chanRole, 'settings': chanDef['settings']}}
+            pub.sendMessage(topic_map.SUBS_CHANNEL_PUB, field='channel', data=data )
         else:
             logger.debug(f"Pub-Sub: Received Invalid channel message")
 

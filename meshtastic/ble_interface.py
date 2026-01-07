@@ -42,7 +42,7 @@ class BLEInterface(RadioInterfaceBase):
 
         super().__init__(address, rcvCallback, logCallback)
         self._should_read: bool = False
-        self._want_receive: bool = True
+        self._wantExit: bool = False
         self.client: BLEClient | None = None
         self._receiveThread: Thread | None = None
         self._exit_handler = None
@@ -178,27 +178,26 @@ class BLEInterface(RadioInterfaceBase):
         return client
 
     def _receiveFromRadioImpl(self) -> None:
-        self._want_receive = True
-        while self._want_receive:
+        while not self._wantExit:
             if self._should_read:
                 self._should_read = False
                 retries: int = 0
-                while self._want_receive:
+                while not self._wantExit:
                     if self.client is None:
                         logger.debug(f"BLE client is None, shutting down")
-                        self._want_receive = False
+                        self._wantExit = True
                         continue
                     try:
                         b = bytes(self.client.read_gatt_char(FROMRADIO_UUID))
                     except BleakDBusError as e:
                         # Device disconnected probably, so end our read loop immediately
                         logger.debug(f"Device disconnected, shutting down {e}")
-                        self._want_receive = False
+                        self._wantExit = True
                     except BleakError as e:
                         # We were definitely disconnected
                         if "Not connected" in str(e):
                             logger.debug(f"Device disconnected, shutting down {e}")
-                            self._want_receive = False
+                            self._wantExit = True
                         else:
                             raise BLEInterface.BLEError("Error reading BLE") from e
                     if not b:  # Fixme: analyze repeat. Function is unclear. b seems not initialized always.
@@ -230,25 +229,18 @@ class BLEInterface(RadioInterfaceBase):
             self._should_read = True
 
     def close(self) -> None:
-        # try:
-        #     MeshInterface.close(self)
-        # except Exception as e:
-        #     logger.error(f"Error closing mesh interface: {e}")
-        #
-        if self._want_receive:
-            self._want_receive = False  # Tell the thread we want it to stop
-            if self._receiveThread:
-                self._receiveThread.join(
-                    timeout=2
-                )  # If bleak is hung, don't wait for the thread to exit (it is critical we disconnect)
-                self._receiveThread = None
+        self._wantExit = True   # Tell the thread we want it to stop
+        time.sleep(0.1)         # Give thread time to finish running operation before we do a forced shut down
+        if self._receiveThread:
+            # If bleak is hung, don't wait for the thread to exit (it is critical we disconnect)
+            self._receiveThread.join(timeout=2)
+            self._receiveThread = None
 
         if self.client:
             atexit.unregister(self._exit_handler)
             self.client.disconnect()
             self.client.close()
             self.client = None
-        # self._disconnected() # send the disconnected indicator up to clients
 
 
 class BLEClient:

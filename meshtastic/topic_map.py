@@ -23,6 +23,8 @@ SUBS_STARTCOMM_FINISH = 'meshtastic.stcomm_finish'
 # Meshinterface Status
 SUBS_MI_STATUS_REQ = 'meshtastic.mi_status_request'
 SUBS_MI_STATUS_PUB = 'meshtastic.mi_status_publish'
+SUBS_MI_CONNECTED = 'meshtastic.mi_connected'
+SUBS_MI_DISCONNECT = 'meshtastic.mi_disconnect'
 
 # Data publishing
 SUBS_MY_INFO_PUB = 'meshtastic.my_info_publish'
@@ -31,9 +33,19 @@ SUBS_CHANNEL_PUB = 'meshtastic.channel_publish'
 SUBS_CONFIG_PUB = 'meshtastic.config_publish'
 #SUBS_MODULE_CONFIG_PUB = 'meshtastic.module_config_publish'
 
+# Node info publising
+SUBS_NODEINFO_PUB = 'meshtastic.nodeinfo_publish'
 
 # Topic names used in API
 TOPIC_LOG_LINE = 'meshtastic.log.line'
+TOPIC_CONNECTED = 'meshtastic.connection.established'
+TOPIC_DISCONNECTED = 'meshtastic.connection.lost'
+TOPIC_RECEIVE_PACKET = 'meshtastic.receive.text'
+TOPIC_RECEIVE_POSITION = 'meshtastic.receive.position'
+TOPIC_RECEIVE_USER = 'meshtastic.receive.user'
+TOPIC_RECEIVE_DATA = 'meshtastic.receive.data.portnum'
+TOPIC_NODE_UPDATE = 'meshtastic.node.updated'
+TOPIC_CLIENT_NOTIFY = 'meshtastic.clientNotification'
 
 # import spec
 logger = logging.getLogger(__name__)
@@ -45,27 +57,9 @@ except Exception as ex:
     logger.debug(f"Importing topic map failed: {ex}")
 
 
-
-# create one special notification handler that ignores all except
-# one type of notification
-class MyPubsubNotifHandler(IgnoreNotificationsMixin):
-    def notifySubscribe(self, pubListener, topicObj, newSub):
-        newSubMsg = ''
-        if not newSub:
-            newSubMsg = ' was already'
-        msg = 'MyPubsubNotifHandler: listener %s%s subscribed to %s'
-        print(msg % (pubListener.name(), newSubMsg, topicObj.getName()))
-
-
-pub.addNotificationHandler(MyPubsubNotifHandler())
-
-# # print(all notifications to stdout)
-# if mt_config.pubsubLogfile is not None:
-#     useNotifyByWriteFile(mt_config.pubsubLogfile, prefix=f"{datetime.now().isoformat()} ", publisher=pub.getDefaultPublisher())
-
 class NotifyByWriteFileEx(INotificationHandler):
     """
-    Print a message to stdout when a notification is received.
+    Print a message to stdout or file when a notification is received.
     """
     defaultPrefix = 'PUBSUB:'
 

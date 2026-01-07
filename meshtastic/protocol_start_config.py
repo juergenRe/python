@@ -10,8 +10,6 @@ from protocol_base import ProtocolHandlerBase, START_CONFIG_HANDLER
 import google.protobuf.json_format
 from google.protobuf.message import Message
 
-from meshtastic.protobuf import mesh_pb2
-
 logger = logging.getLogger(__name__)
 
 @ProtocolHandlerBase.register
@@ -25,15 +23,7 @@ class StartConfigHandler(ProtocolHandlerBase):
         logger.debug(f'Subscribing to start config command Topic: {topic_map.SUBS_STARTCOMM_START}')
 
     def receivePacket(self, field: str, packet: Message) -> None:
-        if field == 'my_info':
-            myInfo = google.protobuf.json_format.MessageToDict(packet).get(field, None)
-            if myInfo is not None:
-                logger.debug(f"Received {myInfo}")
-        elif field == 'metadata':
-            metaData = google.protobuf.json_format.MessageToDict(packet).get(field, None)
-            if metaData is not None:
-                logger.debug(f"Received {metaData}")
-        elif field == 'config_complete_id':
+        if field == 'config_complete_id':
             if self.configId == packet.config_complete_id:
                 pub.sendMessage(topic_map.SUBS_STARTCOMM_FINISH, code='OK')
             else:

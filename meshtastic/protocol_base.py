@@ -6,13 +6,18 @@ from typing import Any, Callable
 from pathlib import Path
 
 from google.protobuf.message import Message
+import google.protobuf.json_format
 
+from pubsub import pub  # type: ignore[import-untyped]
+
+from meshtastic import topic_map, logger
 from meshtastic.protocol_interface import IProtocolHandler
 from meshtastic.mesh_interface import MeshInterface
 from meshtastic.protobuf import mesh_pb2
 
 # Name definitions for protocol handler types
 UNKNOWN_HANDLER = 'Unknown'
+DEFAULT_HANDLER = 'Default'
 START_CONFIG_HANDLER = 'StartConfig'
 LOGGING_HANDLER = 'Logging'
 CHANNEL_HANDLER = 'ChannelData'
@@ -58,6 +63,29 @@ class NotImplementedHandler(ProtocolHandlerBase):
 
     def receivePacket(self, field: str, packet: Message) -> None:
         pass
+
+    def sendPacket(self, data: dict) -> Any:
+        pass
+
+    def closeHandler(self) -> Any:
+        pass
+
+
+@ProtocolHandlerBase.register
+class DefaultHandler(ProtocolHandlerBase):
+    """Protocol handler for all packets containing configuration data"""
+    def __init__(self, ifMesh: MeshInterface, field2Topic, **kwargs) -> None:
+        super().__init__(ifMesh)
+        self.hdlrType: str | None = DEFAULT_HANDLER
+        self.field2Topic = field2Topic
+
+    def receivePacket(self, field: str, packet: Message) -> None:
+        cfgData = google.protobuf.json_format.MessageToDict(packet, preserving_proto_field_name=True).get(field, None)
+        if cfgData is not None:
+            topicName = self.field2Topic[field]
+            pub.sendMessage(topicName, field=field, data=cfgData)
+        else:
+            logger.debug(f"Pub-Sub: Received invalid message")
 
     def sendPacket(self, data: dict) -> Any:
         pass
