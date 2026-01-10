@@ -1,7 +1,6 @@
 """List of all topics used within the project"""
 import logging
 from datetime import datetime
-import sys
 from typing import TextIO, List, Mapping
 
 from pubsub import pub
@@ -9,7 +8,7 @@ from pubsub.core import Listener, Topic, Publisher, INotificationHandler
 from pubsub.utils.notification import NotifyByWriteFile, IgnoreNotificationsMixin
 
 # meshtastic topic specs
-import topic_specification
+from meshtastic import topic_specification
 
 from meshtastic import mt_config
 

@@ -3,7 +3,7 @@ import enum
 from typing import Any, Callable
 
 from google.protobuf.message import Message
-from mesh_model import MeshModel
+from meshtastic.mesh_model import MeshModel
 
 class CmdError(enum.Enum):
     """Enumerations for command return/error values"""

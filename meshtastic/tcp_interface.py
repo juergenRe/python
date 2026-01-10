@@ -84,7 +84,7 @@ class TCPInterface(StreamInterface):
                 self.socket = None
                 time.sleep(1)
                 self.open()
-                self._startConfig()
+                # self._startConfig()
                 return None
             return data
 

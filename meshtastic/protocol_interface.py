@@ -23,7 +23,12 @@ class IProtocolHandler(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def receivePacket(self, field: str, packet: Message) -> None:
-        """Abstract method to receive a packet from underlying level and decode it to a message"""
+        """
+        Abstract method to receive a packet from underlying level and decode it to a message
+        field: field name as defined in the proto file
+        packet: original FromRadio message
+        Decoded data will be sent with transformed keynames according to PRESERVE_FIELDNAME constant
+        """
         raise NotImplementedError("Subclass must implement this method")
 
     @abc.abstractmethod

@@ -1,17 +1,24 @@
 """Protocol handler for all packets containing channel data"""
+import enum
 from typing import Any
 import logging
 
-import google.protobuf.json_format
 from google.protobuf.message import Message
 from pubsub import pub  # type: ignore[import-untyped]
-from meshtastic import topic_map, logger
-from mesh_interface import MeshInterface
-from protocol_base import ProtocolHandlerBase, CHANNEL_HANDLER
+
+from meshtastic import topic_map
+from meshtastic.mesh_interface import MeshInterface
+from meshtastic.protocol_base import ProtocolHandlerBase, formatFieldName, CHANNEL_HANDLER
 
 from meshtastic.protobuf import mesh_pb2
 
 logger = logging.getLogger(__name__)
+
+ROLE_PRIMARY = 'PRIMARY'
+ROLE_SECONDARY = 'SECONDARY'
+ROLE_DISABLED = 'DISABLED'
+ROLE_NONE = 'NONE'
+
 
 @ProtocolHandlerBase.register
 class ChannelHandler(ProtocolHandlerBase):
@@ -21,10 +28,11 @@ class ChannelHandler(ProtocolHandlerBase):
         self.hdlrType: str | None = CHANNEL_HANDLER
 
     def receivePacket(self, field: str, packet: Message) -> None:
-        chanDef = google.protobuf.json_format.MessageToDict(packet).get(field, None)
+        fieldT = formatFieldName(field)
+        chanDef = self.messageToDict(packet).get(fieldT, None)
         if chanDef is not None:
-            chanRole = chanDef.get('role', 'NONE')
-            if chanRole == 'PRIMARY':
+            chanRole = chanDef.get('role', ROLE_NONE)
+            if chanRole == ROLE_PRIMARY:
                 chanNo = 0
             else:
                 chanNo = chanDef['index']

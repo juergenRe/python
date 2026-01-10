@@ -3,9 +3,9 @@ from typing import Any
 import logging
 
 from pubsub import pub  # type: ignore[import-untyped]
-from meshtastic import topic_map, logger
-from mesh_interface import MeshInterface
-from protocol_base import ProtocolHandlerBase, START_CONFIG_HANDLER
+from meshtastic import topic_map
+from meshtastic.mesh_interface import MeshInterface
+from meshtastic.protocol_base import ProtocolHandlerBase, START_CONFIG_HANDLER
 
 import google.protobuf.json_format
 from google.protobuf.message import Message

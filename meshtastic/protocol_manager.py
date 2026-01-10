@@ -24,13 +24,14 @@ logger = logging.getLogger(__name__)
 # some fields will use the same handler to process data and/or use a specific topic.
 # This dict lists them: <field>: (handler_type, topic_name)
 # if no entry for a specific field, then use the field name as handler type (1:1 relation)
+# here it is mandatory to use the original fieldnames from the proto definition
 FIELD2HANDLERTYPE = {
     'my_info': DEFAULT_HANDLER,
     'metadata': DEFAULT_HANDLER,
     'node_info': DEFAULT_HANDLER,
-    'config': DEFAULT_HANDLER,
+    'config': CONFIG_HANDLER,
     'config_complete_id': START_CONFIG_HANDLER,
-    'moduleConfig': DEFAULT_HANDLER,
+    'moduleConfig': CONFIG_HANDLER,
     'channel': CHANNEL_HANDLER,
     'log_record': LOGGING_HANDLER
 }
@@ -53,7 +54,8 @@ KNOWN_HANDLERS = [
     'meshtastic.protocol_base.DefaultHandler',
     'meshtastic.protocol_start_config.StartConfigHandler',
     'meshtastic.protocol_logging.LoggingHandler',
-    'meshtastic.protocol_channel_data.ChannelHandler'
+    'meshtastic.protocol_channel_data.ChannelHandler',
+    'meshtastic.protocol_config_data.ConfigHandler'
 ]
 
 

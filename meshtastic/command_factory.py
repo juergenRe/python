@@ -31,8 +31,8 @@ class CommandFactory:
     def createCommandList(self, argDict) -> list[Command]:
         """scans through the arguments and create command for each entry"""
         cmdList = []
-        destNode = argDict['dest']
-        chIndex = int(argDict['ch_index']) if argDict['ch_index'] is not None else None
+        destNode = argDict['dest'] if argDict.get('dest') else BROADCAST_ADDR
+        chIndex = int(argDict['ch_index']) if argDict.get('ch_index') else None
         for argName, params in argDict.items():
             # check for set arguments, which are commands
             if argName not in noCommandArgs and params is not None:

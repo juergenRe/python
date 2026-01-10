@@ -13,8 +13,8 @@ except ImportError as e:
 
 from pubsub import pub  # type: ignore[import-untyped]
 from meshtastic import topic_map
-from mesh_interface import MeshInterface
-from protocol_base import ProtocolHandlerBase, LOGGING_HANDLER
+from meshtastic.mesh_interface import MeshInterface
+from meshtastic.protocol_base import ProtocolHandlerBase, LOGGING_HANDLER
 
 from meshtastic.protobuf import mesh_pb2
 
