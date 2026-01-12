@@ -4,12 +4,23 @@ from copy import copy, deepcopy
 from decimal import Decimal
 from typing import Any
 import logging
+import base64
 
+from google.protobuf.json_format import ParseDict
+
+from meshtastic.protobuf import apponly_pb2
 from meshtastic.protocol_base import formatFieldName
 from meshtastic.util import convert_mac_addr
 
 
 logger = logging.getLogger(__name__)
+
+URL_PREFIX = 'https://meshtastic.org/e/#'
+
+ROLE_PRIMARY = 'PRIMARY'
+ROLE_SECONDARY = 'SECONDARY'
+ROLE_DISABLED = 'DISABLED'
+ROLE_NONE = 'NONE'
 
 
 class SubDict:
@@ -95,11 +106,36 @@ class Node(SubDict):
         locFlag = '<local>' if self._isLocal else ''
         return f"Node(0x{self._nodeNum:08x} {locFlag} {name})"
 
-    def getName(self) -> tuple[str, str]:
+    def getName(self, default='') -> tuple[str, str]:
         """return long and short name of this node. Return empty strings if not present"""
-        longName: str = self._nodeInfo.getDataElement('user', 'long_name', '')
-        shortName: str = self._nodeInfo.getDataElement('user', 'short_name', '')
+        longName: str = self._nodeInfo.getDataElement('user', 'long_name', default=default)
+        shortName: str = self._nodeInfo.getDataElement('user', 'short_name', default=default)
         return longName, shortName
+
+    def getUrl(self, includeAll: bool = True) -> str:
+        """The sharable URL that describes the current channel"""
+        # Only keep the primary/secondary channels, assume primary is first
+        chanData = self.getField('channel')
+        if chanData is not None:
+            chanList = [chan['settings']
+                        for chan in chanData.values()
+                        if chan['role'] == ROLE_PRIMARY or (includeAll and chan['role'] == ROLE_SECONDARY)]
+
+            if self.getField('config') is None:
+                logger.debug(f"config for node {self.nodeNum} is missing. Aborting operation")
+                # self.requestConfig(self.localConfig.DESCRIPTOR.fields_by_name.get('lora'))
+            loraCfg = self.getDataElement('config', 'lora')
+            chanSetDict: dict[str, Any] = {'settings': chanList, 'lora_config': loraCfg}
+
+            # fill channelSet message
+            channelSet = apponly_pb2.ChannelSet()
+            ParseDict(chanSetDict, channelSet)
+            some_bytes = channelSet.SerializeToString()
+            s = base64.urlsafe_b64encode(some_bytes).decode("ascii")
+            s = s.replace("=", "").replace("+", "-").replace("/", "_")
+            return f"{URL_PREFIX}{s}"
+        else:
+            return ''
 
     @property
     def isLocal(self) -> bool:

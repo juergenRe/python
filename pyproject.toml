@@ -1,10 +1,15 @@
-[tool.poetry]
+[project]
 name = "meshtastic"
-version = "2.7.5"
+dynamic = ["version", "dependencies", "requires-python"]
 description = "Python API & client shell for talking to Meshtastic devices"
-authors = ["Meshtastic Developers <contact@meshtastic.org>"]
+authors = [
+    { name = "Meshtastic Developers", email =  "<contact@meshtastic.org>" }
+]
 license = "GPL-3.0-only"
 readme = "README.md"
+
+[tool.poetry]
+version = "3.0.0"
 
 [tool.poetry.dependencies]
 python = "^3.9,<3.15"                                               # 3.9 is needed for pandas
@@ -70,7 +75,7 @@ cli = ["pyqrcode", "print-color", "dotmap", "argcomplete", "wcwidth"]
 tunnel = ["pytap2"]
 analysis = ["dash", "dash-bootstrap-components", "pandas", "pandas-stubs"]
 
-[tool.poetry.scripts]
+[project.scripts]
 meshtastic = "meshtastic.__main__:main"
 mesh-tunnel = "meshtastic.__main__:tunnelMain [tunnel]"
 mesh-analysis = "meshtastic.analysis.__main__:main [analysis]"

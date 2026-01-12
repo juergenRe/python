@@ -14,7 +14,7 @@
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <option name="RUN_TOOL" value="" />
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/meshtastic/__main__.py" />
-    <option name="PARAMETERS" value="--port COM9 --export-config h1.yaml --timeout 60 --debug" />
+    <option name="PARAMETERS" value="--port COM4 --export-config h1.yaml --timeout 60 --debug" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

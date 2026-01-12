@@ -33,7 +33,8 @@ FIELD2HANDLERTYPE = {
     'config_complete_id': START_CONFIG_HANDLER,
     'moduleConfig': CONFIG_HANDLER,
     'channel': CHANNEL_HANDLER,
-    'log_record': LOGGING_HANDLER
+    'log_record': LOGGING_HANDLER,
+    'packet': MESH_PACKET_HANDLER
 }
 
 # makes the relation between a field from a message to the topic to be published. Needed
@@ -55,7 +56,8 @@ KNOWN_HANDLERS = [
     'meshtastic.protocol_start_config.StartConfigHandler',
     'meshtastic.protocol_logging.LoggingHandler',
     'meshtastic.protocol_channel_data.ChannelHandler',
-    'meshtastic.protocol_config_data.ConfigHandler'
+    'meshtastic.protocol_config_data.ConfigHandler',
+    'meshtastic.protocol_mesh_packet.MeshPacketHandler'
 ]
 
 

@@ -8,7 +8,7 @@ from pubsub import pub  # type: ignore[import-untyped]
 
 from meshtastic import topic_map
 from meshtastic.mesh_interface import MeshInterface
-from meshtastic.protocol_base import ProtocolHandlerBase, formatFieldName, CHANNEL_HANDLER
+from meshtastic.protocol_base import ProtocolHandlerBase, formatFieldName, MESH_PACKET_HANDLER
 from meshtastic.mesh_model import ROLE_PRIMARY, ROLE_SECONDARY, ROLE_NONE
 
 from meshtastic.protobuf import mesh_pb2
@@ -16,11 +16,11 @@ from meshtastic.protobuf import mesh_pb2
 logger = logging.getLogger(__name__)
 
 @ProtocolHandlerBase.register
-class ChannelHandler(ProtocolHandlerBase):
-    """Protocol handler for all packets containing channel data"""
+class MeshPacketHandler(ProtocolHandlerBase):
+    """Protocol handler for all packets containing regular mesh data"""
     def __init__(self, ifMesh: MeshInterface, **kwargs) -> None:
         super().__init__(ifMesh)
-        self.hdlrType: str | None = CHANNEL_HANDLER
+        self.hdlrType: str | None = MESH_PACKET_HANDLER
 
     def receivePacket(self, field: str, packet: Message) -> None:
         fieldT = formatFieldName(field)

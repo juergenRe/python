@@ -23,6 +23,7 @@ START_CONFIG_HANDLER = 'StartConfig'
 LOGGING_HANDLER = 'Logging'
 CHANNEL_HANDLER = 'ChannelData'
 CONFIG_HANDLER = 'ConfigHandler'
+MESH_PACKET_HANDLER = 'MeshPacketHandler'
 
 # Define settings for serialization of messages
 PRESERVE_FIELDNAME = False          # False will convert snake_case to lowerCamelCase

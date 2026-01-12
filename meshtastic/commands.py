@@ -1,31 +1,19 @@
 """Definitions for the commands which can be executed from meshtastic"""
-import base64
 import logging
 from abc import abstractmethod
 from collections import deque
 from threading import Event
-import json
-from typing import Any
 
-from google.protobuf.message import Message
 from pubsub import pub  # type: ignore[import-untyped]
-
-from google.protobuf.json_format import ParseDict
-
-from meshtastic.protobuf import apponly_pb2
 
 from meshtastic import topic_map
 from meshtastic import BROADCAST_ADDR, LOCAL_ADDR, BROADCAST_NUM
 from meshtastic.mesh_model import MeshModel, Node, NodeInfo
 from meshtastic.command_interface import ICommand, CmdError
-from meshtastic.util import pskToString
 from meshtastic.protocol_base import formatFieldName
-from meshtastic.protocol_channel_data import ROLE_PRIMARY, ROLE_SECONDARY, ROLE_DISABLED, ROLE_NONE
 
 logger = logging.getLogger(__name__)
 
-
-URL_PREFIX = 'https://meshtastic.org/e/#'
 
 class Command(ICommand):
     """Base class for all command implementations"""
@@ -33,6 +21,7 @@ class Command(ICommand):
         self.destinationNode: None | int = destNode
         if destNode is None:
             self.destNode = BROADCAST_ADDR
+        self.chIndex: int | None = chIndex
         self.transactionId: None | int = None
         self.cmdName: str = self.__class__.__name__
         self.parameter: list = parameter
@@ -141,106 +130,6 @@ class GetConfigCommand(Command):
         logger.debug(f"Received field {field} data: {data}")
         self.answerQueue.append((field, data), )
 
-
-class InfoCommand(Command):
-    """Defines the info command"""
-    def __init__(self, destNode: str | None, chIndex: int | None, parameter: list = ()):
-        super().__init__(destNode, chIndex, parameter)
-
-    def formatAsJson(self, node: Node, field: str, prefix: str, indent=None) -> str:
-        """format an info entry"""
-        data = node.getField(field)
-        if data is None:
-            s = ""
-        else:
-            s = f"{prefix}{json.dumps(data, indent=indent)}"
-        return s
-
-    def formatChannels(self, node: Node, field: str, prefix: str) -> str:
-        """format channel info"""
-        chanData = node.getField(field)
-        if chanData is None:
-            s = ""
-        else:
-            cl = []
-            for idx, value in chanData.items():
-                if value['role'] != ROLE_NONE and value['role'] != ROLE_DISABLED:
-                    pskBytes = base64.b64decode(value['settings'].get('psk').encode('utf-8'))
-                    pskLit = pskToString(pskBytes)
-                    cs = f"  Index {idx}: {value['role']} psk={pskLit} {json.dumps(value['settings'])}"
-                    cl.append(cs)
-            publicURL = self.getUrl(node, includeAll=False)
-            adminURL = self.getUrl(node, includeAll=True)
-            cl.append(f"\nPrimary channel URL: {publicURL}")
-            if adminURL != publicURL:
-                cl.append(f"Complete URL (includes all channels): {adminURL}")
-            s = f"{prefix}{'\n'.join(cl)}"
-        return s
-
-    def formatNodeInfoAsJson(self, model: MeshModel, prefix: str, indent=None) -> str:
-        """Format node info as json"""
-        def infoJson(obj) -> dict:
-            """JSON encoder for NodeInfo objects"""
-            if isinstance(obj, Node):
-                return obj.formatInfoForJson()
-            raise TypeError(f'Cannot serialize object of {type(obj)}')
-
-        nodes = {}
-        for node in model.nodes.values():
-            # use id as dictionary key for correct JSON format in list of nodes
-            nodeid = node.getDataElement('user', 'id')
-            if nodeid is not None:
-                nodes[nodeid] = node
-        return f"\n{prefix} {json.dumps(nodes, indent=2, default=infoJson)}"
-
-    def getUrl(self, node: Node, includeAll: bool = True) -> str:
-        """The sharable URL that describes the current channel"""
-        # Only keep the primary/secondary channels, assume primary is first
-        chanData = node.getField('channel')
-        if chanData is not None:
-            chanList = [chan['settings']
-                        for chan in chanData.values()
-                        if chan['role'] == ROLE_PRIMARY or (includeAll and chan['role'] == ROLE_SECONDARY)]
-
-            if node.getField('config') is None:
-                logger.debug(f"config for node {node.nodeNum} is missing. Aborting operation")
-                # self.requestConfig(self.localConfig.DESCRIPTOR.fields_by_name.get('lora'))
-            loraCfg = node.getDataElement('config', 'lora')
-            chanSetDict: dict[str, Any] = {'settings': chanList, 'lora_config': loraCfg}
-
-            # fill channelSet message
-            channelSet = apponly_pb2.ChannelSet()
-            ParseDict(chanSetDict, channelSet)
-            some_bytes = channelSet.SerializeToString()
-            s = base64.urlsafe_b64encode(some_bytes).decode("ascii")
-            s = s.replace("=", "").replace("+", "-").replace("/", "_")
-            return f"{URL_PREFIX}{s}"
-        else:
-            return ''
-
-    def execute(self, model: MeshModel, timeout: int) -> tuple:
-        """Show human-readable summary about this object"""
-        logger.debug(f"Execute {self.cmdName} {self.destinationNode}")
-        if self.destinationNode == BROADCAST_ADDR:
-            localNode: Node = model.getLocalNode()
-            outList: list = []
-
-            longName, shortName = localNode.getName()
-
-            outList.append(f"Owner: {longName} ({shortName})")
-            outList.append(self.formatAsJson(localNode, FIELD_MYINFO, '\nMy info: '))
-            outList.append(self.formatAsJson(localNode, 'metadata', '\nMetadata: '))
-            outList.append(self.formatNodeInfoAsJson(model, prefix='\n\nNodes in mesh: ', indent=2))
-            outList.append(self.formatAsJson(localNode, 'config', '\nPreferences: ', indent=2))
-            outList.append(self.formatAsJson(localNode, 'moduleConfig', '\nModule preferences: ', indent=2))
-            outList.append(self.formatChannels(localNode, 'channel', '\nChannels:\n'))
-
-            infos = ''.join(outList)
-            print(infos)
-            return CmdError.OK, infos
-        else:
-            return CmdError.ERROR, ("Showing info of remote node is not supported.\n"
-                                    "Use the '--get' command for a specific configuration (e.g. 'lora') instead.")
 
 class SetCommand(Command):
     """Defines the info command"""

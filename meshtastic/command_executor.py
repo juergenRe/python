@@ -42,6 +42,7 @@ class CommandExecutor:
                 errCode, msg = cmd.execute(self.meshModel, self.timeout)
                 if errCode != CmdError.OK:
                     raise RuntimeError(msg)
+                print(msg)
         finally:
             # Close connection
             lastts = self.meshStatus['tsUnconnected']

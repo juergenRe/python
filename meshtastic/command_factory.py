@@ -18,6 +18,12 @@ noCommandArgs = [
     'power_riden', 'power_ppk2_meter', 'power_ppk2_supply', 'power_sim', 'power_voltage',
     'power_stress', 'power_wait', 'slog'
 ]
+
+commandModules = {
+    'default': 'meshtastic.commands',
+    'InfoCommand': 'meshtastic.command_info',
+    'ExportConfigCommand': 'meshtastic.command_import_export_cfg'
+}
 class CommandFactory:
     """Creates a list of command objects out of the arguments passed to meshtastic CLI"""
     def __init__(self, argsList: list[str]):
@@ -49,7 +55,7 @@ class CommandFactory:
                     cmdList.append(
                         self.instantiateCommand(
                             self.cmdDict.get(argName, 'UnknownCommand'),
-                            destNode, chIndex, params)
+                            destNode, chIndex, [params])
                     )
         return cmdList
 
@@ -57,7 +63,10 @@ class CommandFactory:
         try:
             logger.debug(f"creating Command for {cmdName} with params: {param}")
             # module_path, class_name = class_str.rsplit('.', 1)
-            module = import_module('meshtastic.commands')
+            moduleName = commandModules.get(cmdName, None)
+            if not moduleName:
+                moduleName = commandModules['default']
+            module = import_module(moduleName)
             return getattr(module, cmdName)(destNode, chIndex, param)
         except (ImportError, AttributeError) as e:
             raise ImportError(cmdName)
