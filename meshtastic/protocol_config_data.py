@@ -48,7 +48,7 @@ class ConfigHandler(ProtocolHandlerBase):
         except Exception as ex:
             logger.debug(f"Pub-Sub: Cannot convert {field} message to dict: Exception {ex}")
 
-    def sendPacket(self, data: dict) -> Any:
+    def sendPacket(self, data: dict, **kwargs) -> Any:
         pass
 
     def closeHandler(self) -> Any:

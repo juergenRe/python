@@ -35,6 +35,10 @@ SUBS_CONFIG_PUB = 'meshtastic.config_publish'
 # Node info publising
 SUBS_NODEINFO_PUB = 'meshtastic.nodeinfo_publish'
 
+# Packet handling
+SUBS_PACKET_REQ = 'meshtastic.packet.send_request'
+SUBS_PACKET_PUB = 'meshtastic.packet.receive'
+
 # Topic names used in API
 TOPIC_LOG_LINE = 'meshtastic.log.line'
 TOPIC_CONNECTED = 'meshtastic.connection.established'

@@ -4,6 +4,7 @@
       <w>airquality</w>
       <w>infodata</w>
       <w>nodeid</w>
+      <w>nodeinfo</w>
       <w>portnum</w>
       <w>protobufs</w>
       <w>telem</w>

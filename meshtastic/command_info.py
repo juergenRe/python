@@ -66,11 +66,11 @@ class InfoCommand(Command):
                 nodes[nodeid] = node
         return f"\n{prefix} {json.dumps(nodes, indent=2, default=infoJson)}"
 
-    def execute(self, model: MeshModel, timeout: int) -> tuple:
+    def execute(self, model: MeshModel, timeout: int, **kwargs) -> tuple:
         """Show human-readable summary about this object"""
         logger.debug(f"Execute {self.cmdName} {self.destinationNode}")
         if self.destinationNode == BROADCAST_ADDR:
-            localNode: Node = model.getLocalNode()
+            localNode: Node = model.localNode
             outList: list = []
 
             longName, shortName = localNode.getName()

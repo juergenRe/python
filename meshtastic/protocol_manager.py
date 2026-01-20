@@ -14,7 +14,8 @@ from meshtastic.protocol_base import (
     START_CONFIG_HANDLER,
     LOGGING_HANDLER,
     CHANNEL_HANDLER,
-    CONFIG_HANDLER
+    CONFIG_HANDLER,
+    MESH_PACKET_HANDLER
 )
 
 #from meshtastic.protocol_start_config import StartConfigHandler

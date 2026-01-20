@@ -23,7 +23,7 @@ class ICommand(metaclass=abc.ABCMeta):
                 NotImplemented)
 
     @abc.abstractmethod
-    def execute(self, model: MeshModel, timeout: int) -> tuple[CmdError, str]:
+    def execute(self, model: MeshModel, timeout: int, **kwargs) -> tuple[CmdError, str]:
         """Executes the command"""
         raise NotImplementedError(f"Command not implemented")
 

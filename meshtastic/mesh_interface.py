@@ -200,6 +200,7 @@ class MeshInterface:  # pylint: disable=R0902
 
         # Packet queuing
         self.txQueue: collections.deque = collections.deque(maxlen=100)
+        self.ackId: collections.deque = collections.deque(maxlen=100)
         self.waitAckQueue: collections.OrderedDict = collections.OrderedDict()
         self.xon: bool = True       # is sending from txQueue permitted?
         self.qs: QueueStatus = QueueStatus()
@@ -230,17 +231,23 @@ class MeshInterface:  # pylint: disable=R0902
                 toRadio = self.txQueue.popleft()
                 if toRadio.HasField('packet'):
                     # we can only trace reception for mesh packets, others might be lost
-                    self.waitAckQueue[toRadio.packet.packetId] = toRadio
+                    self.waitAckQueue[toRadio.packet.id] = toRadio
                 self.interface.sendToRadioImpl(toRadio)
                 self.xon = self.qs.sendPacket(self.xon)
 
             # handle acknowledgements
-            pass
+            if len(self.ackId) > 0:
+                ackedId = self.ackId.popleft()
+                if ackedId in self.waitAckQueue:
+                    del self.waitAckQueue[ackedId]
+                    logger.debug(f"Packet {ackedId} is acknowledged")
+                else:
+                    logger.debug(f"Packet {ackedId} is not found in waitAckQueue")
 
             # handle time-outs of commands
             for k, v in self.pendingCmd.items():
                 cmd, endTime = v
-                if endTime > 0 and endTime < time.time():
+                if 0 < endTime < time.time():
                     logger.debug(f"Command {cmd} timed out")
                     endTime = 0
 
@@ -287,7 +294,7 @@ class MeshInterface:  # pylint: disable=R0902
 
         msg, msgId = self._createStartConfigMsg(self.configId, self.noNodes)
         self.pendingCmd[msgId] = (cmdTxt, time.time() + timeout)
-        self._sendToRadio(msg)
+        self.sendToRadio(msg)
         self.configId = msgId
         logger.debug(f"created start config msg using {msgId} ")
         return msgId
@@ -315,6 +322,11 @@ class MeshInterface:  # pylint: disable=R0902
             return True
         return False
 
+    def ackPacket(self, packeId: int) -> None:
+        """Acknowledge a received packet from protocol handler toward interface
+        Take care to not interfere with threading"""
+        self.ackId.append(packeId)
+
     def _createStartConfigMsg(self, actId: int, noNodes: bool) -> tuple:
         """create start config message
         FixMe: to be relocated to protocol handler, it has nothing to do with transport tasks
@@ -331,7 +343,7 @@ class MeshInterface:  # pylint: disable=R0902
         """Sends a heartbeat to the radio. Can be used to verify the connection is healthy."""
         p = mesh_pb2.ToRadio()
         p.heartbeat.CopyFrom(mesh_pb2.Heartbeat())
-        self._sendToRadio(p)
+        self.sendToRadio(p)
 
     def _startHeartbeat(self):
         """We need to send a heartbeat message to the device every X seconds"""
@@ -350,9 +362,9 @@ class MeshInterface:  # pylint: disable=R0902
         """Tell device we are done using it"""
         m = mesh_pb2.ToRadio()
         m.disconnect = True
-        self._sendToRadio(m)
+        self.sendToRadio(m)
 
-    def _sendToRadio(self, toRadio: mesh_pb2.ToRadio) -> None:
+    def sendToRadio(self, toRadio: mesh_pb2.ToRadio) -> None:
         """Send a ToRadio protobuf to the device using opened interface"""
         # logger.debug(f"Sending toRadio: {stripnl(toRadio)}")
 
@@ -369,6 +381,7 @@ class MeshInterface:  # pylint: disable=R0902
         cb('log_record', logline)
 
     def _handleId(self):
+        """dummy callback, do nothing here"""
         pass
 
     def _handleReboot(self):

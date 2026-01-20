@@ -1,8 +1,100 @@
 # Meshtastic CLI Architecture
 
-## Communication to Radio
+## 1 Messages definitions
 
-### Level 1: Link connection 
+### 1.1 Message categories
+Messages containing data can be separated into 4 categories:
+- Control messages: disconnect, heartbeat, rebooted, QueueStatus
+- Low-Level data messages: MyNodeInfo, NodeInfo, Config, ModuleConfig, DeviceMetaData etc.
+- High-level packets: MeshPacket
+- Feed-through messages: ClientNotification, XModem, MqttClientProxyMessage
+
+__Control-messages:__
+
+those are mainly used on the data link level to ensure proper communication flow. They
+will not transport application/mesh model specific data.
+
+- disconnect
+- Heartbeat
+- rebooted
+- QueueStatus
+
+__Low-level data messages:__
+
+These can be handled directly by some protocol handler and will feed the command and/or
+mesh model.
+
+__High-level packets:__
+
+Those messages need deeper decoding, the payload is encapsulated according to the application
+used. As well more addresssing, encryption and acknowledgement features are present.
+
+__Feed-through messages:__
+
+The CLI does not look at those messages at all but publish them directly to some subscriber.
+
+
+### 1.2 Concrete Messages implemented
+__ToRadio:__
+Support 6 different packets:
+1. MeshPacket (ID 1): a regular packet sent to the mesh
+2. want_config_id (ID 3): requests actual config of local node, using a random ID
+3. disconnect (ID4): announces a disconnection
+4. XModem packet (ID 5)
+5. MqttClientProxyMessage (ID 6)
+6. Heartbeat (ID 7): to keep the connection active
+
+__FromRadio:__
+1. packet_id:   not clear if this is always filled in and what it exactly means
+2. Payload with variants:
+
+   1. MeshPacket
+   2. MyNodeInfo (partial response to of want_config_id)
+   3. NodeInfo (partial response to of want_config_id)
+   4. Config (partial response to of want_config_id)
+   5. LogRecord
+   6. config_complete_id: returns initial sent ID when all config has been sent
+   7. rebooted
+   8. ModuleConfig (partial response to of want_config_id)
+   9. Channel (partial response to of want_config_id)
+   10. QueueStatus
+   11. XModem
+   12. DeviceMetaData (partial response to of want_config_id)
+   13. MqttClientProxyMessage
+   14. FileInfo
+   15. ClientNotification
+   16. DeviceUIConfig
+
+__Overview table of ToRadio/FromRadio messages__
+
+| To/From | Name                   | Type        | Remark                        |
+|---------|------------------------|-------------|-------------------------------|
+| To      | disconnect             | Control     | no explicit connect avail.    |
+| To      | Heartbeat              | Control     |                               |
+| From    | QueueStatus            | Control     |                               |
+| From    | rebooted               | Control     |                               |
+| To      | want_config_id         | LowLevel    | will do an implicit connect   |
+| From    | config_complete_id     | LowLevel    | will trigger connected status |
+| From    | NodeInfo               | LowLevel    | will define the mesh contents |
+| From    | MyNodeInfo             | LowLevel    | local node only               |
+| From    | Config                 | LowLevel    | local node only               |
+| From    | ModuleConfig           | LowLevel    | local node only               |
+| From    | Channel                | LowLevel    | local node only               |
+| From    | DeviceMetaData         | LowLevel    | local node only               |
+| From    | DeviceUIConfig         | LowLevel    | local node only               |
+| From    | LogRecord              | LowLevel    | logging data from the radio   |
+| From    | FileInfo               | LowLevel    | unknown use                   |
+| From    | MeshPacket             | HighLevel   |                               |
+| To      | MeshPacket             | HighLevel   |                               |
+| To      | XModem                 | FeedThrough |                               |
+| To      | MqttClientProxyMessage | FeedThrough |                               |
+| From    | XModem                 | FeedThrough |                               |
+| From    | MqttClientProxyMessage | FeedThrough |                               |
+| From    | ClientNotification     | FeedThrough |                               |
+
+## 2 Communication to Radio
+
+### 2.1 Level 1: Link connection 
 
 This level should define the way the data is transmitted between
 sender and receiver.
@@ -26,60 +118,6 @@ When using BLE, only the data itself will be transmitted. BLE is taking
 care about the header (which basically also is true for TCP).
 
 The data must be formatted as a "ToRadio" protobuf structure.
-
-### Level 2: ToRadio/FromRadio packets
-
-This level should define some control messages and otherwise feed through
-different types of packets according to their "envelope".
-
-Control Messages are:
-- disconnect
-- Heartbeat
-- want_config_id (somehow in between, because it delivers a lot of data but it serves otherwise to start communication)
-- config_complete_id (denotes the full availability of local radio)
-- rebooted
-- QueueStatus
-- FileInfo
-
-
-
-__ToRadio:__
-Support 6 different packets:
-1. MeshPacket (ID 1): a regular packet sent to the mesh
-2. want_config_id (ID 3): requests actual config of local node, using a random ID
-3. disconnect (ID4): announces a disconnection
-4. XModem packet (ID 5)
-5. MqttClientProxyMessage (ID 6)
-6. Heartbeat (ID 7): to keep the connection active
-
-__FromRadio:__
-1. packet_id:   not clear if this is always filled in and what it exactly means
-2. Payload with variants:
-   3. MeshPacket
-   4. MyNodeInfo (partial response to of want_config_id)
-   5. NodeInfo (partial response to of want_config_id)
-   6. Config (partial response to of want_config_id)
-   7. LogRecord
-   8. config_complete_id: returns initial sent ID when all config has been sent
-   9. rebooted
-   10. ModuleConfig (partial response to of want_config_id)
-   11. Channel (partial response to of want_config_id)
-   12. QueueStatus
-   13. XModem
-   14. DeviceMetaData (partial response to of want_config_id)
-   15. MqttClientProxyMessage
-   16. FileInfo
-   17. ClientNotification
-   18. DeviceUIConfig
-
-This level should also handle the send/receive queue to ensure that no overflow 
-happens on either side.
-
-This means in particular, that the received QueueStatus messages from the radio are
-interpreted and used to throttle/limit the flow of messages towards the radio.
-
-On the lowest level exist the direct interfaces to the radios using the different 
-data transmission protocols. Those are defined by the _IRadioInterface_
 
 ```plantuml
 title Level 1 classes: Radio Interface definition
@@ -174,9 +212,24 @@ BLEInterface "1" o-down- "1" BLEClient
 
 ```
 
+### 2.2 Level 2: Data Link Level: ToRadio/FromRadio packets
+
+This level should handle the control messages and otherwise feed through
+different types of packets according to their "envelope".
+
+This level should also handle the send/receive queue to ensure that no overflow 
+happens on either side.
+
+This means in particular, that the received QueueStatus messages from the radio are
+interpreted and used to throttle/limit the flow of messages towards the radio.
+
+On the lowest level exist the direct interfaces to the radios using the different 
+data transmission protocols. Those are defined by the _IRadioInterface_
+
+
 ```plantuml
 title Level 2 classes: Interface to radio: Queuing, Heartbeat
-interface IMeshInterface {
+interface ITransportInterface {
     __ functions __
     -handleFromRadio()
     -sendToRadio()
@@ -197,7 +250,7 @@ interface IRadioPacket <<protobuf>>{
     fromRadio: pb
 }
 
-class MeshInterface {
+class TransportInterface {
     queue
     heartbeatTimer
     status
@@ -215,7 +268,7 @@ class InterfaceFactory{
     createInterface()
 }
 
-note right of MeshInterface
+note right of TransportInterface
     Interface is responsible to transfer the data, 
     but not process them.
     Responsibilities:
@@ -226,11 +279,11 @@ note right of MeshInterface
     - manage timeouts
 end note
 
-MeshInterface .up.|> IMeshInterface: implements
-IMeshInterface -left-> IRadioPacket: uses
-MeshInterface -right-> InterfaceFactory: "create Instance"
+TransportInterface .up.|> ITransportInterface: implements
+ITransportInterface -left-> IRadioPacket: uses
+TransportInterface -right-> InterfaceFactory: "create Instance"
 InterfaceFactory -down-> RadioInterface: instantiates
-MeshInterface --> RadioInterface: uses
+TransportInterface --> RadioInterface: uses
 
 
 ```
@@ -261,7 +314,7 @@ resent if no ACK is receieved within a resend time-out.
 ```plantuml
 title Level 2: Control flow of radio packets
 participant ProtocolHandler as ph
-participant MeshInerface as mi
+participant MeshInterface as mi
 participant Queue as q
 participant "Waiting \nAcknowledgements" as ack
 participant RadioInterface as ri
@@ -295,23 +348,25 @@ mi <- ri: receive QueueStatus
 mi -> mi: set xon/xoff
 ```
 
-### Level 3: Higher Level Packets
 
-Those packets are:
-- MeshPacket
-- XModem
-- MqttClientProxyMessage
+### 2.3 Level 3: Transport Level: Low Level Packets
+
+Low-Level messages can be treated directly (thus forwarded immediately to dedicated 
+protocol handlers):
 - LogRecord
-- ClientNotification
 - Config-Data*
-- ModuelConfig-Data*
+- ModuleConfig-Data*
 - Channel-Data*
-- initial config data: MyNodeInfo, NodeInfo, DeviceMetaData, DeviceUIConfig
+- NodeInfo*
+- initial config data: MyNodeInfo, DeviceMetaData, DeviceUIConfig
 
 *) Also received during initial config transmission
 
+All other packets are forwarded either via publishing event or - in the case of MeshPacket -
+handled in a separate Interface.
+
 Those packets need to be decoded according to their content by the appropriate handler
-Handlers should register themselves at the receiver, so they can called when
+Handlers should register themselves at the receiver, so they can be called when
 the respective packet arrives.
 
 _Implementation note:_
@@ -320,18 +375,104 @@ It seems to be useful to keep decoding data in the protocol handlers
 within this thread, but switch back to the main thread when publishing
 the decoded data.
 
-The idea here is, that the handlers queue the decoded data in
-the manager and set a flag. This will waken the main thread to take 
-the data and publish it to the subscribed applications.
-
 Might be useful to use async functions here.
 
+### 2.4 Level 4: Mesh packet Level
+
+Mesh packets carry a certain number of routing data along with the payload, especially 
+- sender id
+- destination id
+- packet id
+- and a few more
+
+Many other elements of this packet might be treated directly by the firmware/router and
+might be of no interest for the CLI.
+
+The payload itself defines the type of data transferred using the term "portNum". Actually,
+about 32 different ports are defined. The receiver of such port data is called "App". Each
+App will use its own protobuf definition.
+
+Level 4 handling of message shall analyze and handle all layers till output of the final App data.
+Especially, it shall handle Acknowledgements of reception including evtl. resending of the 
+original data after a time-out in case the data got lost.
+
+As well, this level will also handle the session key for admin messages.
+
 ```plantuml
-title Level 2 classes: Handling of protocols
-interface IMeshInterface {}
+title Level 4 packets: Mesh packet handling
+
+participant Command as cmd
+participant PubSub as ps
+participant PacketHandler as hdl
+participant TransportInterface as ti
+participant RadioInterface as ri
+
+hdl -> ps: subscribe Requests
+cmd -> cmd: create request r
+cmd -> ps: subscribe Answer(r)
+cmd -> ps: pub Request(r)
+ps -> hdl: callback(r)
+hdl -> hdl: create AdminPacket
+hdl -> ti: sendPacket(id)
+ti -> ti: queue packet(id)
+ti -> ri: send Packet
+ti <-- ri
+hdl <-- ti
+ps <-- hdl
+cmd <-- ps
+activate cmd #DarkSalmon
+cmd -> cmd: wait for answer
+note over cmd, ri: red arrows are processed in receiving thread.
+alt valid answer is received in time
+   ri -[#red]> ti: receive Packet
+   ti -[#red]> hdl: callback
+    ti -[#red]> ti: remove packet from pending list
+   hdl -[#red]> hdl: decode packet
+   hdl -[#red]> ps: pub Answer a
+   ps -[#red]> cmd: callback(a)
+   ps <-[#red]- cmd
+   hdl <-[#red]- ps
+   ti <-[#red]- hdl
+   ri <-[#red]- ti
+   cmd -> cmd: got answer
+   deactivate cmd
+   cmd -> cmd: process answer
+else no answer in time
+    activate cmd #DarkSalmon
+    ti -[#blue]> ti: check sent packets
+    ti -[#blue]> ri: resend packet
+    ti -[#blue]> ti: check sent packets
+    ti -[#blue]> hdl: callback with error
+    hdl -[#blue]> ps: pub error
+    ps -[#blue]> cmd: callback(error)
+   cmd -> cmd: got answer (error))
+   deactivate cmd
+   cmd -> cmd: process error
+    
+end
+```
+Each mesh packet will carry a unique id, this can be used already at the cmd level to 
+identify to which sent command each received answer belongs.
+
+Decoding a packet will return the messages according to their port resp. protocol definition.
+
+### 3. Protocol handling scheme
+
+Protocol handlers are used to unpack and decode packets, so the data can be forwarded to the command
+in question. Forwarding is done via Pub-Sub, so the protocol handlers do not need to know at all who will
+receive the data they forward.
+
+All protocol buffer messages shall be decoded at this level, forwarding is done using Python
+objects. This shall ensure independence of the apps using the data from the actual protobuf version
+(the version provided by Google and the ones from the project).
+
+
+```plantuml
+title Level 3 classes: Handling of protocols
+interface ITransportInterface {}
 
 interface IProtocolHandler {
-    MeshInterface
+    TransportInterface
     ProtocolType
     receivePacket()
     sendPacket()
@@ -343,7 +484,6 @@ class MeshPacketHandler
 
 class ProtocolManager{
     list: ProtocolHandler
-    rcvQueue
     createHandler()
     sendData()
     receiveData()
@@ -358,7 +498,7 @@ BaseProtocolHandler <|-- StartConfigHandler
 BaseProtocolHandler <|-- IfcStatusHandler 
 BaseProtocolHandler <|-- LoggingHandler 
 BaseProtocolHandler <|-- UnknownHandler 
-BaseProtocolHandler "1" o-> "1" IMeshInterface: "       "
+BaseProtocolHandler "1" o-> "1" ITransportInterface: "       "
 
 ProtocolManager --> IProtocolHandler: create
 

@@ -96,7 +96,7 @@ class NotImplementedHandler(ProtocolHandlerBase):
     def receivePacket(self, field: str, packet: Message) -> None:
         pass
 
-    def sendPacket(self, data: dict) -> Any:
+    def sendPacket(self, data: dict, args: dict) -> Any:
         pass
 
     def closeHandler(self) -> Any:
@@ -121,7 +121,7 @@ class DefaultHandler(ProtocolHandlerBase):
         else:
             logger.debug(f"Pub-Sub: Received invalid message")
 
-    def sendPacket(self, data: dict) -> Any:
+    def sendPacket(self, data: dict, args: dict) -> Any:
         pass
 
     def closeHandler(self) -> Any:

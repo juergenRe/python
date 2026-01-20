@@ -48,7 +48,7 @@ class LoggingHandler(ProtocolHandlerBase):
         self.printLogLine(record)
         pub.sendMessage(topic_map.TOPIC_LOG_LINE, message=record, interface=self.ifMesh)
 
-    def sendPacket(self, data: dict) -> Any:
+    def sendPacket(self, data: dict, **kwargs) -> Any:
         pass
 
     def closeHandler(self) -> Any:

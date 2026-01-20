@@ -32,7 +32,7 @@ class IProtocolHandler(metaclass=abc.ABCMeta):
         raise NotImplementedError("Subclass must implement this method")
 
     @abc.abstractmethod
-    def sendPacket(self, data: dict) -> Any:
+    def sendPacket(self, data: dict, args: dict) -> Any:
         """Abstract method to receive data from the command, encode it to a packet and
         transfer it using the underlying level"""
         raise NotImplementedError("Subclass must implement this method")

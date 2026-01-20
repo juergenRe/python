@@ -31,7 +31,7 @@ class StartConfigHandler(ProtocolHandlerBase):
         else:
             logger.debug(f"Received unknown {field} with message {packet}")
 
-    def sendPacket(self, data: dict) -> Any:
+    def sendPacket(self, data: dict, **kwargs) -> Any:
         pass
 
     def closeHandler(self) -> Any:

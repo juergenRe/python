@@ -1,5 +1,6 @@
 """Specification of topics, their hierarchy and messages"""
 
+
 class meshtastic:
     """parent topic, no direct messages defined """
 
@@ -15,6 +16,7 @@ class meshtastic:
             """
             - data: dictionary of MeshStatus
             """
+
     class mi_connected:
         """event to indicated connection established finally"""
 
@@ -23,18 +25,22 @@ class meshtastic:
 
     class stcomm_start:
         """defines the trigger to start communication (empty)"""
+
         def msgDataSpec(timeout: int = 300):
             """starts the connection using the timeout value provided."""
 
     class stcomm_receive:
         """defines the message to data"""
+
         def msgDataSpec(field: str, data: dict):
             """
             - field: type of data received
             - data: dictionary of data received, corresponding to a protobuf field type
             """
+
     class stcomm_finish:
         """signals reaching the connected state (empty)"""
+
         def msgDataSpec(code: str):
             """indicates connected state and gives back error string.
             'OK' is success case
@@ -42,6 +48,7 @@ class meshtastic:
 
     class my_info_publish:
         """published new m<_info data"""
+
         def msgDataSpec(field: str, data: dict):
             """
             - field: key for dict
@@ -50,6 +57,7 @@ class meshtastic:
 
     class metadata_publish:
         """published new metadata"""
+
         def msgDataSpec(field: str, data: dict):
             """
             - field: key for dict
@@ -58,6 +66,7 @@ class meshtastic:
 
     class channel_publish:
         """published new channel data"""
+
         def msgDataSpec(field: str, data: dict):
             """
             - field: key for dict
@@ -66,6 +75,7 @@ class meshtastic:
 
     class config_publish:
         """published confg or moduleConfig data"""
+
         def msgDataSpec(field: str, data: dict):
             """
             - field: key for dict
@@ -74,23 +84,49 @@ class meshtastic:
 
     class nodeinfo_publish:
         """published node data"""
+
         def msgDataSpec(field: str, data: dict):
             """
             - field: key for dict
             - data: contents as dict
             """
 
+    class packet:
+        """published packet data"""
+
+        class send_request:
+            """request for sending an admin packet"""
+
+            def msgDataSpec(data: dict, args: dict):
+                """
+                - data: contents as dict
+                - args: addional arguments as dict
+                """
+
+        class receive:
+            """published admin data"""
+
+            def msgDataSpec(field: str, data: dict, requestId: int):
+                """
+                - field: key for dict
+                - data: contents as dict
+                - requestId: id of initial message
+                """
+
     #---------------------------------------------------------------------------------
     # public topics for use with API
     class log:
         """used with subtopic"""
+
         class line:
             """defines a single line of log message"""
+
             def msgDataSpec(message: str, interface):
                 """ line of "message" originating from "interface" """
 
     class connection:
         """used with subtopic"""
+
         class established:
             """sent, when connection is completely established"""
 

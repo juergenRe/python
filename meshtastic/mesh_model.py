@@ -1,6 +1,7 @@
 """Keeps all data about the mesh entities during execution of a command.
 Especially this is the local node and all discovered other nodes accessed via mesh"""
-from copy import copy, deepcopy
+import datetime as dt
+from copy import deepcopy
 from decimal import Decimal
 from typing import Any
 import logging
@@ -8,10 +9,10 @@ import base64
 
 from google.protobuf.json_format import ParseDict
 
+from meshtastic import BROADCAST_NUM
 from meshtastic.protobuf import apponly_pb2
 from meshtastic.protocol_base import formatFieldName
 from meshtastic.util import convert_mac_addr
-
 
 logger = logging.getLogger(__name__)
 
@@ -67,6 +68,7 @@ class NodeInfo(SubDict):
     """represents the content of node_info protobuf message
     externalized into this class to keep this data close together
     Node will _always_ contain one instance of this class"""
+
     def __init__(self, nodeInfo: dict) -> None:
         super().__init__(nodeInfo['num'])
         self._data = deepcopy(nodeInfo)
@@ -90,14 +92,50 @@ class Node(SubDict):
     NodeInfo data will be mapped directly to the level of the Node itself:
     external requesters don't need (and don't have) to know internal structure
     """
-    nodeFields: list[str] = [formatFieldName(fn) for fn in
-                             ['my_info', 'channel', 'config', 'moduleConfig', 'metadata', 'deviceUI']]
+
+    # defines what substructure lies behind the field names. Used to initialize internal data
+    nodeFieldsDef: dict[str, Any] = {formatFieldName(tp[0]): tp[1] for tp in
+                                     [('my_info', {}),
+                                      ('channel', []),
+                                      ('config', {}),
+                                      ('moduleConfig', {}),
+                                      ('metadata', {}),
+                                      ('deviceUI', {}),
+                                      ('other', {})
+                                      ]}
+
+    # nodeFields are those fields to be stored within the node data structure.
+    # All other fields will be stored within nodeInfo data
+    nodeFields: list[str] = list(nodeFieldsDef.keys())
+    sessionKeyTimeoutVal = dt.timedelta(seconds=300)
+    minFWVersion = '2.7'
+
+    @classmethod
+    def toNodeNum(cls, nodeStr: str, numLocal: int) -> int:
+        """convert string to node number"""
+        if nodeStr == '^all':
+            return BROADCAST_NUM
+        if nodeStr == '^local':
+            return numLocal
+        s = nodeStr.strip().lower()
+        try:
+            if s.startswith('!'):
+                nodeNum = int(s[1:], 16)
+            elif s.startswith('0x') == 0:
+                nodeNum = int(s, 16)
+            else:
+                nodeNum = numLocal
+        except ValueError:
+            nodeNum = numLocal
+        return nodeNum
 
     def __init__(self, nodeNum: int, isLocal: bool = False) -> None:
         super().__init__(nodeNum)
         self._isLocal: bool = isLocal
         self._nodeInfo: NodeInfo | None = None
-        self._data: dict = {}
+        self._data: dict = deepcopy(self.nodeFieldsDef)
+        self._sessionKey: str | None = None
+        self._sessionKeyTimeout: dt.datetime = dt.datetime(1, 1, 1)
 
     def __repr__(self) -> str:
         name = self._nodeInfo.getDataElement('user', 'long_name')
@@ -111,6 +149,39 @@ class Node(SubDict):
         longName: str = self._nodeInfo.getDataElement('user', 'long_name', default=default)
         shortName: str = self._nodeInfo.getDataElement('user', 'short_name', default=default)
         return longName, shortName
+
+    @property
+    def isValidFW(self) -> bool | None:
+        """Checks if actual fw of a node is acceptable to be communicated with"""
+        fwVersion: str = self.getDataElement('metadata', 'firmware_version')
+        if fwVersion is None:
+            return None
+        else:
+            fwact = fwVersion.strip().split('.')
+            fwmin = self.minFWVersion.split('.')
+            cnt = min(len(fwact), len(fwmin))
+            for i in range(cnt):
+                if fwact[i] < fwmin[i]:
+                    return False
+            return True
+
+    @property
+    def sessionKey(self) -> str | None:
+        """return session key of this node if present and not timed out"""
+        if dt.datetime.now() > self._sessionKeyTimeout:
+            self._sessionKey = None
+            self._sessionKeyTimeout: dt.datetime = dt.datetime(1, 1, 1)
+        return self._sessionKey
+
+    @sessionKey.setter
+    def sessionKey(self, value: str):
+        self._sessionKey = value
+        self._sessionKeyTimeout = dt.datetime.now() + self.sessionKeyTimeoutVal
+
+    def getAdminChannelIndex(self):
+        """return admin channel index if present"""
+        # Fixme: add real implementation
+        return 0
 
     def getUrl(self, includeAll: bool = True) -> str:
         """The sharable URL that describes the current channel"""
@@ -205,11 +276,13 @@ class MeshModel:
         self.nodes: dict[int, Node] = {}
         self._localNodeNum: int = -1
 
-    def getLocalNode(self) -> Node | None:
+    @property
+    def localNode(self) -> Node | None:
         """returns the local node object"""
         return self.nodes.get(self._localNodeNum)
 
-    def getLocalNodeNum(self) -> int:
+    @property
+    def localNodeNum(self) -> int:
         """returns the local node number"""
         return self._localNodeNum
 
@@ -221,13 +294,17 @@ class MeshModel:
         """returns the node with the given nodeNum"""
         return self.nodes.get(nodeNum)
 
-    def getNodeIds(self) ->list[int]:
+    def getNodeFromStr(self, nodeStr: str) -> Node | None:
+        """returns the node from nodeID as string"""
+        return self.getNode(Node.toNodeNum(nodeStr, self._localNodeNum))
+
+    def getNodeIds(self) -> list[int]:
         """returns a list of all node numbers listed in the mesh"""
         return list(self.nodes.keys())
 
     def addNode(self, node: Node, overwrite: bool = True) -> None:
         """adds the node information to the dictionary of nodes.
-        if overwrite is True: silently overwrite any existing entry. Otherwise raise an error"""
+        if overwrite is True: silently overwrite any existing entry, otherwise raise an error"""
         if node.nodeNum in self.nodes and not overwrite:
             raise RuntimeError(f'Node {node} cannot added because it already exists in the mesh')
         self.nodes[node.nodeNum] = node

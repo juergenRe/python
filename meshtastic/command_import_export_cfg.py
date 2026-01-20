@@ -25,12 +25,12 @@ class ExportConfigCommand(Command):
     def __init__(self, destNode: str | None, chIndex: int | None, parameter: list = ()):
         super().__init__(destNode, chIndex, parameter)
 
-    def execute(self, model: MeshModel, timeout: int) -> tuple:
+    def execute(self, model: MeshModel, timeout: int, **kwargs) -> tuple:
         """Show human-readable summary about this object"""
         logger.debug(f"Execute {self.cmdName} {self.destinationNode}. Print to: {self.parameter}")
         if self.destinationNode != BROADCAST_ADDR:
             return CmdError.ERROR, "Exporting configuration of remote nodes is not supported."
-        yamlTxt = self.exportConfig(model.getLocalNode())
+        yamlTxt = self.exportConfig(model.localNode)
         outFile = self.parameter[0]
         if outFile == '-':
             print(yamlTxt)

@@ -36,7 +36,7 @@ class ChannelHandler(ProtocolHandlerBase):
         else:
             logger.debug(f"Pub-Sub: Received Invalid channel message")
 
-    def sendPacket(self, data: dict) -> Any:
+    def sendPacket(self, data: dict, **kwargs) -> Any:
         pass
 
     def closeHandler(self) -> Any:
